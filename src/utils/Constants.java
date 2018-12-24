@@ -13,5 +13,15 @@ package utils;
 public final class Constants {
 
 
+    //Texts
     public static final String MAIN_PROGRAM_TEXT = "תוכנה לניהול לקוחות";
+
+    //Default values
+    public static final double DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT =12;
+    public static final double DEFAULT_VIP_SUBSCRIPTION_AMOUNT =400;
+
+    //format
+    public static final String CSV_SEPERATOR = ",";
+    public static final String DATE_FORMAT = "YYYY-MM-DD HH:MI:SS";
+
 }

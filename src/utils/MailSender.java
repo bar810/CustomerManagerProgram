@@ -4,12 +4,11 @@
  * CORPORATION OR ITS LICENSORS AND IS SUBJECT TO LICENSE TERMS.
  */
 
-package entities.subscription;
+package utils;
 
 /**
  * @author bbrownsh
  * @since 12/23/2018
  */
-public class VIPSubscription extends AbstractSubscription {
-
+public class MailSender {
 }

@@ -11,5 +11,7 @@ package entities.subscription;
  * @since 12/23/2018
  */
 public interface Subscription {
-
+    boolean purchase(double amount);
+    boolean thereIsMoreCredit(double amount);
+    double getBalance();
 }

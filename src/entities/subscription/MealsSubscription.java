@@ -6,9 +6,19 @@
 
 package entities.subscription;
 
+import static utils.Constants.DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT;
+
 /**
  * @author bbrownsh
  * @since 12/23/2018
  */
 public class MealsSubscription extends AbstractSubscription {
+
+
+    public MealsSubscription() {
+        super(DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT,SubscriptionType.MEALS);
+    }
+
+
+
 }

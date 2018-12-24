@@ -1,0 +1,49 @@
+CREATE DATABASE  IF NOT EXISTS `Customer_Manager`;
+USE `Customer_Manager`;
+--
+-- Table structure for table `student`
+--
+
+DROP TABLE IF EXISTS `subscriptions`;
+
+CREATE TABLE `subscriptions` (
+  `subscriptionID` int(11) NOT NULL AUTO_INCREMENT,
+  `customerID` varchar(45) DEFAULT NULL,
+  `purchaseDate` varchar(45) DEFAULT NULL,
+  `balance` float(53) DEFAULT NULL,
+  `type` int(11) DEFAULT NULL,
+  PRIMARY KEY (`subscriptionID`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `purchases`;
+
+CREATE TABLE `purchases` (
+  `purchaseID` int(11) NOT NULL AUTO_INCREMENT,
+  `customerID` varchar(45) DEFAULT NULL,
+  `Date` DATETIME (6) DEFAULT NULL,
+  `amount` float(53) DEFAULT NULL,
+  `newBalance` int(11) DEFAULT NULL,
+  PRIMARY KEY (`purchaseID`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `customers`;
+
+CREATE TABLE `customers` (
+  `customerID` int(11) NOT NULL AUTO_INCREMENT,
+  `firstName` varchar(45) DEFAULT NULL,
+  `lasrName` varchar(45) DEFAULT NULL,
+  `mail` varchar(45) DEFAULT NULL,
+  `phone` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`customerID`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
+
+INSERT INTO purchases (customerID,Date,amount,newBalance)
+VALUES (1,'1991-10-08 08:22:22', 10, 12)
+
+select * from purchases where Date<'1991-10-08 08:22:21'
+
+
+
+
+
