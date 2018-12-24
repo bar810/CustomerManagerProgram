@@ -6,10 +6,7 @@
 
 package entities.customer;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author bbrownsh
@@ -18,7 +15,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name="Customers")
 public class Customer {
+
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="Customer_ID")
     private int customerID;
 
@@ -34,8 +33,11 @@ public class Customer {
     @Column(name="Phone")
     private String phoneNumber;
 
-    public Customer(int ID, String firstName, String lastName, String mailAddress, String phoneNumber) {
-        this.customerID = ID;
+
+    public Customer() {
+    }
+
+    public Customer(String firstName, String lastName, String mailAddress, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.mailAddress = mailAddress;

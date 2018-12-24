@@ -25,6 +25,7 @@ public abstract class AbstractSubscription implements Subscription {
     }
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="Subscription_ID")
     private int subscriptionID;
 

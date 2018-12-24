@@ -41,7 +41,7 @@ CREATE TABLE `Customers` (
 INSERT INTO purchases (customerID,Date,amount,newBalance)
 VALUES (1,'1991-10-08 08:22:22', 10, 12)
 
-select * from purchases where Date<'1991-10-08 08:22:21'
+select * from customers Customer_ID
 
 
 

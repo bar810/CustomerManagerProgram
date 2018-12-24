@@ -6,10 +6,7 @@
 
 package entities.purchase;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import static utils.Utils.getCurrentTimeStamp;
 
@@ -22,6 +19,7 @@ import static utils.Utils.getCurrentTimeStamp;
 public class Purchase {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="Purchase_ID")
     private int purchaseID;
 

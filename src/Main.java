@@ -1,5 +1,3 @@
-package impl;
-
 import entities.customer.Customer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,9 +7,10 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import static utils.Constants.MAIN_PROGRAM_TEXT;
+import static utils.SQLQueries.getAllCustomersFromDB;
 
 public class Main extends Application {
 
@@ -47,19 +46,15 @@ public class Main extends Application {
         //
         // }
 
-        ArrayList<Customer> customers=new ArrayList<Customer>();
-        Customer c=new Customer(1,"bar","brownshtein","bar810@gmail.com","0548004754");
+        //
+        // Customer customer = new Customer("Gal","Brownshtein","bar810@gmail.com","0548004754");
+        // int id=insertCustomerToDB(customer);
+        // System.out.println("id1: "+id);
 
-        c.buyMealSubscription();
-        c.makeMealPurchase(1);
-        c.makeMealPurchase(0.5);
+        //Customer customer=getCustomerByID(2);
 
-        customers.add(c);
-
-
-
-
-
+        //TODO :: not working
+        List<Customer> customers=getAllCustomersFromDB();
 
         System.out.println("Program finished !");
     }
