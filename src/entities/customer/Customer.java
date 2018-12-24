@@ -6,25 +6,33 @@
 
 package entities.customer;
 
-import entities.purchase.Purchase;
-import entities.subscription.MealsSubscription;
-import entities.subscription.Subscription;
-
-import java.util.ArrayList;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @author bbrownsh
  * @since 12/23/2018
  */
+@Entity
+@Table(name="Customers")
 public class Customer {
+    @Id
+    @Column(name="Customer_ID")
     private int customerID;
-    private String firstName;
-    private String lastName;
-    private String mailAddress;
-    private String phoneNumber;
-    private ArrayList<Subscription> subscription;
-    private ArrayList<Purchase> purchasesHistory;
 
+    @Column(name="First_name")
+    private String firstName;
+
+    @Column(name="Last_name")
+    private String lastName;
+
+    @Column(name="Mail")
+    private String mailAddress;
+
+    @Column(name="Phone")
+    private String phoneNumber;
 
     public Customer(int ID, String firstName, String lastName, String mailAddress, String phoneNumber) {
         this.customerID = ID;
@@ -32,10 +40,7 @@ public class Customer {
         this.lastName = lastName;
         this.mailAddress = mailAddress;
         this.phoneNumber = phoneNumber;
-        subscription=new ArrayList<Subscription>();
-        purchasesHistory=new ArrayList<Purchase>();
     }
-
 
 
     public String getFirstName() {
@@ -70,14 +75,6 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
-    public ArrayList<Subscription> getSubscription() {
-        return subscription;
-    }
-
-    public void setSubscription(ArrayList<Subscription> subscription) {
-        this.subscription = subscription;
-    }
-
     public int getCustomerID() {
         return customerID;
     }
@@ -85,25 +82,4 @@ public class Customer {
     public void setCustomerID(int customerID) {
         this.customerID = customerID;
     }
-
-    public ArrayList<Purchase> getPurchasesHistory() {
-        return purchasesHistory;
-    }
-
-    public boolean makeMealPurchase(double amount){
-        for (Subscription s: subscription) {
-            if(s.getClass().equals(MealsSubscription.class) && s.thereIsMoreCredit(amount)){
-                s.purchase(amount);
-                purchasesHistory.add(new Purchase(customerID,1,s.getBalance()));
-                return true;
-            }
-        }
-        //TODO there is not enough credit
-        return false;
-    }
-
-    public void buyMealSubscription(){
-        subscription.add(new MealsSubscription());
-    }
-
 }

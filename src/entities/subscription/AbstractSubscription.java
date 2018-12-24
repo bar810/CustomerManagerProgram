@@ -6,14 +6,15 @@
 
 package entities.subscription;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * @author bbrownsh
  * @since 12/23/2018
  */
-
-
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class AbstractSubscription implements Subscription {
     public enum SubscriptionType {
         MEALS(1), VIP(2);
@@ -23,16 +24,26 @@ public abstract class AbstractSubscription implements Subscription {
         public int getValue() { return type; }
     }
 
+    @Id
+    @Column(name="Subscription_ID")
     private int subscriptionID;
+
+    @Column(name="Customer_ID")
     private int coustomerID;
-    private Date subscriptionBuyingDate;
+
+    @Column(name="Balance")
+    private Date subscriptionPurchaseDate;
+
+    @Column(name="Type")
     private double balance;
+
+    @Column(name="Type")
     private SubscriptionType type;
 
     public AbstractSubscription(double balance,SubscriptionType subscriptionType) {
         this.balance = balance;
         this.type=subscriptionType;
-        subscriptionBuyingDate =new Date();
+        subscriptionPurchaseDate =new Date();
     }
 
     @Override
@@ -52,8 +63,8 @@ public abstract class AbstractSubscription implements Subscription {
         return balance>=amount;
     }
 
-    public Date getSubscriptionBuyingDate() {
-        return subscriptionBuyingDate;
+    public Date getSubscriptionPurchaseDate() {
+        return subscriptionPurchaseDate;
     }
 
     public double getBalance() {

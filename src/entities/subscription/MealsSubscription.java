@@ -6,19 +6,20 @@
 
 package entities.subscription;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import static utils.Constants.DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT;
 
 /**
  * @author bbrownsh
  * @since 12/23/2018
  */
+@Entity
+@Table(name="Subscriptions")
 public class MealsSubscription extends AbstractSubscription {
-
 
     public MealsSubscription() {
         super(DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT,SubscriptionType.MEALS);
     }
-
-
-
 }

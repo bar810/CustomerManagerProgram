@@ -24,4 +24,11 @@ public final class Constants {
     public static final String CSV_SEPERATOR = ",";
     public static final String DATE_FORMAT = "YYYY-MM-DD HH:MI:SS";
 
+    //SQL properties
+    public static final String JBDC_CONNECTION_STRING = "jdbc:mysql://localhost:3306/customer_manager?useSSL=false&serverTimezone=UTC";
+    public static final String USER_NAME = "hbstudent";
+    public static final String PASSWORD = "hbstudent";
+
+
+
 }

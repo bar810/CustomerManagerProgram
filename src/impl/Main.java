@@ -31,6 +31,21 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
+    }
+
+
+    public static void main(String[] args) {
+        //launch(args);
+
+        // try {
+        //     System.out.println("connecting to DB "+JBDC_CONNECTION_STRING);
+        //     Connection myConn=DriverManager.getConnection(JBDC_CONNECTION_STRING,USER_NAME,PASSWORD);
+        //     System.out.println("connection successful !");
+        //
+        // } catch (Exception ex) {
+        //     System.out.println("connection failed !");
+        //
+        // }
 
         ArrayList<Customer> customers=new ArrayList<Customer>();
         Customer c=new Customer(1,"bar","brownshtein","bar810@gmail.com","0548004754");
@@ -43,10 +58,9 @@ public class Main extends Application {
 
 
 
-    }
 
 
-    public static void main(String[] args) {
-        launch(args);
+
+        System.out.println("Program finished !");
     }
 }

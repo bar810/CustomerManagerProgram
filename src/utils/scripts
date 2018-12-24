@@ -4,37 +4,37 @@ USE `Customer_Manager`;
 -- Table structure for table `student`
 --
 
-DROP TABLE IF EXISTS `subscriptions`;
+DROP TABLE IF EXISTS `Subscriptions`;
 
-CREATE TABLE `subscriptions` (
-  `subscriptionID` int(11) NOT NULL AUTO_INCREMENT,
-  `customerID` varchar(45) DEFAULT NULL,
-  `purchaseDate` varchar(45) DEFAULT NULL,
-  `balance` float(53) DEFAULT NULL,
-  `type` int(11) DEFAULT NULL,
-  PRIMARY KEY (`subscriptionID`)
+CREATE TABLE `Subscriptions` (
+  `Subscription_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Customer_ID` varchar(45) DEFAULT NULL,
+  `Subscription_purchase_date` varchar(45) DEFAULT NULL,
+  `Balance` float(53) DEFAULT NULL,
+  `Type` int(11) DEFAULT NULL,
+  PRIMARY KEY (`Subscription_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS `purchases`;
+DROP TABLE IF EXISTS `Purchases`;
 
-CREATE TABLE `purchases` (
-  `purchaseID` int(11) NOT NULL AUTO_INCREMENT,
-  `customerID` varchar(45) DEFAULT NULL,
-  `Date` DATETIME (6) DEFAULT NULL,
-  `amount` float(53) DEFAULT NULL,
-  `newBalance` int(11) DEFAULT NULL,
-  PRIMARY KEY (`purchaseID`)
+CREATE TABLE `Purchases` (
+  `Purchase_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Customer_ID` varchar(45) DEFAULT NULL,
+  `Purchase_date` DATETIME (6) DEFAULT NULL,
+  `Amount` float(53) DEFAULT NULL,
+  `New_balance` int(11) DEFAULT NULL,
+  PRIMARY KEY (`Purchase_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS `customers`;
+DROP TABLE IF EXISTS `Customers`;
 
-CREATE TABLE `customers` (
-  `customerID` int(11) NOT NULL AUTO_INCREMENT,
-  `firstName` varchar(45) DEFAULT NULL,
-  `lasrName` varchar(45) DEFAULT NULL,
-  `mail` varchar(45) DEFAULT NULL,
-  `phone` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`customerID`)
+CREATE TABLE `Customers` (
+  `Customer_ID` int(11) NOT NULL AUTO_INCREMENT,
+  `First_name` varchar(45) DEFAULT NULL,
+  `Last_name` varchar(45) DEFAULT NULL,
+  `Mail` varchar(45) DEFAULT NULL,
+  `Phone` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`Customer_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 

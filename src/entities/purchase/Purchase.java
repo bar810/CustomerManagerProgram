@@ -6,18 +6,35 @@
 
 package entities.purchase;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import static utils.Utils.getCurrentTimeStamp;
 
 /**
  * @author bbrownsh
  * @since 12/23/2018
  */
+@Entity
+@Table(name="Purchases")
 public class Purchase {
 
+    @Id
+    @Column(name="Purchase_ID")
     private int purchaseID;
+
+    @Column(name="Customer_ID")
     private int customerID;
+
+    @Column(name="Purchase_date")
     private String date;
+
+    @Column(name="Amount")
     private double amount;
+
+    @Column(name="New_balance")
     private double newBalance;
 
     public Purchase(int customerID, double amount, double newBalance) {
