@@ -27,12 +27,37 @@ public final class Constants {
     public static final String DATE_FORMAT = "dd-MM-yyyy HH:mm:ss";
 
     //Subscription types
-    public static final String MEALS_SUBSCRIPTION = "MEALS";
+    public static final String MEALS_SUBSCRIPTION = "ארוחות";
     public static final String VIP_SUBSCRIPTION = "VIP";
 
     //Locations for files
     public static final String CUSTOMER_TABLE_LOCATION = "customers.csv";
     public static final String PURCHASE_TABLE_LOCATION = "purchases.csv";
     public static final String SUBSCRIPTION_TABLE_LOCATION = "subscriptions.csv";
+
+    //Customer table names
+    public static final String CUSTOMER_TABLE_NAME = "לקוחות";
+    public static final String CUSTOMER_ID_TABLE_NAME = "מספר_לקוח";
+    public static final String CUSTOMER_FIRST_NAME_TABLE_NAME = "שם_פרטי";
+    public static final String CUSTOMER_LAST_NAME_TABLE_NAME = "שם_משפחה";
+    public static final String CUSTOMER_MAIL_TABLE_NAME = "מייל";
+    public static final String CUSTOMER_PHONE_TABLE_NAME = "טלפון";
+
+    //Purchase table names
+    public static final String PURCHASE_TABLE_NAME = "רכישות";
+    public static final String PURCHASE_ID_TABLE_NAME = "מספר_רכישה";
+    public static final String PURCHASE_CUSTOMER_ID_TABLE_NAME = "מספר_לקוח";
+    public static final String PURCHASE_DATE_TABLE_NAME = "תאריך_רכישה";
+    public static final String PURCHASE_AMOUNT_TABLE_NAME = "סכום_רכישה";
+    public static final String PURCHASE_NEW_BALANCE_TABLE_NAME = "יתרת_לקוח";
+
+    //Subscription table names
+    public static final String SUBSCRIPTION_TABLE_NAME = "מנויים";
+    public static final String SUBSCRIPTION_ID_TABLE_NAME = "מספר_מנוי";
+    public static final String SUBSCRIPTION_CUSTOMER_ID_TABLE_NAME = "מספר_לקוח";
+    public static final String SUBSCRIPTION_DATE_TABLE_NAME = "תאריך_רכישת_מנוי";
+    public static final String SUBSCRIPTION_BALANCE_TABLE_NAME = "יתרה";
+    public static final String SUBSCRIPTION_TYPE_TABLE_NAME = "סוג_מנוי";
+
 
 }

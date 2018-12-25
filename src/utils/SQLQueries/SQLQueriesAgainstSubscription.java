@@ -178,6 +178,20 @@ public class SQLQueriesAgainstSubscription {
             _logger.debug("subscription updated successfully. subscription: "+subscription.toString());
         }
     }
+    public static void updateSubscriptionPurchaseDate(int subscriptionID,String newDate){
+        _logger.debug("update Subscription date. Subscription ID: "+subscriptionID+". new Date: "+newDate);
+        Session subscriptionSession= getSubscriptionSession();
+        subscriptionSession.beginTransaction();
+        Subscription subscription=subscriptionSession.get(Subscription.class,subscriptionID);
+        if(subscription==null){
+            _logger.warning("subscription not found");
+        }else{
+            subscription.setSubscriptionPurchaseDate(newDate);
+            subscriptionSession.getTransaction().commit();
+            _logger.debug("subscription updated successfully. subscription: "+subscription.toString());
+        }
+    }
+
     public static void removeOneSubscription(int subscriptionID){
         _logger.debug("removing Subscription. ID: "+subscriptionID);
         Session subscriptionSession;

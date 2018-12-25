@@ -53,6 +53,8 @@ public class BasicMethods {
                 }else{
                     //need to update the current subscription
                     updateSubscriptionBalance(list.get(0).getSubscriptionID(),list.get(0).getBalance()+amount);
+                    updateSubscriptionPurchaseDate(list.get(0).getSubscriptionID(),getCurrentTimeStamp());
+
                 }
             }
 

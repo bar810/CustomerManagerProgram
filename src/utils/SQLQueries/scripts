@@ -5,41 +5,36 @@ USE `Customer_Manager`;
 --
 
 
-DROP TABLE IF EXISTS `Subscriptions`;
+DROP TABLE IF EXISTS `מנויים`;
 
-CREATE TABLE `Subscriptions` (
-  `Subscription_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Customer_ID` varchar(45) DEFAULT NULL,
-  `Subscription_purchase_date` varchar(45) DEFAULT NULL,
-  `Balance` float(53) DEFAULT NULL,
-  `Type` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`Subscription_ID`)
+CREATE TABLE `מנויים` (
+  `מספר_מנוי` int(11) NOT NULL AUTO_INCREMENT,
+  `מספר_לקוח` nvarchar(45) DEFAULT NULL,
+  `תאריך_רכישת_מנוי` nvarchar(45) DEFAULT NULL,
+  `יתרה` float(53) DEFAULT NULL,
+  `סוג_מנוי` nvarchar(45) DEFAULT NULL,
+  PRIMARY KEY (`מספר_מנוי`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
-DROP TABLE IF EXISTS `Purchases`;
+DROP TABLE IF EXISTS `רכישות`;
 
-CREATE TABLE `Purchases` (
-  `Purchase_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Customer_ID` varchar(45) DEFAULT NULL,
-  `Purchase_date` varchar (45) DEFAULT NULL,
-  `Amount` float(53) DEFAULT NULL,
-  `New_balance` int(11) DEFAULT NULL,
-  PRIMARY KEY (`Purchase_ID`)
+CREATE TABLE `רכישות` (
+  `מספר_רכישה` int(11) NOT NULL AUTO_INCREMENT,
+  `מספר_לקוח` nvarchar(45) DEFAULT NULL,
+  `תאריך_רכישה` nvarchar (45) DEFAULT NULL,
+  `סכום_רכישה` float(53) DEFAULT NULL,
+  `יתרת_לקוח` int(11) DEFAULT NULL,
+  PRIMARY KEY (`מספר_רכישה`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS `Customers`;
+DROP TABLE IF EXISTS `לקוחות`;
 
-CREATE TABLE `Customers` (
-  `Customer_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `First_name` varchar(45) DEFAULT NULL,
-  `Last_name` varchar(45) DEFAULT NULL,
-  `Mail` varchar(45) DEFAULT NULL,
-  `Phone` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`Customer_ID`)
+CREATE TABLE `לקוחות` (
+  `מספר_לקוח` int(11) NOT NULL AUTO_INCREMENT,
+  `שם_פרטי` nvarchar(45) DEFAULT NULL,
+  `שם_משפחה` nvarchar(45) DEFAULT NULL,
+  `מייל` nvarchar(45) DEFAULT NULL,
+  `טלפון` nvarchar(45) DEFAULT NULL,
+  PRIMARY KEY (`מספר_לקוח`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
-
-
-
-
-

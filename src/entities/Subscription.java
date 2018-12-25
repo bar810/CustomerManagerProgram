@@ -8,30 +8,31 @@ package entities;
 
 import javax.persistence.*;
 
+import static utils.Constants.*;
+
 /**
  * @author bbrownsh
  * @since 12/23/2018
  */
 @Entity
-@Table(name="Subscriptions")
+@Table(name=SUBSCRIPTION_TABLE_NAME)
 public class Subscription{
-
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="Subscription_ID")
+    @Column(name= SUBSCRIPTION_ID_TABLE_NAME)
     private int subscriptionID;
 
-    @Column(name="Customer_ID")
+    @Column(name= SUBSCRIPTION_CUSTOMER_ID_TABLE_NAME)
     private int coustomerID;
 
-    @Column(name="Subscription_purchase_date")
+    @Column(name= SUBSCRIPTION_DATE_TABLE_NAME)
     private String subscriptionPurchaseDate;
 
-    @Column(name="Balance")
+    @Column(name= SUBSCRIPTION_BALANCE_TABLE_NAME)
     private double balance;
 
-    @Column(name="Type")
+    @Column(name= SUBSCRIPTION_TYPE_TABLE_NAME)
     private String type;
 
     public Subscription() {

@@ -14,7 +14,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static utils.Constants.CSV_SEPERATOR;
+import static utils.Constants.*;
 import static utils.GlobalProperties._logger;
 
 /**
@@ -30,15 +30,15 @@ public class CSVScripts {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(location), "UTF-8"));
             //write the header
             StringBuffer oneLine = new StringBuffer();
-            oneLine.append("ID");
+            oneLine.append(PURCHASE_ID_TABLE_NAME);
             oneLine.append(CSV_SEPERATOR);
-            oneLine.append("Customer ID");
+            oneLine.append(PURCHASE_CUSTOMER_ID_TABLE_NAME);
             oneLine.append(CSV_SEPERATOR);
-            oneLine.append("Date");
+            oneLine.append(PURCHASE_DATE_TABLE_NAME);
             oneLine.append(CSV_SEPERATOR);
-            oneLine.append("amount");
+            oneLine.append(PURCHASE_AMOUNT_TABLE_NAME);
             oneLine.append(CSV_SEPERATOR);
-            oneLine.append("new balance");
+            oneLine.append(PURCHASE_NEW_BALANCE_TABLE_NAME);
             bw.write(oneLine.toString());
             bw.newLine();
 
@@ -99,15 +99,15 @@ public class CSVScripts {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(location), "UTF-8"));
             //write the header
             StringBuffer oneLine = new StringBuffer();
-            oneLine.append("ID");
+            oneLine.append(CUSTOMER_ID_TABLE_NAME);
             oneLine.append(CSV_SEPERATOR);
-            oneLine.append("First Name");
+            oneLine.append(CUSTOMER_FIRST_NAME_TABLE_NAME);
             oneLine.append(CSV_SEPERATOR);
-            oneLine.append("Last Name");
+            oneLine.append(CUSTOMER_LAST_NAME_TABLE_NAME);
             oneLine.append(CSV_SEPERATOR);
-            oneLine.append("Mail Adress");
+            oneLine.append(CUSTOMER_MAIL_TABLE_NAME);
             oneLine.append(CSV_SEPERATOR);
-            oneLine.append("Phone Number");
+            oneLine.append(CUSTOMER_PHONE_TABLE_NAME);
             bw.write(oneLine.toString());
             bw.newLine();
 
@@ -161,15 +161,15 @@ public class CSVScripts {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(location), "UTF-8"));
             //write the header
             StringBuffer oneLine = new StringBuffer();
-            oneLine.append("ID");
+            oneLine.append(SUBSCRIPTION_ID_TABLE_NAME);
             oneLine.append(CSV_SEPERATOR);
-            oneLine.append("Customer ID");
+            oneLine.append(SUBSCRIPTION_CUSTOMER_ID_TABLE_NAME);
             oneLine.append(CSV_SEPERATOR);
-            oneLine.append("Purchase date");
+            oneLine.append(SUBSCRIPTION_DATE_TABLE_NAME);
             oneLine.append(CSV_SEPERATOR);
-            oneLine.append("Balance");
+            oneLine.append(SUBSCRIPTION_BALANCE_TABLE_NAME);
             oneLine.append(CSV_SEPERATOR);
-            oneLine.append("Type");
+            oneLine.append(SUBSCRIPTION_TYPE_TABLE_NAME);
             bw.write(oneLine.toString());
             bw.newLine();
 

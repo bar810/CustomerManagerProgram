@@ -1,3 +1,4 @@
+import entities.Customer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -7,9 +8,12 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import utils.GlobalProperties;
 
+import static impl.Methods.BasicMethods.addCustomer;
+import static impl.Methods.BasicMethods.buyProduct;
+import static impl.Methods.BasicMethods.buySubscription;
 import static utils.Constants.*;
 import static utils.GlobalProperties._logger;
-import static utils.SQLQueries.GeneralScripts.csvToDB;
+import static utils.SQLQueries.GeneralScripts.DBToCsv;
 import static utils.SQLQueries.GeneralScripts.removeAllDataFromAllDBTables;
 
 public class Main extends Application {
@@ -43,18 +47,17 @@ public class Main extends Application {
         //launch(args);
 
         removeAllDataFromAllDBTables();
-        // Customer bar=new Customer("Bar","Brownshtein","00","00");
-        // Customer gal=new Customer("Gal","Brownshtein","00","00");
-        // addCustomer(bar);
-        // addCustomer(gal);
-        // buySubscription(bar,VIP_SUBSCRIPTION);
-        // buySubscription(gal, MEALS_SUBSCRIPTION);
-        //
-        // buyProduct(bar,VIP_SUBSCRIPTION,50);
-        // buyProduct(gal,MEALS_SUBSCRIPTION,1);
-        //
-        // DBToCsv(CUSTOMER_TABLE_LOCATION,PURCHASE_TABLE_LOCATION,SUBSCRIPTION_TABLE_LOCATION);
-        csvToDB(CUSTOMER_TABLE_LOCATION,PURCHASE_TABLE_LOCATION,SUBSCRIPTION_TABLE_LOCATION);
+        Customer bar=new Customer("בר","בראונשטיין","bar810@gmail.com","0548004754");
+        Customer gal=new Customer("גל","בראונשטיין","gal@gmail.com","0546552365");
+        addCustomer(bar);
+        addCustomer(gal);
+        buySubscription(bar,VIP_SUBSCRIPTION);
+        buySubscription(gal, MEALS_SUBSCRIPTION);
+
+        buyProduct(bar,VIP_SUBSCRIPTION,50);
+        buyProduct(gal,MEALS_SUBSCRIPTION,1);
+
+        DBToCsv(CUSTOMER_TABLE_LOCATION,PURCHASE_TABLE_LOCATION,SUBSCRIPTION_TABLE_LOCATION);
         _logger.debug("Program Finished");
         GlobalProperties.closeConnections();
     }

@@ -8,6 +8,7 @@ package entities;
 
 import javax.persistence.*;
 
+import static utils.Constants.*;
 import static utils.Utils.getCurrentTimeStamp;
 
 /**
@@ -15,24 +16,24 @@ import static utils.Utils.getCurrentTimeStamp;
  * @since 12/23/2018
  */
 @Entity
-@Table(name="Purchases")
+@Table(name=PURCHASE_TABLE_NAME)
 public class Purchase {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="Purchase_ID")
+    @Column(name=PURCHASE_ID_TABLE_NAME)
     private int purchaseID;
 
-    @Column(name="Customer_ID")
+    @Column(name=PURCHASE_CUSTOMER_ID_TABLE_NAME)
     private int customerID;
 
-    @Column(name="Purchase_date")
+    @Column(name=PURCHASE_DATE_TABLE_NAME)
     private String date;
 
-    @Column(name="Amount")
+    @Column(name=PURCHASE_AMOUNT_TABLE_NAME)
     private double amount;
 
-    @Column(name="New_balance")
+    @Column(name=PURCHASE_NEW_BALANCE_TABLE_NAME)
     private double newBalance;
 
     public Purchase() {

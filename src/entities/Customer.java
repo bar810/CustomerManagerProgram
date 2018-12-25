@@ -8,29 +8,31 @@ package entities;
 
 import javax.persistence.*;
 
+import static utils.Constants.*;
+
 /**
  * @author bbrownsh
  * @since 12/23/2018
  */
 @Entity
-@Table(name="Customers")
+@Table(name=CUSTOMER_TABLE_NAME)
 public class Customer {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="Customer_ID")
+    @Column(name=CUSTOMER_ID_TABLE_NAME)
     private int customerID;
 
-    @Column(name="First_name")
+    @Column(name=CUSTOMER_FIRST_NAME_TABLE_NAME)
     private String firstName;
 
-    @Column(name="Last_name")
+    @Column(name=CUSTOMER_LAST_NAME_TABLE_NAME)
     private String lastName;
 
-    @Column(name="Mail")
+    @Column(name=CUSTOMER_MAIL_TABLE_NAME)
     private String mailAddress;
 
-    @Column(name="Phone")
+    @Column(name=CUSTOMER_PHONE_TABLE_NAME)
     private String phoneNumber;
 
 
