@@ -1,3 +1,4 @@
+import entities.customer.Customer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,6 +10,9 @@ import utils.GlobalProperties;
 
 import static utils.Constants.MAIN_PROGRAM_TEXT;
 import static utils.GlobalProperties._logger;
+import static utils.SQLQueries.SQLQueriesAgainstCustomer.insertCustomerToDB;
+import static utils.SQLQueries.SQLQueriesAgainstCustomer.removeAllCustomerTable;
+import static utils.SQLQueries.SQLQueriesAgainstCustomer.updateCustomerFirstName;
 
 public class Main extends Application {
 
@@ -40,12 +44,12 @@ public class Main extends Application {
         _logger.debug("Program Started");
         //launch(args);
 
-        // insertCustomerToDB(new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754"));
-        // insertCustomerToDB(new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754"));
-        // insertCustomerToDB(new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754"));
-        // int id=insertCustomerToDB(new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754"));
-        // updateCustomerFirstName(id,"newName");
-        // removeAllCustomerTable();
+        insertCustomerToDB(new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754"));
+        insertCustomerToDB(new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754"));
+        insertCustomerToDB(new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754"));
+        int id=insertCustomerToDB(new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754"));
+        updateCustomerFirstName(id,"newName");
+        removeAllCustomerTable();
 
         // Customer c1=new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754");
         // Customer c2=new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754");
@@ -70,9 +74,10 @@ public class Main extends Application {
         //exportPurchasesToCsv(l);
         // ArrayList<Purchase> l=importPurchasesFromCsv("Purchases.csv");
         //
-        // GlobalProperties.closeConnections();
+
 
 
         _logger.debug("Program Finished");
+        GlobalProperties.closeConnections();
     }
 }

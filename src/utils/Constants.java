@@ -21,7 +21,9 @@ public final class Constants {
     public static final double DEFAULT_VIP_SUBSCRIPTION_AMOUNT =400;
 
     //format
+    public static final String LOG_FILE_NAME_EXTENSION = "log";
     public static final String CSV_SEPERATOR = ",";
+    public static final int LOG_MAX_SIZE = 1000;
     public static final String DATE_FORMAT = "dd-MM-yyyy HH:mm:ss";
 
 }

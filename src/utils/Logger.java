@@ -6,9 +6,13 @@
 
 package utils;
 
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static utils.Constants.LOG_FILE_NAME_EXTENSION;
+import static utils.Constants.LOG_MAX_SIZE;
 import static utils.Utils.getCurrentTimeStamp;
 
 /**
@@ -34,9 +38,13 @@ public class Logger {
             this.message = message;
         }
 
-        public void ToString(){
+        public void printToConsole(){
             System.out.println(date+" "+ type+ " "+ " "+message );
         }
+        public String toString(){
+            return date+" "+ type+ " "+ " "+message;
+        }
+
     }
 
     List<Log> logs;
@@ -47,27 +55,43 @@ public class Logger {
 
     public void debug(String message){
         Log log=new Log(getCurrentTimeStamp(),logType.DEBUG,message);
-        log.ToString();
+        log.printToConsole();
         logs.add(log);
-        CleanAndSaveLogIfNeeded();
+        CleanAndSaveLogIfNeeded(false);
     }
 
     public void warning(String message){
         Log log=new Log(getCurrentTimeStamp(),logType.WARNNING,message);
-        log.ToString();
+        log.printToConsole();
         logs.add(log);
-        CleanAndSaveLogIfNeeded();
+        CleanAndSaveLogIfNeeded(false);
     }
 
     public void error(String message){
         Log log=new Log(getCurrentTimeStamp(),logType.ERROR,message);
-        log.ToString();
+        log.printToConsole();
         logs.add(log);
-        CleanAndSaveLogIfNeeded();
+        CleanAndSaveLogIfNeeded(false);
     }
 
-    public void CleanAndSaveLogIfNeeded(){
-        //TODO
+    public void CleanAndSaveLogIfNeeded(boolean force){
+        if(logs.size()>LOG_MAX_SIZE || force){
+            //save log
+            String fileName=LOG_FILE_NAME_EXTENSION+"_"+getCurrentTimeStamp()+".txt";
+            fileName=fileName.replaceAll("-","-");
+            fileName=fileName.replaceAll(" ","_");
+            fileName=fileName.replaceAll(":","-");
+            try {
+                PrintWriter pw = new PrintWriter(new FileOutputStream(fileName));
+                for (Log log : logs)
+                    pw.println(log.toString());
+                pw.close();
+            } catch (Exception ex) {
+                System.out.println("ff");
+            }
+            //clear log
+            logs.clear();
+        }
     }
 
 

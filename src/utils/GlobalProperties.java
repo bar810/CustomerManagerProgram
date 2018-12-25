@@ -54,6 +54,7 @@ public class GlobalProperties {
         // _subscriptionFactory.close();
 
         _logger.debug("Connection closed successfully");
+        _logger.CleanAndSaveLogIfNeeded(true);
     }
 
 }
