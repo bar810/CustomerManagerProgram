@@ -8,11 +8,13 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import utils.GlobalProperties;
 
+import java.util.ArrayList;
+
 import static utils.Constants.MAIN_PROGRAM_TEXT;
 import static utils.GlobalProperties._logger;
-import static utils.SQLQueries.SQLQueriesAgainstCustomer.insertCustomerToDB;
-import static utils.SQLQueries.SQLQueriesAgainstCustomer.removeAllCustomerTable;
-import static utils.SQLQueries.SQLQueriesAgainstCustomer.updateCustomerFirstName;
+import static utils.SQLQueries.SQLQueriesAgainstCustomer.insertRangeOfCustomersToDB;
+import static utils.Utils.exportToCsv;
+import static utils.Utils.importFromCsv;
 
 public class Main extends Application {
 
@@ -44,12 +46,21 @@ public class Main extends Application {
         _logger.debug("Program Started");
         //launch(args);
 
-        insertCustomerToDB(new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754"));
-        insertCustomerToDB(new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754"));
-        insertCustomerToDB(new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754"));
-        int id=insertCustomerToDB(new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754"));
-        updateCustomerFirstName(id,"newName");
-        removeAllCustomerTable();
+        // insertCustomerToDB(new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754"));
+        // insertCustomerToDB(new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754"));
+        // insertCustomerToDB(new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754"));
+        // int id=insertCustomerToDB(new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754"));
+        // updateCustomerFirstName(id,"newName");
+        // removeAllCustomerTable();
+
+        Customer c1=new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754");
+        Customer c2=new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754");
+        ArrayList<Customer>l =new ArrayList<Customer>();
+        l.add(c1);
+        l.add(c2);
+        exportToCsv(l);
+        ArrayList<Customer>l2=importFromCsv("Customers.csv");
+        insertRangeOfCustomersToDB(l2);
 
         GlobalProperties.closeConnections();
         _logger.debug("Program Finished");

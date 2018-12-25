@@ -8,7 +8,6 @@ package utils;
 
 import entities.customer.Customer;
 import entities.purchase.Purchase;
-import entities.subscription.AbstractSubscription;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -40,17 +39,17 @@ public class GlobalProperties {
                 .addAnnotatedClass(Purchase.class)
                 .buildSessionFactory();
 
-        _subscriptionFactory =new Configuration()
-                .configure("utils/hibernate.cfg.xml")
-                .addAnnotatedClass(AbstractSubscription.class)//TODO :: check if this is good
-                .buildSessionFactory();
+        // _subscriptionFactory =new Configuration()
+        //         .configure("utils/hibernate.cfg.xml")
+        //         .addAnnotatedClass(AbstractSubscription.class)//TODO :: check if this is good
+        //         .buildSessionFactory();
 
         _logger.debug("Global properties initialized");
     }
     public static void closeConnections(){
         _customerFactory.close();
         _purchaseFactory.close();
-        _subscriptionFactory.close();
+        // _subscriptionFactory.close();
 
         _logger.debug("Connection closed successfully");
     }

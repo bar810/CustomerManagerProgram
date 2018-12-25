@@ -8,13 +8,13 @@ package utils;
 
 import entities.customer.Customer;
 import org.hibernate.Session;
+import sun.reflect.annotation.ExceptionProxy;
 
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static utils.Constants.CSV_SEPERATOR;
 import static utils.Constants.DATE_FORMAT;
@@ -67,7 +67,27 @@ public class Utils {
             _logger.error("Error when trying to export to CSV. "+e.toString());
         }
         _logger.debug("Exporting to csv finished successfully");
+    }
 
+    public static ArrayList<Customer> importFromCsv(String location) {
+        _logger.debug("Import Customers from CSV. location: "+location);
+        List<String[]> content = new ArrayList<>();
+        try(BufferedReader br = new BufferedReader(new FileReader(location))) {
+            String line = "";
+            while ((line = br.readLine()) != null) {
+                content.add(line.split(","));
+            }
+        } catch (Exception e) {
+            _logger.error("Error while trying to import from csv. "+e.toString());
+        }
+        ArrayList<Customer> customers=new ArrayList<>();
+        //return content;
+        for(int i=1;i<content.size();i++){
+            String[] con=content.get(i);
+            customers.add(new Customer(con[1],con[2],con[3],con[4]));
+        }
+        _logger.debug("Customers imported successfully. size:  "+customers.size());
+        return customers;
     }
 
     public static String getCurrentTimeStamp() {

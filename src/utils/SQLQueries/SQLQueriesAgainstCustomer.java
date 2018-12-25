@@ -39,6 +39,23 @@ public class SQLQueriesAgainstCustomer {
         _logger.debug("Customer inserted successfully to DB. ID: "+customer.getCustomerID());
         return customer.getCustomerID();
     }
+    public static int insertRangeOfCustomersToDB(List<Customer> customers) {
+        _logger.debug("Inserting range of Customers to DB. size: "+customers.size());
+        Session customerSession= getCustomerSession();
+        int counter=0;
+        for(Customer c: customers){
+            int retVal=insertCustomerToDB(c);
+            if(retVal!=-1){
+                counter++;
+            }
+        }
+        if(counter==customers.size()){
+            _logger.debug("All the customers are inserted to DB successfully");
+        }else{
+            _logger.warning("not all the customers are inserted to DB successfully");
+        }
+        return counter;
+    }
     public static Customer getCustomerByID(int id){
         _logger.debug("getting Customer from DB by ID: "+id);
         Session customerSession= getCustomerSession();
