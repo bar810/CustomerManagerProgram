@@ -1,4 +1,3 @@
-import entities.customer.Customer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,13 +7,8 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import utils.GlobalProperties;
 
-import java.util.ArrayList;
-
 import static utils.Constants.MAIN_PROGRAM_TEXT;
 import static utils.GlobalProperties._logger;
-import static utils.SQLQueries.SQLQueriesAgainstCustomer.insertRangeOfCustomersToDB;
-import static utils.Utils.exportToCsv;
-import static utils.Utils.importFromCsv;
 
 public class Main extends Application {
 
@@ -53,16 +47,32 @@ public class Main extends Application {
         // updateCustomerFirstName(id,"newName");
         // removeAllCustomerTable();
 
-        Customer c1=new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754");
-        Customer c2=new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754");
-        ArrayList<Customer>l =new ArrayList<Customer>();
-        l.add(c1);
-        l.add(c2);
-        exportToCsv(l);
-        ArrayList<Customer>l2=importFromCsv("Customers.csv");
-        insertRangeOfCustomersToDB(l2);
+        // Customer c1=new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754");
+        // Customer c2=new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754");
+        // ArrayList<Customer>l =new ArrayList<Customer>();
+        // l.add(c1);
+        // l.add(c2);
+        // exportCustomersToCsv(l);
+        // ArrayList<Customer>l2=importCustomersFromCsv("Customers.csv");
+        // insertRangeOfCustomersToDB(l2);
 
-        GlobalProperties.closeConnections();
+        // Purchase c1=new Purchase(1,1,1);
+        // Purchase c2=new Purchase(1,1,1);
+        // ArrayList<Purchase> l =new ArrayList<Purchase>();
+        // l.add(c1);
+        // l.add(c2);
+        //insertRangeOfPurchasesToDB(l);
+
+        //List<Purchase> c1=getAllPurchasesFromDBWithConditions("1","1","","2","1");
+
+        //removeAllPurchaseTable();
+
+        //exportPurchasesToCsv(l);
+        // ArrayList<Purchase> l=importPurchasesFromCsv("Purchases.csv");
+        //
+        // GlobalProperties.closeConnections();
+
+
         _logger.debug("Program Finished");
     }
 }

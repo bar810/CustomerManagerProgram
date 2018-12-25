@@ -20,7 +20,7 @@ DROP TABLE IF EXISTS `Purchases`;
 CREATE TABLE `Purchases` (
   `Purchase_ID` int(11) NOT NULL AUTO_INCREMENT,
   `Customer_ID` varchar(45) DEFAULT NULL,
-  `Purchase_date` DATETIME (6) DEFAULT NULL,
+  `Purchase_date` varchar (45) DEFAULT NULL,
   `Amount` float(53) DEFAULT NULL,
   `New_balance` int(11) DEFAULT NULL,
   PRIMARY KEY (`Purchase_ID`)

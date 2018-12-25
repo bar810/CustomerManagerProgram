@@ -41,7 +41,6 @@ public class SQLQueriesAgainstCustomer {
     }
     public static int insertRangeOfCustomersToDB(List<Customer> customers) {
         _logger.debug("Inserting range of Customers to DB. size: "+customers.size());
-        Session customerSession= getCustomerSession();
         int counter=0;
         for(Customer c: customers){
             int retVal=insertCustomerToDB(c);

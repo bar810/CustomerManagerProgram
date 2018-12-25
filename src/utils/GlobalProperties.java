@@ -28,8 +28,12 @@ public class GlobalProperties {
     public static void init() {
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
         _logger=new Logger();
+        openConnections();
+        _logger.debug("Global properties initialized");
+    }
 
-         _customerFactory =new Configuration()
+    public static void openConnections(){
+        _customerFactory =new Configuration()
                 .configure("utils/hibernate.cfg.xml")
                 .addAnnotatedClass(Customer.class)
                 .buildSessionFactory();
@@ -43,8 +47,6 @@ public class GlobalProperties {
         //         .configure("utils/hibernate.cfg.xml")
         //         .addAnnotatedClass(AbstractSubscription.class)//TODO :: check if this is good
         //         .buildSessionFactory();
-
-        _logger.debug("Global properties initialized");
     }
     public static void closeConnections(){
         _customerFactory.close();
