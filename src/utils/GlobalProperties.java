@@ -7,7 +7,6 @@
 package utils;
 
 import entities.customer.Customer;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -17,14 +16,12 @@ import org.hibernate.cfg.Configuration;
  */
 public class GlobalProperties {
     public static SessionFactory customerFactory;
-    public static Session customerSession;
 
     public static void init() {
          customerFactory=new Configuration()
                 .configure("utils/hibernate.cfg.xml")
                 .addAnnotatedClass(Customer.class)
                 .buildSessionFactory();
-         customerSession=customerFactory.getCurrentSession();
          System.out.println("Global properties initialized");
     }
 

@@ -7,11 +7,12 @@
 package utils;
 
 import entities.customer.Customer;
+import org.hibernate.Session;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static utils.GlobalProperties.customerSession;
+import static utils.GlobalProperties.customerFactory;
 import static utils.Utils.isNotNullOrEmpty;
 
 /**
@@ -21,7 +22,7 @@ import static utils.Utils.isNotNullOrEmpty;
 public class SQLQueriesAgainstCustomer {
 
     public static int insertCustomerToDB(Customer customer) {
-
+        Session customerSession=customerFactory.getCurrentSession();
         Integer id = -1;
         try {
             customerSession.beginTransaction();
@@ -38,6 +39,7 @@ public class SQLQueriesAgainstCustomer {
     }
 
     public static Customer getCustomerByID(int id){
+        Session customerSession=customerFactory.getCurrentSession();
         Customer customer=null;
         try {
             customerSession.beginTransaction();
@@ -53,6 +55,7 @@ public class SQLQueriesAgainstCustomer {
     }
 
     public static List<Customer> getAllCustomersFromDB(){
+        Session customerSession=customerFactory.getCurrentSession();
         List customers=new ArrayList<Customer>();
         try {
             customerSession.beginTransaction();
@@ -68,6 +71,7 @@ public class SQLQueriesAgainstCustomer {
     }
 
     public static List<Customer> getAllCustomersFromDBWithConditions(String ID,String firstName,String lastName,String mail,String phone){
+        Session customerSession=customerFactory.getCurrentSession();
         boolean putFirstPrefix=false;
         String query="from Customer";
         if(isNotNullOrEmpty(ID)){
@@ -134,7 +138,14 @@ public class SQLQueriesAgainstCustomer {
         return customers;
     }
 
-    public static void update(){}//TODO}
-    public static void removeOneCustomer(){}//TODO}
+    public static void updateCustomerFirstName(Customer customer,String newFirstName){
+        Session customerSession=customerFactory.getCurrentSession();
+        Customer customer1=customerSession.get(Customer.class,1);
+        customer1.setFirstName(newFirstName);
+        customerSession.getTransaction().commit();
+        // customer.setFirstName("newFirstName");
+        // customerSession.getTransaction().commit();
+    }//TODO}
+    public static void removeOneCustomer(Customer customer){}//TODO}
     public static void removeAllCustomerTable(){}//TODO}
 }

@@ -8,10 +8,9 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import utils.GlobalProperties;
 
-import java.util.List;
-
 import static utils.Constants.MAIN_PROGRAM_TEXT;
-import static utils.SQLQueriesAgainstCustomer.getAllCustomersFromDBWithConditions;
+import static utils.SQLQueriesAgainstCustomer.getCustomerByID;
+import static utils.SQLQueriesAgainstCustomer.updateCustomerFirstName;
 
 public class Main extends Application {
 
@@ -60,8 +59,9 @@ public class Main extends Application {
         //Customer customer=getCustomerByID(2);
 
         // //TODO :: not working
-        List<Customer> customers=getAllCustomersFromDBWithConditions("","Bar","","","");
-
+        Customer customer=getCustomerByID(1);
+        Customer customer2=getCustomerByID(2);
+        updateCustomerFirstName(customer,"bar new name");
         GlobalProperties.closeConnections();
         System.out.println("Program finished !");
     }
