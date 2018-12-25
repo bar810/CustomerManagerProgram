@@ -43,7 +43,7 @@ public class BasicMethods {
             List<Subscription> list= getAllSubscriptionFromDBWithConditions("",String.valueOf(customer.getCustomerID()),"","",type.toString());
             if(list.size()>1){
                 //not valid case
-                _logger.error("Customer have more than 1 subscription. not valid case. Customer: "+customer);
+                _logger.error("Customer have more than 1 subscription from on type. not valid case. Customer: "+customer);
             }
             else{
                 boolean createNewSubscription=list.size()==0;
