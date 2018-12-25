@@ -4,7 +4,7 @@
  * CORPORATION OR ITS LICENSORS AND IS SUBJECT TO LICENSE TERMS.
  */
 
-package utils;
+package utils.SQLQueries;
 
 import entities.customer.Customer;
 import org.hibernate.Session;
@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static utils.GlobalProperties._customerFactory;
+import static utils.GlobalProperties._logger;
 import static utils.Utils.isNotNullOrEmpty;
 
 /**
@@ -20,7 +21,7 @@ import static utils.Utils.isNotNullOrEmpty;
  * @since 12/24/2018
  */
 public class SQLQueriesAgainstCustomer {
-
+        //TODO :: try catch for everything with log !
     public static int insertCustomerToDB(Customer customer) {
         Session customerSession= _customerFactory.getCurrentSession();
         Integer id = -1;
@@ -31,6 +32,7 @@ public class SQLQueriesAgainstCustomer {
 
         }catch(Exception e){
             //TODO
+
             System.out.println("Exception while insert customer");
         }
         System.out.println("Customer inserted!");
@@ -158,4 +160,6 @@ public class SQLQueriesAgainstCustomer {
             removeOneCustomer(c.getCustomerID());
         }
     }
+
+
 }

@@ -24,12 +24,9 @@ import static utils.Constants.DATE_FORMAT;
  */
 public class Utils {
 
-    //TODO export to json and from json
-
     public static void exportToCsv(ArrayList<Customer> list) {
         try
         {
-
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Customers.csv"), "UTF-8"));
 
             //write the header
@@ -67,11 +64,10 @@ public class Utils {
         catch (Exception e) {
             //TODO add log file
         }
-
-
     }
 
     public static String getCurrentTimeStamp() {
+        //TODO:: add try catch
         SimpleDateFormat sdfDate = new SimpleDateFormat(DATE_FORMAT);//dd/MM/yyyy
         Date now = new Date();
         String strDate = sdfDate.format(now);

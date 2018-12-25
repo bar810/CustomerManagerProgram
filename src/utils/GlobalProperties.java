@@ -15,11 +15,16 @@ import org.hibernate.cfg.Configuration;
  * @since 12/25/2018
  */
 public class GlobalProperties {
+
+    public static Logger _logger;
+
     public static SessionFactory _customerFactory;
     public static SessionFactory _purchaseFactory;
     public static SessionFactory _subscriptionFactory;
 
     public static void init() {
+        _logger=new Logger();
+
          _customerFactory =new Configuration()
                 .configure("utils/hibernate.cfg.xml")
                 .addAnnotatedClass(Customer.class)

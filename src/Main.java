@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import utils.GlobalProperties;
 
 import static utils.Constants.MAIN_PROGRAM_TEXT;
-import static utils.SQLQueriesAgainstCustomer.removeAllCustomerTable;
+import static utils.GlobalProperties._logger;
 
 public class Main extends Application {
 
@@ -39,31 +39,20 @@ public class Main extends Application {
         GlobalProperties.init();
         //launch(args);
 
-        // try {
-        //     System.out.println("connecting to DB "+JBDC_CONNECTION_STRING);
-        //     Connection myConn=DriverManager.getConnection(JBDC_CONNECTION_STRING,USER_NAME,PASSWORD);
-        //     System.out.println("connection successful !");
-        //
-        // } catch (Exception ex) {
-        //     System.out.println("connection failed !");
-        //
-        // }
-
-        //
-        // Customer customer = new Customer("Gal","Brownshtein","bar810@gmail.com","0548004754");
+        // Customer customer = new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754");
         // int id=insertCustomerToDB(customer);
-        // System.out.println("id1: "+id);
+        // System.out.println("Customer inserted. ID: "+id);
+        //
+        // customer=getCustomerByID(id);
+        // updateCustomerFirstName(customer.getCustomerID(),"newName");
 
-        //Customer customer=getCustomerByID(2);
+        _logger.debug("msg");
+        _logger.warning("msg1");
+        _logger.error("msg2");
 
-        // //TODO :: not working
-        // Customer customer=getCustomerByID(1);
-        // Customer customer2=getCustomerByID(2);
-        // updateCustomerFirstName(customer.getCustomerID(),"kkk");
         // removeOneCustomer(customer.getCustomerID());
         // GlobalProperties.closeConnections();
-
-        removeAllCustomerTable();
+        //removeAllCustomerTable();
         System.out.println("Program finished !");
     }
 }

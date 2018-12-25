@@ -22,7 +22,7 @@ public final class Constants {
 
     //format
     public static final String CSV_SEPERATOR = ",";
-    public static final String DATE_FORMAT = "YYYY-MM-DD HH:MI:SS";
+    public static final String DATE_FORMAT = "YYYY-MM-DD HH:MM:SS";
 
     //SQL properties
     public static final String JBDC_CONNECTION_STRING = "jdbc:mysql://localhost:3306/customer_manager?useSSL=false&serverTimezone=UTC";
