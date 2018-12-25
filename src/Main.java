@@ -1,4 +1,3 @@
-import entities.customer.Customer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,8 +8,7 @@ import javafx.stage.Stage;
 import utils.GlobalProperties;
 
 import static utils.Constants.MAIN_PROGRAM_TEXT;
-import static utils.SQLQueriesAgainstCustomer.getCustomerByID;
-import static utils.SQLQueriesAgainstCustomer.updateCustomerFirstName;
+import static utils.SQLQueriesAgainstCustomer.removeAllCustomerTable;
 
 public class Main extends Application {
 
@@ -59,10 +57,13 @@ public class Main extends Application {
         //Customer customer=getCustomerByID(2);
 
         // //TODO :: not working
-        Customer customer=getCustomerByID(1);
-        Customer customer2=getCustomerByID(2);
-        updateCustomerFirstName(customer,"bar new name");
-        GlobalProperties.closeConnections();
+        // Customer customer=getCustomerByID(1);
+        // Customer customer2=getCustomerByID(2);
+        // updateCustomerFirstName(customer.getCustomerID(),"kkk");
+        // removeOneCustomer(customer.getCustomerID());
+        // GlobalProperties.closeConnections();
+
+        removeAllCustomerTable();
         System.out.println("Program finished !");
     }
 }

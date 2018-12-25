@@ -15,18 +15,34 @@ import org.hibernate.cfg.Configuration;
  * @since 12/25/2018
  */
 public class GlobalProperties {
-    public static SessionFactory customerFactory;
+    public static SessionFactory _customerFactory;
+    public static SessionFactory _purchaseFactory;
+    public static SessionFactory _subscriptionFactory;
 
     public static void init() {
-         customerFactory=new Configuration()
+         _customerFactory =new Configuration()
                 .configure("utils/hibernate.cfg.xml")
                 .addAnnotatedClass(Customer.class)
                 .buildSessionFactory();
+
+        _purchaseFactory =new Configuration()
+                .configure("utils/hibernate.cfg.xml")
+                .addAnnotatedClass(Customer.class)
+                .buildSessionFactory();
+
+        _subscriptionFactory =new Configuration()
+                .configure("utils/hibernate.cfg.xml")
+                .addAnnotatedClass(Customer.class)
+                .buildSessionFactory();
+
          System.out.println("Global properties initialized");
     }
 
     public static void closeConnections(){
-        customerFactory.close();
+        _customerFactory.close();
+        _purchaseFactory.close();
+        _subscriptionFactory.close();
+
         System.out.println("Connection closed successfully");
     }
 
