@@ -7,6 +7,8 @@
 package utils;
 
 import entities.customer.Customer;
+import entities.purchase.Purchase;
+import entities.subscription.AbstractSubscription;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -35,12 +37,12 @@ public class GlobalProperties {
 
         _purchaseFactory =new Configuration()
                 .configure("utils/hibernate.cfg.xml")
-                .addAnnotatedClass(Customer.class)
+                .addAnnotatedClass(Purchase.class)
                 .buildSessionFactory();
 
         _subscriptionFactory =new Configuration()
                 .configure("utils/hibernate.cfg.xml")
-                .addAnnotatedClass(Customer.class)
+                .addAnnotatedClass(AbstractSubscription.class)//TODO :: check if this is good
                 .buildSessionFactory();
 
         _logger.debug("Global properties initialized");

@@ -49,25 +49,25 @@ public class Logger {
         Log log=new Log(getCurrentTimeStamp(),logType.DEBUG,message);
         log.ToString();
         logs.add(log);
-        CleanLog();
+        CleanAndSaveLogIfNeeded();
     }
 
     public void warning(String message){
         Log log=new Log(getCurrentTimeStamp(),logType.WARNNING,message);
         log.ToString();
         logs.add(log);
-        CleanLog();
+        CleanAndSaveLogIfNeeded();
     }
 
     public void error(String message){
         Log log=new Log(getCurrentTimeStamp(),logType.ERROR,message);
         log.ToString();
         logs.add(log);
-        CleanLog();
+        CleanAndSaveLogIfNeeded();
     }
 
-    public void CleanLog(){
-        //TODO :: after I can check here if to clean the log- save and create new.
+    public void CleanAndSaveLogIfNeeded(){
+        //TODO
     }
 
 

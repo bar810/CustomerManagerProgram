@@ -7,6 +7,7 @@
 package utils;
 
 import entities.customer.Customer;
+import org.hibernate.Session;
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -17,7 +18,7 @@ import java.util.Date;
 
 import static utils.Constants.CSV_SEPERATOR;
 import static utils.Constants.DATE_FORMAT;
-import static utils.GlobalProperties._logger;
+import static utils.GlobalProperties.*;
 
 /**
  * @author bbrownsh
@@ -83,5 +84,30 @@ public class Utils {
 
     public static boolean isNotNullOrEmpty(String s){
         return s!=null && (!s.isEmpty());
+    }
+
+    public static Session getCustomerSession(){
+        try {
+            return  _customerFactory.getCurrentSession();
+        } catch (Exception ex) {
+            _logger.error("Exception while trying to get customer session. "+ ex.toString());
+            return null;
+        }
+    }
+    public static Session getPurchaseSession(){
+        try {
+            return  _purchaseFactory.getCurrentSession();
+        } catch (Exception ex) {
+            _logger.error("Exception while trying to get purchase session. "+ ex.toString());
+            return null;
+        }
+    }
+    public static Session getSubscriptionSession(){
+        try {
+            return  _subscriptionFactory.getCurrentSession();
+        } catch (Exception ex) {
+            _logger.error("Exception while trying to get subscription session. "+ ex.toString());
+            return null;
+        }
     }
 }

@@ -12,8 +12,8 @@ import org.hibernate.Session;
 import java.util.ArrayList;
 import java.util.List;
 
-import static utils.GlobalProperties._customerFactory;
 import static utils.GlobalProperties._logger;
+import static utils.Utils.getCustomerSession;
 import static utils.Utils.isNotNullOrEmpty;
 
 /**
@@ -21,11 +21,10 @@ import static utils.Utils.isNotNullOrEmpty;
  * @since 12/24/2018
  */
 public class SQLQueriesAgainstCustomer {
-        //TODO :: try catch for everything with log !
         //TODO :: more update functions
     public static int insertCustomerToDB(Customer customer) {
         _logger.debug("Inserting Customer to DB: "+customer.toString());
-        Session customerSession= _customerFactory.getCurrentSession();
+        Session customerSession= getCustomerSession();
         Integer id = -1;
         try {
             customerSession.beginTransaction();
@@ -42,7 +41,7 @@ public class SQLQueriesAgainstCustomer {
     }
     public static Customer getCustomerByID(int id){
         _logger.debug("getting Customer from DB by ID: "+id);
-        Session customerSession= _customerFactory.getCurrentSession();
+        Session customerSession= getCustomerSession();
         Customer customer=null;
         try {
             customerSession.beginTransaction();
@@ -63,7 +62,7 @@ public class SQLQueriesAgainstCustomer {
     }
     public static List<Customer> getAllCustomersFromDB(){
         _logger.debug("Getting all customers from DB");
-        Session customerSession= _customerFactory.getCurrentSession();
+        Session customerSession= getCustomerSession();
         List customers=new ArrayList<Customer>();
         try {
             customerSession.beginTransaction();
@@ -77,7 +76,7 @@ public class SQLQueriesAgainstCustomer {
         return customers;
     }
     public static List<Customer> getAllCustomersFromDBWithConditions(String ID,String firstName,String lastName,String mail,String phone){
-        Session customerSession= _customerFactory.getCurrentSession();
+        Session customerSession= getCustomerSession();
         boolean putFirstPrefix=false;
         String query="from Customer";
         if(isNotNullOrEmpty(ID)){
@@ -146,7 +145,7 @@ public class SQLQueriesAgainstCustomer {
     }
     public static void updateCustomerFirstName(int customerID,String newFirstName){
         _logger.debug("update customer first name. Customer ID: "+customerID+". new name: "+newFirstName);
-        Session customerSession= _customerFactory.getCurrentSession();
+        Session customerSession= getCustomerSession();
         customerSession.beginTransaction();
         Customer customer=customerSession.get(Customer.class,customerID);
         if(customer==null){
@@ -159,7 +158,7 @@ public class SQLQueriesAgainstCustomer {
     }
     public static void removeOneCustomer(int customerID){
         _logger.debug("removing customer. ID: "+customerID);
-        Session customerSession= _customerFactory.getCurrentSession();
+        Session customerSession= getCustomerSession();
         customerSession.beginTransaction();
         Customer customer=customerSession.get(Customer.class,customerID);
         if(customer==null){
