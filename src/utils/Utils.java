@@ -17,6 +17,7 @@ import java.util.Date;
 
 import static utils.Constants.CSV_SEPERATOR;
 import static utils.Constants.DATE_FORMAT;
+import static utils.GlobalProperties._logger;
 
 /**
  * @author bbrownsh
@@ -27,8 +28,8 @@ public class Utils {
     public static void exportToCsv(ArrayList<Customer> list) {
         try
         {
+            _logger.debug("Exporting to csv");
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Customers.csv"), "UTF-8"));
-
             //write the header
             StringBuffer oneLine = new StringBuffer();
             oneLine.append("ID");
@@ -62,16 +63,22 @@ public class Utils {
             bw.close();
         }
         catch (Exception e) {
-            //TODO add log file
+            _logger.error("Error when trying to export to CSV. "+e.toString());
         }
+        _logger.debug("Exporting to csv finished successfully");
+
     }
 
     public static String getCurrentTimeStamp() {
-        //TODO:: add try catch
-        SimpleDateFormat sdfDate = new SimpleDateFormat(DATE_FORMAT);//dd/MM/yyyy
-        Date now = new Date();
-        String strDate = sdfDate.format(now);
-        return strDate;
+        try {
+            SimpleDateFormat sdfDate = new SimpleDateFormat(DATE_FORMAT);//dd/MM/yyyy
+            Date now = new Date();
+            String strDate = sdfDate.format(now);
+            return strDate;
+        } catch (Exception ex) {
+            _logger.error("Error when trying to get current time. "+ ex.toString());
+        }
+        return null;
     }
 
     public static boolean isNotNullOrEmpty(String s){

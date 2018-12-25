@@ -24,14 +24,18 @@ public class Logger {
 
     public class Log {
         private String date;
-        private logType TYPE;
+        private logType type;
         private String message;
 
 
-        public Log(String date ,logType TYPE, String message) {
+        public Log(String date ,logType type, String message) {
             this.date=date;
-            this.TYPE = TYPE;
+            this.type = type;
             this.message = message;
+        }
+
+        public void ToString(){
+            System.out.println(date+" "+ type+ " "+ " "+message );
         }
     }
 
@@ -42,23 +46,23 @@ public class Logger {
     }
 
     public void debug(String message){
-        String date = getCurrentTimeStamp();
-        logs.add(new Log(date,logType.DEBUG,message));
-        System.out.println(date+" "+ logType.DEBUG+ " "+ " "+message );
+        Log log=new Log(getCurrentTimeStamp(),logType.DEBUG,message);
+        log.ToString();
+        logs.add(log);
         CleanLog();
     }
 
     public void warning(String message){
-        String date = getCurrentTimeStamp();
-        logs.add(new Log(date,logType.WARNNING,message));
-        System.out.println(date+" "+ logType.WARNNING+ " "+ " "+message );
+        Log log=new Log(getCurrentTimeStamp(),logType.WARNNING,message);
+        log.ToString();
+        logs.add(log);
         CleanLog();
     }
 
     public void error(String message){
-        String date = getCurrentTimeStamp();
-        logs.add(new Log(date,logType.ERROR,message));
-        System.out.println(date+" "+ logType.ERROR+ " "+ " "+message );
+        Log log=new Log(getCurrentTimeStamp(),logType.ERROR,message);
+        log.ToString();
+        logs.add(log);
         CleanLog();
     }
 

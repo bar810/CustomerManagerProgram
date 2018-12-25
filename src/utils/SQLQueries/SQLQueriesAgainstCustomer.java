@@ -22,7 +22,9 @@ import static utils.Utils.isNotNullOrEmpty;
  */
 public class SQLQueriesAgainstCustomer {
         //TODO :: try catch for everything with log !
+        //TODO :: more update functions
     public static int insertCustomerToDB(Customer customer) {
+        _logger.debug("Inserting Customer to DB: "+customer.toString());
         Session customerSession= _customerFactory.getCurrentSession();
         Integer id = -1;
         try {
@@ -31,16 +33,15 @@ public class SQLQueriesAgainstCustomer {
             customerSession.getTransaction().commit();
 
         }catch(Exception e){
-            //TODO
-
-            System.out.println("Exception while insert customer");
+            _logger.error("Exception thrown while trying to insert customer: "+e.toString());
+            return -1;
         }
         System.out.println("Customer inserted!");
-        id=customer.getCustomerID();
-        return id;
+        _logger.debug("Customer inserted successfully to DB. ID: "+customer.getCustomerID());
+        return customer.getCustomerID();
     }
-
     public static Customer getCustomerByID(int id){
+        _logger.debug("getting Customer from DB by ID: "+id);
         Session customerSession= _customerFactory.getCurrentSession();
         Customer customer=null;
         try {
@@ -49,29 +50,32 @@ public class SQLQueriesAgainstCustomer {
             customerSession.getTransaction().commit();
 
         }catch(Exception e){
-            //TODO
-            System.out.println("Exception while getting customer");
+            _logger.error("Exception while getting customer by ID: "+e.toString());
+            return null;
         }
-        System.out.println("Customer getting succeeded !");
+        if(customer==null){
+            _logger.warning("Customer not found ! ID: "+id);
+        }
+        else{
+            _logger.debug("Customer getting succeeded !");
+        }
         return customer;
     }
-
     public static List<Customer> getAllCustomersFromDB(){
+        _logger.debug("Getting all customers from DB");
         Session customerSession= _customerFactory.getCurrentSession();
         List customers=new ArrayList<Customer>();
         try {
             customerSession.beginTransaction();
             customers=customerSession.createQuery("from Customer").getResultList();
             customerSession.getTransaction().commit();
-
         }catch(Exception e){
-            //TODO
-            System.out.println("Exception");
+            _logger.error("Exception while trying to get all customers from DB");
+            return null;
         }
-        System.out.println("Customer succeeded !");
+        _logger.debug("Getting all customers query succeeded. customers founds: "+customers.size());
         return customers;
     }
-
     public static List<Customer> getAllCustomersFromDBWithConditions(String ID,String firstName,String lastName,String mail,String phone){
         Session customerSession= _customerFactory.getCurrentSession();
         boolean putFirstPrefix=false;
@@ -126,6 +130,7 @@ public class SQLQueriesAgainstCustomer {
             }
             query+=" s.phoneNumber='"+phone+"'";
         }
+        _logger.debug("Getting all customers from DB with condition. query: "+query);
         List customers=new ArrayList<Customer>();
         try {
             customerSession.beginTransaction();
@@ -133,33 +138,44 @@ public class SQLQueriesAgainstCustomer {
             customerSession.getTransaction().commit();
 
         }catch(Exception e){
-            //TODO
-            System.out.println("Exception");
+            _logger.error("Exception while trying to get all customers from DB with conditions");
+            return null;
         }
-        System.out.println("Customer succeeded !");
+        _logger.debug("Getting all customers with condition query succeeded. customers founds: "+customers.size());
         return customers;
     }
-
     public static void updateCustomerFirstName(int customerID,String newFirstName){
+        _logger.debug("update customer first name. Customer ID: "+customerID+". new name: "+newFirstName);
         Session customerSession= _customerFactory.getCurrentSession();
         customerSession.beginTransaction();
         Customer customer=customerSession.get(Customer.class,customerID);
-        customer.setFirstName(newFirstName);
-        customerSession.getTransaction().commit();
+        if(customer==null){
+            _logger.warning("Customer not found");
+        }else{
+            customer.setFirstName(newFirstName);
+            customerSession.getTransaction().commit();
+            _logger.debug("Customer updated successfully. customer: "+customer.toString());
+        }
     }
     public static void removeOneCustomer(int customerID){
+        _logger.debug("removing customer. ID: "+customerID);
         Session customerSession= _customerFactory.getCurrentSession();
         customerSession.beginTransaction();
         Customer customer=customerSession.get(Customer.class,customerID);
-        customerSession.delete(customer);
-        customerSession.getTransaction().commit();
+        if(customer==null){
+            _logger.warning("Customer not found");
+        }else{
+            customerSession.delete(customer);
+            customerSession.getTransaction().commit();
+            _logger.debug("Customer removed successfully");
+        }
     }
     public static void removeAllCustomerTable(){
+        _logger.debug("Removing all customers from DB");
         List<Customer> list=getAllCustomersFromDB();
         for(Customer c: list){
             removeOneCustomer(c.getCustomerID());
         }
+        _logger.debug("Removing all customers succeeded");
     }
-
-
 }

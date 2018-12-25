@@ -10,6 +10,8 @@ import entities.customer.Customer;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.util.logging.Level;
+
 /**
  * @author bbrownsh
  * @since 12/25/2018
@@ -23,6 +25,7 @@ public class GlobalProperties {
     public static SessionFactory _subscriptionFactory;
 
     public static void init() {
+        java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
         _logger=new Logger();
 
          _customerFactory =new Configuration()
@@ -40,15 +43,14 @@ public class GlobalProperties {
                 .addAnnotatedClass(Customer.class)
                 .buildSessionFactory();
 
-         System.out.println("Global properties initialized");
+        _logger.debug("Global properties initialized");
     }
-
     public static void closeConnections(){
         _customerFactory.close();
         _purchaseFactory.close();
         _subscriptionFactory.close();
 
-        System.out.println("Connection closed successfully");
+        _logger.debug("Connection closed successfully");
     }
 
 }

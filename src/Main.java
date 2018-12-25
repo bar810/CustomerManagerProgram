@@ -1,3 +1,4 @@
+import entities.customer.Customer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,6 +10,9 @@ import utils.GlobalProperties;
 
 import static utils.Constants.MAIN_PROGRAM_TEXT;
 import static utils.GlobalProperties._logger;
+import static utils.SQLQueries.SQLQueriesAgainstCustomer.insertCustomerToDB;
+import static utils.SQLQueries.SQLQueriesAgainstCustomer.removeAllCustomerTable;
+import static utils.SQLQueries.SQLQueriesAgainstCustomer.updateCustomerFirstName;
 
 public class Main extends Application {
 
@@ -37,22 +41,17 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         GlobalProperties.init();
+        _logger.debug("Program Started");
         //launch(args);
 
-        // Customer customer = new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754");
-        // int id=insertCustomerToDB(customer);
-        // System.out.println("Customer inserted. ID: "+id);
-        //
-        // customer=getCustomerByID(id);
-        // updateCustomerFirstName(customer.getCustomerID(),"newName");
+        insertCustomerToDB(new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754"));
+        insertCustomerToDB(new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754"));
+        insertCustomerToDB(new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754"));
+        int id=insertCustomerToDB(new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754"));
+        updateCustomerFirstName(id,"newName");
+        removeAllCustomerTable();
 
-        _logger.debug("msg");
-        _logger.warning("msg1");
-        _logger.error("msg2");
-
-        // removeOneCustomer(customer.getCustomerID());
-        // GlobalProperties.closeConnections();
-        //removeAllCustomerTable();
-        System.out.println("Program finished !");
+        GlobalProperties.closeConnections();
+        _logger.debug("Program Finished");
     }
 }

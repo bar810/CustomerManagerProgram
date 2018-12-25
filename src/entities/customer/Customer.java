@@ -44,7 +44,6 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
-
     public String getFirstName() {
         return firstName;
     }
@@ -83,5 +82,9 @@ public class Customer {
 
     public void setCustomerID(int customerID) {
         this.customerID = customerID;
+    }
+
+    public String toString(){
+        return "Customer: ID: "+customerID+", First name: "+firstName+", last name: "+lastName+", phone: "+phoneNumber+", mail: "+mailAddress;
     }
 }
