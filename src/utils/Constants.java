@@ -26,4 +26,13 @@ public final class Constants {
     public static final int LOG_MAX_SIZE = 1000;
     public static final String DATE_FORMAT = "dd-MM-yyyy HH:mm:ss";
 
+    //Subscription types
+    public static final String MEALS_SUBSCRIPTION = "MEALS";
+    public static final String VIP_SUBSCRIPTION = "VIP";
+
+    //Locations for files
+    public static final String CUSTOMER_TABLE_LOCATION = "customers.csv";
+    public static final String PURCHASE_TABLE_LOCATION = "purchases.csv";
+    public static final String SUBSCRIPTION_TABLE_LOCATION = "subscriptions.csv";
+
 }

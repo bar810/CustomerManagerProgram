@@ -184,7 +184,7 @@ public class CSVScripts {
                 oneLine.append(CSV_SEPERATOR);
                 oneLine.append(subscription.getBalance()< 0? "" : subscription.getBalance());
                 oneLine.append(CSV_SEPERATOR);
-                oneLine.append(subscription.getType().getValue().trim().length() <0? "" : subscription.getType().getValue());
+                oneLine.append(subscription.getType().trim().length() <0? "" : subscription.getType());
                 bw.write(oneLine.toString());
                 bw.newLine();
             }
@@ -215,7 +215,7 @@ public class CSVScripts {
                 int customerID= Integer.parseInt(con[1]);
                 String date=con[2];
                 double balance= Double.parseDouble(con[3]);
-                Subscription.SubscriptionType type= Subscription.SubscriptionType.valueOf(con[4]);
+                String type= con[4];
                 subscriptions.add(new Subscription(customerID,date,balance,type));
             } catch (Exception ex) {
                 _logger.debug("Subscriptions reading failed. probably cannot cast string to int");

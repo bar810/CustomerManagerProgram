@@ -24,7 +24,7 @@ public class GeneralScripts {
     }
 
     public static void csvToDB(String customerLocation,String purchasaeLocation,String subscriptionLocation){
-        insertRangeOfCustomersToDB(importCustomersFromCsv(purchasaeLocation));
+        insertRangeOfCustomersToDB(importCustomersFromCsv(customerLocation));
         insertRangeOfPurchasesToDB(importPurchasesFromCsv(purchasaeLocation));
         insertRangeOfSubscriptionsToDB(importSubscriptionsFromCsv(subscriptionLocation));
     }

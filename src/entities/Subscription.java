@@ -15,13 +15,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="Subscriptions")
 public class Subscription{
-    public enum SubscriptionType{
-        MEALS("MEALS"),VIP("VIP");
 
-        private final String type;
-        SubscriptionType(String type) { this.type = type; }
-        public String getValue() { return type; }
-    }
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -38,12 +32,12 @@ public class Subscription{
     private double balance;
 
     @Column(name="Type")
-    private SubscriptionType type;
+    private String type;
 
     public Subscription() {
     }
 
-    public Subscription(int coustomerID, String subscriptionPurchaseDate, double balance,SubscriptionType type) {
+    public Subscription(int coustomerID, String subscriptionPurchaseDate, double balance,String type) {
         this.coustomerID = coustomerID;
         this.subscriptionPurchaseDate = subscriptionPurchaseDate;
         this.balance = balance;
@@ -82,11 +76,11 @@ public class Subscription{
         this.balance = balance;
     }
 
-    public SubscriptionType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(SubscriptionType type) {
+    public void setType(String type) {
         this.type = type;
     }
 

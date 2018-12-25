@@ -7,8 +7,10 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import utils.GlobalProperties;
 
-import static utils.Constants.MAIN_PROGRAM_TEXT;
+import static utils.Constants.*;
 import static utils.GlobalProperties._logger;
+import static utils.SQLQueries.GeneralScripts.csvToDB;
+import static utils.SQLQueries.GeneralScripts.removeAllDataFromAllDBTables;
 
 public class Main extends Application {
 
@@ -40,7 +42,19 @@ public class Main extends Application {
         _logger.debug("Program Started");
         //launch(args);
 
-
+        removeAllDataFromAllDBTables();
+        // Customer bar=new Customer("Bar","Brownshtein","00","00");
+        // Customer gal=new Customer("Gal","Brownshtein","00","00");
+        // addCustomer(bar);
+        // addCustomer(gal);
+        // buySubscription(bar,VIP_SUBSCRIPTION);
+        // buySubscription(gal, MEALS_SUBSCRIPTION);
+        //
+        // buyProduct(bar,VIP_SUBSCRIPTION,50);
+        // buyProduct(gal,MEALS_SUBSCRIPTION,1);
+        //
+        // DBToCsv(CUSTOMER_TABLE_LOCATION,PURCHASE_TABLE_LOCATION,SUBSCRIPTION_TABLE_LOCATION);
+        csvToDB(CUSTOMER_TABLE_LOCATION,PURCHASE_TABLE_LOCATION,SUBSCRIPTION_TABLE_LOCATION);
         _logger.debug("Program Finished");
         GlobalProperties.closeConnections();
     }
