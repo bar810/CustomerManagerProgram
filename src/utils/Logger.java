@@ -13,6 +13,7 @@ import java.util.List;
 
 import static utils.Constants.LOG_FILE_NAME_EXTENSION;
 import static utils.Constants.LOG_MAX_SIZE;
+import static utils.GlobalProperties._logger;
 import static utils.Utils.getCurrentTimeStamp;
 
 /**
@@ -86,11 +87,10 @@ public class Logger {
                 for (Log log : logs)
                     pw.println(log.toString());
                 pw.close();
+                logs.clear();
             } catch (Exception ex) {
-                System.out.println("ff");
+                _logger.error("Log save failed");
             }
-            //clear log
-            logs.clear();
         }
     }
 

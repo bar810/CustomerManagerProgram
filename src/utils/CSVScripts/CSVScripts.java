@@ -6,8 +6,8 @@
 
 package utils.CSVScripts;
 
-import entities.customer.Customer;
-import entities.purchase.Purchase;
+import entities.Customer;
+import entities.Purchase;
 
 import java.io.*;
 import java.util.ArrayList;

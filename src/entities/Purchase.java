@@ -4,7 +4,7 @@
  * CORPORATION OR ITS LICENSORS AND IS SUBJECT TO LICENSE TERMS.
  */
 
-package entities.purchase;
+package entities;
 
 import javax.persistence.*;
 

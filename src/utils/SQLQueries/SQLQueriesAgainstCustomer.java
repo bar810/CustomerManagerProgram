@@ -6,7 +6,7 @@
 
 package utils.SQLQueries;
 
-import entities.customer.Customer;
+import entities.Customer;
 import org.hibernate.Session;
 
 import java.util.ArrayList;

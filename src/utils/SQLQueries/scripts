@@ -4,6 +4,7 @@ USE `Customer_Manager`;
 -- Table structure for table `student`
 --
 
+
 DROP TABLE IF EXISTS `Subscriptions`;
 
 CREATE TABLE `Subscriptions` (
@@ -11,9 +12,10 @@ CREATE TABLE `Subscriptions` (
   `Customer_ID` varchar(45) DEFAULT NULL,
   `Subscription_purchase_date` varchar(45) DEFAULT NULL,
   `Balance` float(53) DEFAULT NULL,
-  `Type` int(11) DEFAULT NULL,
+  `Type` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`Subscription_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
 
 DROP TABLE IF EXISTS `Purchases`;
 
@@ -36,12 +38,6 @@ CREATE TABLE `Customers` (
   `Phone` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`Customer_ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
-
-
-INSERT INTO purchases (customerID,Date,amount,newBalance)
-VALUES (1,'1991-10-08 08:22:22', 10, 12)
-
-select * from customers Customer_ID
 
 
 

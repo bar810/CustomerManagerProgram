@@ -6,7 +6,7 @@
 
 package utils.SQLQueries;
 
-import entities.purchase.Purchase;
+import entities.Purchase;
 import org.hibernate.Session;
 
 import java.util.ArrayList;
@@ -38,9 +38,6 @@ public class SQLQueriesAgainstPurchase {
         _logger.debug("purchase inserted successfully to DB. ID: "+purchase.getPurchaseID());
         return purchase.getPurchaseID();
     }
-
-
-
     public static int insertRangeOfPurchasesToDB(List<Purchase> purchases) {
         _logger.debug("Inserting range of purchases to DB. size: "+purchases.size());
         int counter=0;
@@ -57,8 +54,6 @@ public class SQLQueriesAgainstPurchase {
         }
         return counter;
     }
-
-
     public static Purchase getPurchaseByID(int id){
         _logger.debug("getting Purchase from DB by ID: "+id);
         Session purchaseSession= getPurchaseSession();
@@ -80,7 +75,6 @@ public class SQLQueriesAgainstPurchase {
         }
         return purchase;
     }
-
     public static List<Purchase> getAllPurchasesFromDB(){
         _logger.debug("Getting all Purchases from DB");
         Session purchaseSession= getPurchaseSession();
@@ -96,7 +90,6 @@ public class SQLQueriesAgainstPurchase {
         _logger.debug("Getting all Purchases query succeeded. Purchases founds: "+purchases.size());
         return purchases;
     }
-
     public static List<Purchase> getAllPurchasesFromDBWithConditions(String ID,String customerID,String date,String amount,String newBalance){
         Session purchaseSession= getPurchaseSession();
         boolean putFirstPrefix=false;
@@ -165,7 +158,6 @@ public class SQLQueriesAgainstPurchase {
         _logger.debug("Getting all purchases with condition query succeeded. purchases founds: "+purchases.size());
         return purchases;
     }
-
     public static void updatePurchaseAmount(int purchaseID,int newAmount){
         _logger.debug("update Purchase amount. Purchase ID: "+purchaseID+". new name: "+newAmount);
         Session purchaseSession= getPurchaseSession();

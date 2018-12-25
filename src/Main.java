@@ -1,4 +1,4 @@
-import entities.customer.Customer;
+import entities.Subscription;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,11 +8,12 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import utils.GlobalProperties;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static utils.Constants.MAIN_PROGRAM_TEXT;
 import static utils.GlobalProperties._logger;
-import static utils.SQLQueries.SQLQueriesAgainstCustomer.insertCustomerToDB;
-import static utils.SQLQueries.SQLQueriesAgainstCustomer.removeAllCustomerTable;
-import static utils.SQLQueries.SQLQueriesAgainstCustomer.updateCustomerFirstName;
+import static utils.SQLQueries.SQLQueriesAgainstSubscription.*;
 
 public class Main extends Application {
 
@@ -44,38 +45,22 @@ public class Main extends Application {
         _logger.debug("Program Started");
         //launch(args);
 
-        insertCustomerToDB(new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754"));
-        insertCustomerToDB(new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754"));
-        insertCustomerToDB(new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754"));
-        int id=insertCustomerToDB(new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754"));
-        updateCustomerFirstName(id,"newName");
-        removeAllCustomerTable();
+        Subscription a= new Subscription(1,"meal",1.5,Subscription.SubscriptionType.MEALS);
+        Subscription a1=new Subscription(1,"vip",1.5,Subscription.SubscriptionType.VIP);
+        List<Subscription> l=new ArrayList<>();
+        l.add(a);
+        l.add(a1);
+        insertRangeOfSubscriptionsToDB(l);
 
-        // Customer c1=new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754");
-        // Customer c2=new Customer("Bar","Brownshtein","bar810@gmail.com","0548004754");
-        // ArrayList<Customer>l =new ArrayList<Customer>();
-        // l.add(c1);
-        // l.add(c2);
-        // exportCustomersToCsv(l);
-        // ArrayList<Customer>l2=importCustomersFromCsv("Customers.csv");
-        // insertRangeOfCustomersToDB(l2);
+        Subscription s=getSubscriptionByID(1);
 
-        // Purchase c1=new Purchase(1,1,1);
-        // Purchase c2=new Purchase(1,1,1);
-        // ArrayList<Purchase> l =new ArrayList<Purchase>();
-        // l.add(c1);
-        // l.add(c2);
-        //insertRangeOfPurchasesToDB(l);
+        List<Subscription> ll=getAllSubscriptionFromDBWithConditions("","","meal","1","0");
 
-        //List<Purchase> c1=getAllPurchasesFromDBWithConditions("1","1","","2","1");
+        updateSubscriptionBalance(1,50);
 
-        //removeAllPurchaseTable();
+        removeOneSubscription(2);
 
-        //exportPurchasesToCsv(l);
-        // ArrayList<Purchase> l=importPurchasesFromCsv("Purchases.csv");
-        //
-
-
+        removeAllSubscriptionsTable();
 
         _logger.debug("Program Finished");
         GlobalProperties.closeConnections();

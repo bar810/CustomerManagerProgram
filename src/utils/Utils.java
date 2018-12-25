@@ -52,7 +52,7 @@ public class Utils {
     }
     public static Session getSubscriptionSession(){
         try {
-            return  _subscriptionFactory.getCurrentSession();
+            return _SubscriptionFactory.getCurrentSession();
         } catch (Exception ex) {
             _logger.error("Exception while trying to get subscription session. "+ ex.toString());
             return null;

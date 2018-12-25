@@ -6,8 +6,9 @@
 
 package utils;
 
-import entities.customer.Customer;
-import entities.purchase.Purchase;
+import entities.Customer;
+import entities.Purchase;
+import entities.Subscription;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -23,7 +24,9 @@ public class GlobalProperties {
 
     public static SessionFactory _customerFactory;
     public static SessionFactory _purchaseFactory;
-    public static SessionFactory _subscriptionFactory;
+    public static SessionFactory _SubscriptionFactory;
+
+
 
     public static void init() {
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
@@ -43,15 +46,17 @@ public class GlobalProperties {
                 .addAnnotatedClass(Purchase.class)
                 .buildSessionFactory();
 
-        // _subscriptionFactory =new Configuration()
-        //         .configure("utils/hibernate.cfg.xml")
-        //         .addAnnotatedClass(AbstractSubscription.class)//TODO :: check if this is good
-        //         .buildSessionFactory();
+        _SubscriptionFactory =new Configuration()
+                .configure("utils/hibernate.cfg.xml")
+                .addAnnotatedClass(Subscription.class)
+                .buildSessionFactory();
+
+
     }
     public static void closeConnections(){
         _customerFactory.close();
         _purchaseFactory.close();
-        // _subscriptionFactory.close();
+        _SubscriptionFactory.close();
 
         _logger.debug("Connection closed successfully");
         _logger.CleanAndSaveLogIfNeeded(true);
