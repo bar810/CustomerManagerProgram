@@ -23,11 +23,11 @@ import static utils.GlobalProperties._logger;
  */
 public class CSVScripts {
 
-    public static void exportPurchasesToCsv(List<Purchase> list) {
+    public static void exportPurchasesToCsv(List<Purchase> list,String location) {
         try
         {
             _logger.debug("Exporting to csv");
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Purchases.csv"), "UTF-8"));
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(location), "UTF-8"));
             //write the header
             StringBuffer oneLine = new StringBuffer();
             oneLine.append("ID");
@@ -92,11 +92,11 @@ public class CSVScripts {
         _logger.debug("Purchases imported successfully. size:  "+purchases.size());
         return purchases;
     }
-    public static void exportCustomersToCsv(List<Customer> list) {
+    public static void exportCustomersToCsv(List<Customer> list,String location) {
         try
         {
             _logger.debug("Exporting to csv");
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Customers.csv"), "UTF-8"));
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(location), "UTF-8"));
             //write the header
             StringBuffer oneLine = new StringBuffer();
             oneLine.append("ID");
@@ -154,11 +154,11 @@ public class CSVScripts {
         _logger.debug("Customers imported successfully. size:  "+customers.size());
         return customers;
     }
-    public static void exportSubscriptionsToCsv(List<Subscription> list) {
+    public static void exportSubscriptionsToCsv(List<Subscription> list,String location) {
         try
         {
             _logger.debug("Exporting to csv");
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("Subscriptions.csv"), "UTF-8"));
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(location), "UTF-8"));
             //write the header
             StringBuffer oneLine = new StringBuffer();
             oneLine.append("ID");

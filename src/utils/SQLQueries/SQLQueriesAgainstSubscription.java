@@ -192,8 +192,6 @@ public class SQLQueriesAgainstSubscription {
             _logger.debug("subscription removed successfully");
         }
     }
-
-
     public static void removeAllSubscriptionsTable(){
         _logger.debug("Removing all Subscriptions from DB");
         List<Subscription> list=getAllSubscriptionsFromDB();
