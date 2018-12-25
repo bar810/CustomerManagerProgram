@@ -77,4 +77,8 @@ public class Utils {
         String strDate = sdfDate.format(now);
         return strDate;
     }
+
+    public static boolean isNotNullOrEmpty(String s){
+        return s!=null && (!s.isEmpty());
+    }
 }

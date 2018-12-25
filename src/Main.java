@@ -6,27 +6,32 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import utils.GlobalProperties;
 
 import java.util.List;
 
 import static utils.Constants.MAIN_PROGRAM_TEXT;
-import static utils.SQLQueries.getAllCustomersFromDB;
+import static utils.SQLQueriesAgainstCustomer.getAllCustomersFromDBWithConditions;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("impl/sample.fxml"));
         primaryStage.setTitle(MAIN_PROGRAM_TEXT);
         // primaryStage.setScene(new Scene(root, 300, 275));
 
         Button button=new Button();
         button.setText("כפתור - לחץ עלי !!");
 
+        Button button2=new Button();
+        button2.setText("כפץור 2");
+
         StackPane layout=new StackPane();
         layout.getChildren().add(button);
+        layout.getChildren().add(button2);
 
-        Scene scene=new Scene(layout,300,200);
+        Scene scene=new Scene(layout,500,400);
         primaryStage.setScene(scene);
         primaryStage.show();
 
@@ -34,6 +39,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
+        GlobalProperties.init();
         //launch(args);
 
         // try {
@@ -53,9 +59,10 @@ public class Main extends Application {
 
         //Customer customer=getCustomerByID(2);
 
-        //TODO :: not working
-        List<Customer> customers=getAllCustomersFromDB();
+        // //TODO :: not working
+        List<Customer> customers=getAllCustomersFromDBWithConditions("","Bar","","","");
 
+        GlobalProperties.closeConnections();
         System.out.println("Program finished !");
     }
 }
