@@ -108,7 +108,7 @@ public class NewCustomerPageController implements Initializable {
 
         if(everythingIsGood){
             //Here I have valid customer. insert the new customer to DB and if succeed -  print the number.
-            int id=insertCustomerToDB(new Customer(firstName,lastName,phoneNumber,mail));
+            int id=insertCustomerToDB(new Customer(firstName,lastName,mail,phoneNumber));
             if(id==-1){//TODO Check if this this is the case for not good query
                 Alert alert=new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("אימות נתונים");
