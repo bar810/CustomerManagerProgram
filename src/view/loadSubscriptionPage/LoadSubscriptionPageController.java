@@ -18,8 +18,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import view.loadSubscriptionPage.loadPage.LoadPageController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -64,7 +66,7 @@ public class LoadSubscriptionPageController implements Initializable {
 
 
     private List<ViewCustomer> viewCustomers=new ArrayList<>();
-
+    private List<Subscription> subscriptions;
 
     @FXML
     private void backButton(ActionEvent event){
@@ -85,11 +87,36 @@ public class LoadSubscriptionPageController implements Initializable {
 
     }
 
+
+    @FXML
+    private void customerClicked(MouseEvent event){
+        ViewCustomer customer=table.getSelectionModel().getSelectedItem();
+        if(customer==null){
+            System.out.println("d");
+        }else{
+            Parent homePageParent;
+            Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            FXMLLoader loader=new FXMLLoader();
+            loader.setLocation(getClass().getResource("loadPage/LoadPage.fxml"));
+            try {
+                loader.load();
+            } catch (Exception ex) {
+            }
+            LoadPageController controller=loader.getController();
+            controller.setCustomer(customer);
+            controller.setSubscriptions(subscriptions);
+            homePageParent=loader.getRoot();
+            appStage.setScene(new Scene(homePageParent));
+            appStage.show();
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         List<Customer> customersToShow=getAllCustomersFromDB();
         List<Purchase> purchase =getAllPurchasesFromDB();
-        List<Subscription> subscriptions=getAllSubscriptionsFromDB();
+        subscriptions=getAllSubscriptionsFromDB();
         //TODO sort the purchases
 
         for(Customer c : customersToShow){
@@ -125,5 +152,7 @@ public class LoadSubscriptionPageController implements Initializable {
 
         table.setItems(data);
     }
+
+
 }
 

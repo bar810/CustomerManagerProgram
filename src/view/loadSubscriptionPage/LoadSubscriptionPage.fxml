@@ -21,7 +21,7 @@
    <center>
       <StackPane prefHeight="176.0" prefWidth="318.0" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="table" prefHeight="200.0" prefWidth="371.0">
+            <TableView fx:id="table" onMouseClicked="#customerClicked" prefHeight="200.0" prefWidth="371.0">
               <columns>
                 <TableColumn fx:id="lastPurchase_col" prefWidth="75.0" text="רכישה אחרונה" />
                 <TableColumn fx:id="vip_col" prefWidth="75.0" text="VIP" />
@@ -64,11 +64,4 @@
             </VBox>
          </children></StackPane>
    </right>
-   <bottom>
-      <StackPane prefHeight="38.0" prefWidth="782.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button mnemonicParsing="false" onAction="#submit" text="הכנס לקוח למערכת" />
-         </children>
-      </StackPane>
-   </bottom>
 </BorderPane>
