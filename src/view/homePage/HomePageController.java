@@ -40,7 +40,20 @@ public class HomePageController implements Initializable {
     @FXML
     private void moveToLoadSubscriptionPage(ActionEvent event){
         try {
-            Parent homePageParent=FXMLLoader.load(getClass().getResource("../loadSubscriptionPage/LoadSubscriptionPage.fxml"));
+            Parent homePageParent=FXMLLoader.load(getClass().getResource("../findCustomerPage/FindCustomerPage.fxml"));
+            Scene homePageScene=new Scene(homePageParent);
+            Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            appStage.setScene(homePageScene);
+            appStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void moveToBuyMealPage(ActionEvent event){
+        try {
+            Parent homePageParent=FXMLLoader.load(getClass().getResource("../mealsPage/MealsPage.fxml"));
             Scene homePageScene=new Scene(homePageParent);
             Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
             appStage.setScene(homePageScene);

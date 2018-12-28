@@ -1,4 +1,4 @@
-package view.loadSubscriptionPage.loadPage;
+package view.findCustomerPage.selectActionPage;
 
 
 import entities.Subscription;
@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
+import view.findCustomerPage.selectActionPage.loadSubscriptionPage.LoadSubscriptionPageController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,11 +21,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import static utils.Constants.*;
-import static utils.SQLQueries.SQLQueriesAgainstSubscription.insertSubscriptionToDB;
-import static utils.SQLQueries.SQLQueriesAgainstSubscription.updateSubscriptionBalance;
-
-public class LoadPageController implements Initializable {
+public class SelectActionPageController implements Initializable {
 
 
 
@@ -35,7 +32,7 @@ public class LoadPageController implements Initializable {
     @FXML
     private void backButton(ActionEvent event){
         try {
-            Parent homePageParent=FXMLLoader.load(getClass().getResource("../../loadSubscriptionPage/LoadSubscriptionPage.fxml"));
+            Parent homePageParent=FXMLLoader.load(getClass().getResource("../FindCustomerPage.fxml"));
             Scene homePageScene=new Scene(homePageParent);
             Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
             appStage.setScene(homePageScene);
@@ -56,48 +53,27 @@ public class LoadPageController implements Initializable {
     }
 
 
+    public void goToLoadSubscription(ActionEvent event){
 
+        Parent homePageParent;
+        Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
-    @FXML
-    private void loadMeals(ActionEvent event){
-     if(alertForSubscription()){
-         //check if there is subscription. - if yes just reload if no create new.
-         Subscription subscription=isThisCustomerHaveSubscriptionAlready(Customer.getCustomerID(),MEALS_SUBSCRIPTION);
-         if(subscription!=null){
-             //reload
-             updateSubscriptionBalance(subscription.getSubscriptionID(),subscription.getBalance()+DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT);
-         }
-         else{
-             //create new
-             insertSubscriptionToDB(new Subscription(Customer.getCustomerID(),DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT,MEALS_SUBSCRIPTION));
-         }
-         SucceededAlertAndGoToHomePage(event);
-     }
-     else{
-         this.backButton(event);
-     }
+        FXMLLoader loader=new FXMLLoader();
+        loader.setLocation(getClass().getResource("loadSubscriptionPage/LoadSubscriptionPage.fxml"));
+        try {
+            loader.load();
+        } catch (Exception ex) {
+        }
+        LoadSubscriptionPageController controller=loader.getController();
+        controller.setCustomer(Customer);
+        controller.setSubscriptions(subscriptions);
+        homePageParent=loader.getRoot();
+        appStage.setScene(new Scene(homePageParent));
+        appStage.show();
+
     }
 
-    @FXML
-    private void loadVIP(ActionEvent event){
-        if(alertForSubscription()){
-            //check if there is subscription. - if yes just reload if no create new.
-            Subscription subscription=isThisCustomerHaveSubscriptionAlready(Customer.getCustomerID(),VIP_SUBSCRIPTION);
-            if(subscription!=null){
-                //reload
-                updateSubscriptionBalance(subscription.getSubscriptionID(),subscription.getBalance()+DEFAULT_VIP_SUBSCRIPTION_AMOUNT);
-            }
-            else{
-                //create new
-                insertSubscriptionToDB(new Subscription(Customer.getCustomerID(),DEFAULT_VIP_SUBSCRIPTION_AMOUNT,VIP_SUBSCRIPTION));
-            }
-            //Alert
-            SucceededAlertAndGoToHomePage(event);
-        }
-        else{
-            this.backButton(event);
-        }
-    }
+
 
     private void SucceededAlertAndGoToHomePage(ActionEvent event){
         Alert alert=new Alert(Alert.AlertType.INFORMATION);
@@ -107,7 +83,7 @@ public class LoadPageController implements Initializable {
         alert.showAndWait();
 
         try {
-            Parent homePageParent=FXMLLoader.load(getClass().getResource("../../homePage/HomePage.fxml"));
+            Parent homePageParent=FXMLLoader.load(getClass().getResource("../../../homePage/HomePage.fxml"));
             Scene homePageScene=new Scene(homePageParent);
             Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
             appStage.setScene(homePageScene);

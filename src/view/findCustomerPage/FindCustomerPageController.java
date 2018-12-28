@@ -1,4 +1,4 @@
-package view.loadSubscriptionPage;
+package view.findCustomerPage;
 
 
 import entities.Customer;
@@ -21,7 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import view.loadSubscriptionPage.loadPage.LoadPageController;
+import view.findCustomerPage.selectActionPage.SelectActionPageController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -35,7 +35,7 @@ import static utils.SQLQueries.SQLQueriesAgainstCustomer.getAllCustomersFromDB;
 import static utils.SQLQueries.SQLQueriesAgainstPurchase.getAllPurchasesFromDB;
 import static utils.SQLQueries.SQLQueriesAgainstSubscription.getAllSubscriptionsFromDB;
 
-public class LoadSubscriptionPageController implements Initializable {
+public class FindCustomerPageController implements Initializable {
 
     @FXML
     private Pane checkCustomerBalancePage;
@@ -128,12 +128,12 @@ public class LoadSubscriptionPageController implements Initializable {
             Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
             FXMLLoader loader=new FXMLLoader();
-            loader.setLocation(getClass().getResource("loadPage/LoadPage.fxml"));
+            loader.setLocation(getClass().getResource("selectActionPage/SelectActionPage.fxml"));
             try {
                 loader.load();
             } catch (Exception ex) {
             }
-            LoadPageController controller=loader.getController();
+            SelectActionPageController controller=loader.getController();
             controller.setCustomer(customer);
             controller.setSubscriptions(subscriptions);
             homePageParent=loader.getRoot();

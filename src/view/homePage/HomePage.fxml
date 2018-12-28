@@ -28,9 +28,9 @@
         </rowConstraints>
          <children>
             <Button mnemonicParsing="false" onAction="#moveToNewCustomerPage" prefHeight="10000.0" prefWidth="10000.0" text="הכנס לקוח חדש" GridPane.columnIndex="1" />
-            <Button maxHeight="10000.0" maxWidth="10000.0" mnemonicParsing="false" prefHeight="10000.0" prefWidth="10000.0" text="VIP" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" prefHeight="10000.0" prefWidth="10000.0" text="ארוחות" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Button mnemonicParsing="false" onAction="#moveToLoadSubscriptionPage" prefHeight="10000.0" prefWidth="10000.0" text="רכישה או חידוש מנוי קיים" />
+            <Button maxHeight="10000.0" maxWidth="10000.0" mnemonicParsing="false" prefHeight="10000.0" prefWidth="10000.0" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false"  prefHeight="10000.0" prefWidth="10000.0" text="הצג רכישות אחרונות" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button mnemonicParsing="false" onAction="#moveToLoadSubscriptionPage" prefHeight="10000.0" prefWidth="10000.0" text="חפש לקוח קיים" />
          </children>
       </GridPane>
       <MenuBar maxHeight="233.0" maxWidth="10000.0" prefHeight="132.0" prefWidth="688.0" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
