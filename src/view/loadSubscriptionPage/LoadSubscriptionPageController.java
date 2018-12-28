@@ -69,6 +69,36 @@ public class LoadSubscriptionPageController implements Initializable {
     private List<Subscription> subscriptions;
 
     @FXML
+    private void findCustomer(ActionEvent event){
+
+        List<ViewCustomer> newCustomerList=new ArrayList<>();
+        String id= this.id.getText();
+        String firstName= this.firstName.getText();
+        String lastName= this.lastName.getText();
+        String phoneNumber=phone.getText();
+
+        boolean insertVar=true;
+        for(ViewCustomer c:viewCustomers){
+            if((!id.isEmpty())&&(!String.valueOf(c.getCustomerID()).equals(id))){
+                insertVar=false;
+            }if((!firstName.isEmpty())&&(!c.getFirstName().equals(firstName))){
+                insertVar=false;
+            } if((!lastName.isEmpty())&&(!c.getLastName().equals(lastName))){
+                insertVar=false;
+            } if((!phoneNumber.isEmpty())&&(!String.valueOf(c.getCustomerID()).equals(id))){
+                insertVar=false;
+            }
+            if(insertVar){
+                newCustomerList.add(c);
+            }
+        }
+
+        ObservableList<ViewCustomer> data=FXCollections.observableArrayList(newCustomerList);
+        table.setItems(data);
+    }
+
+
+    @FXML
     private void backButton(ActionEvent event){
         try {
             Parent homePageParent=FXMLLoader.load(getClass().getResource("../homePage/HomePage.fxml"));
@@ -139,7 +169,7 @@ public class LoadSubscriptionPageController implements Initializable {
                     lastPurchase=p.getDate();
                 }
             }
-            viewCustomers.add(new ViewCustomer(c.getCustomerID(),c.getFirstName(),c.getLastName(),lastPurchase,mealsBalance,vipBalance));
+            viewCustomers.add(new ViewCustomer(c.getCustomerID(),c.getFirstName(),c.getLastName(),lastPurchase,mealsBalance,vipBalance,c.getPhoneNumber()));
         }
 
         ObservableList<ViewCustomer> data=FXCollections.observableArrayList(viewCustomers);

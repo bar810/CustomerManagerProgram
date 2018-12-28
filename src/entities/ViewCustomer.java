@@ -24,17 +24,21 @@ public class ViewCustomer {
 
     private SimpleStringProperty lastPurchase;
 
+    private SimpleStringProperty phone;
+
+
     private SimpleDoubleProperty mealsBalance;
 
     private SimpleDoubleProperty vipBalance;
 
-    public ViewCustomer(int customerID, String firstName, String lastName, String lastPurchase, double mealsBalance, double vipBalance) {
+    public ViewCustomer(int customerID, String firstName, String lastName, String lastPurchase, double mealsBalance, double vipBalance,String phone) {
         this.customerID = new SimpleIntegerProperty(customerID);
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
         this.lastPurchase = new SimpleStringProperty(lastPurchase);
         this.mealsBalance = new SimpleDoubleProperty(mealsBalance);
         this.vipBalance = new SimpleDoubleProperty(vipBalance);
+        this.phone=new SimpleStringProperty(phone);
     }
 
     public int getCustomerID() {
@@ -107,5 +111,17 @@ public class ViewCustomer {
 
     public void setVipBalance(double vipBalance) {
         this.vipBalance.set(vipBalance);
+    }
+
+    public String getPhone() {
+        return phone.get();
+    }
+
+    public SimpleStringProperty phoneProperty() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone.set(phone);
     }
 }

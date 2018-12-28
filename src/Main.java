@@ -22,7 +22,7 @@ public class Main extends Application {
         launch(args);
 
 
-        // removeAllDataFromAllDBTables();
+        //removeAllDataFromAllDBTables();
         // int id=insertCustomerToDB(new Customer("bar","brownhtein","0548004754",""));
         // insertSubscriptionToDB(new Subscription(id,10,MEALS_SUBSCRIPTION));
         // insertSubscriptionToDB(new Subscription(id,50,VIP_SUBSCRIPTION));
