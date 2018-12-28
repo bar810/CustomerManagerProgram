@@ -58,4 +58,29 @@ public class Utils {
             return null;
         }
     }
+
+    public static boolean isValidMail(String mail){
+        if(mail.isEmpty()){
+            return true;
+        }
+        return mail.contains("@")&&mail.contains(".");
+    }
+    public static boolean isValidPhone(String phone){
+        if(phone.isEmpty()){
+            return true;
+        }
+        phone=phone.replaceAll("-","");
+        if(phone.length()<9 || phone.length()>10){
+            return false;
+        }
+        int phoneAsInt;
+        try {
+            phoneAsInt=Integer.parseInt(phone);
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+
+    }
+
 }

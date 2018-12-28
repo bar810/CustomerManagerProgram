@@ -14,13 +14,14 @@ public final class Constants {
 
 
     //Texts
-    public static final String MAIN_PROGRAM_TEXT = "תוכנה לניהול לקוחות";
+    public static final String MAIN_PROGRAM_TEXT = "שלי אוכל מוכן - ניהול מנויים";
 
     //Default values
     public static final double DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT =12;
     public static final double DEFAULT_VIP_SUBSCRIPTION_AMOUNT =400;
 
     //format
+    public static final String SAVE_LOG = "false";
     public static final String LOG_FILE_NAME_EXTENSION = "log";
     public static final String CSV_SEPERATOR = ",";
     public static final int LOG_MAX_SIZE = 1000;

@@ -4,7 +4,7 @@
  * CORPORATION OR ITS LICENSORS AND IS SUBJECT TO LICENSE TERMS.
  */
 
-package impl.Methods;
+package model;
 
 import entities.Customer;
 import entities.Purchase;

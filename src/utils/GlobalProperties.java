@@ -36,20 +36,27 @@ public class GlobalProperties {
     }
 
     public static void openConnections(){
-        _customerFactory =new Configuration()
-                .configure("utils/hibernate.cfg.xml")
-                .addAnnotatedClass(Customer.class)
-                .buildSessionFactory();
+        try {
+            _customerFactory =new Configuration()
+                    .configure("utils/hibernate.cfg.xml")
+                    .addAnnotatedClass(Customer.class)
+                    .buildSessionFactory();
 
-        _purchaseFactory =new Configuration()
-                .configure("utils/hibernate.cfg.xml")
-                .addAnnotatedClass(Purchase.class)
-                .buildSessionFactory();
+            _purchaseFactory =new Configuration()
+                    .configure("utils/hibernate.cfg.xml")
+                    .addAnnotatedClass(Purchase.class)
+                    .buildSessionFactory();
 
-        _SubscriptionFactory =new Configuration()
-                .configure("utils/hibernate.cfg.xml")
-                .addAnnotatedClass(Subscription.class)
-                .buildSessionFactory();
+            _SubscriptionFactory =new Configuration()
+                    .configure("utils/hibernate.cfg.xml")
+                    .addAnnotatedClass(Subscription.class)
+                    .buildSessionFactory();
+        } catch (Exception ex) {
+            _logger.error("Cannot open connection to DB");
+            _logger.CleanAndSaveLogIfNeeded(true);
+        }
+
+
 
 
     }

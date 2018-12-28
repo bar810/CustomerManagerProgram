@@ -13,6 +13,7 @@ import java.util.List;
 
 import static utils.Constants.LOG_FILE_NAME_EXTENSION;
 import static utils.Constants.LOG_MAX_SIZE;
+import static utils.Constants.SAVE_LOG;
 import static utils.GlobalProperties._logger;
 import static utils.Utils.getCurrentTimeStamp;
 
@@ -76,7 +77,7 @@ public class Logger {
     }
 
     public void CleanAndSaveLogIfNeeded(boolean force){
-        if(logs.size()>LOG_MAX_SIZE || force){
+        if((logs.size()>LOG_MAX_SIZE || force)&& SAVE_LOG.toLowerCase().equals("true")){
             //save log
             String fileName=LOG_FILE_NAME_EXTENSION+"_"+getCurrentTimeStamp()+".txt";
             fileName=fileName.replaceAll("-","-");
