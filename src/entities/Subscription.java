@@ -9,6 +9,7 @@ package entities;
 import javax.persistence.*;
 
 import static utils.Constants.*;
+import static utils.Utils.getCurrentTimeStamp;
 
 /**
  * @author bbrownsh
@@ -38,12 +39,19 @@ public class Subscription{
     public Subscription() {
     }
 
-    public Subscription(int coustomerID, String subscriptionPurchaseDate, double balance,String type) {
+    public Subscription(int coustomerID, double balance,String type) {
         this.coustomerID = coustomerID;
-        this.subscriptionPurchaseDate = subscriptionPurchaseDate;
+        this.subscriptionPurchaseDate = getCurrentTimeStamp();
         this.balance = balance;
         this.type=type;
     }
+    public Subscription(int coustomerID,String date, double balance,String type) {
+        this.coustomerID = coustomerID;
+        this.subscriptionPurchaseDate = date;
+        this.balance = balance;
+        this.type=type;
+    }
+
 
     public int getSubscriptionID() {
         return subscriptionID;

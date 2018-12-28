@@ -58,12 +58,12 @@ public class NewCustomerPageController implements Initializable {
     @FXML
     private void submit(ActionEvent event){
         boolean everythingIsGood=true;
-        String fn=firstName.getText();
-        String ln=lastName.getText();
-        String p=phone.getText();
-        String m=mail.getText();
+        String firstName= this.firstName.getText();
+        String lastName= this.lastName.getText();
+        String phoneNumber=phone.getText();
+        String mail= this.mail.getText();
         // first - validate the input. first name, last name and phone are mandatory. than validate phone and mail (if inserted)
-        if(fn.isEmpty() || ln.isEmpty() || p.isEmpty()){
+        if(firstName.isEmpty() || lastName.isEmpty() || phoneNumber.isEmpty()){
             Alert alert=new Alert(Alert.AlertType.WARNING);
             alert.setTitle("אימות נתונים");
             alert.setHeaderText(null);
@@ -71,7 +71,7 @@ public class NewCustomerPageController implements Initializable {
             alert.showAndWait();
             everythingIsGood=false;
         }
-        if(everythingIsGood && (!isValidPhone(p))){
+        if(everythingIsGood && (!isValidPhone(phoneNumber))){
             Alert alert=new Alert(Alert.AlertType.WARNING);
             alert.setTitle("אימות נתונים");
             alert.setHeaderText(null);
@@ -79,7 +79,7 @@ public class NewCustomerPageController implements Initializable {
             alert.showAndWait();
             everythingIsGood=false;
         }
-        if(everythingIsGood && (!isValidMail(m))){
+        if(everythingIsGood && (!isValidMail(mail))){
             Alert alert=new Alert(Alert.AlertType.WARNING);
             alert.setTitle("אימות נתונים");
             alert.setHeaderText(null);
@@ -92,7 +92,7 @@ public class NewCustomerPageController implements Initializable {
             //Here I have valid information. check if this customer is already exist in db.
             List<Customer> customersInDB=getAllCustomersFromDB();
             for(Customer c :customersInDB){
-                if(c.getFirstName().equals(fn) &&c.getLastName().equals(ln)&& c.getPhoneNumber().equals(p)){
+                if(c.getFirstName().equals(firstName) &&c.getLastName().equals(lastName)&& c.getPhoneNumber().equals(phoneNumber)){
                     Alert alert=new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("אימות נתונים");
                     alert.setHeaderText(null);
@@ -108,7 +108,7 @@ public class NewCustomerPageController implements Initializable {
 
         if(everythingIsGood){
             //Here I have valid customer. insert the new customer to DB and if succeed -  print the number.
-            int id=insertCustomerToDB(new Customer(fn,ln,p,m));
+            int id=insertCustomerToDB(new Customer(firstName,lastName,phoneNumber,mail));
             if(id==-1){//TODO Check if this this is the case for not good query
                 Alert alert=new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("אימות נתונים");
