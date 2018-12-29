@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import static utils.GeneralViewFunctions.alertToScreen;
+
 public class SelectActionPageController implements Initializable {
 
     @FXML
@@ -114,13 +116,8 @@ public class SelectActionPageController implements Initializable {
         appStage.show();
     }
 
-
     private void SucceededAlertAndGoToHomePage(ActionEvent event){
-        Alert alert=new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("אימות נתונים");
-        alert.setHeaderText(null);
-        alert.setContentText("מנוי נרכש בהצלחה !" );
-        alert.showAndWait();
+        alertToScreen(Alert.AlertType.INFORMATION,"אימות נתונים","מנוי נרכש בהצלחה !");
 
         try {
             Parent homePageParent=FXMLLoader.load(getClass().getResource("../../../homePage/HomePage.fxml"));

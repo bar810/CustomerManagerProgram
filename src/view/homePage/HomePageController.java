@@ -7,12 +7,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static utils.GeneralViewFunctions.alertToScreen;
 
 public class HomePageController implements Initializable {
 
@@ -61,6 +64,11 @@ public class HomePageController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void aboutClicked(ActionEvent event){
+        alertToScreen(Alert.AlertType.INFORMATION,"אודות","התוכנה נכתבה על ידי בר בראונשטיין 2018. גרסא - 1.0 ");
     }
 }
 

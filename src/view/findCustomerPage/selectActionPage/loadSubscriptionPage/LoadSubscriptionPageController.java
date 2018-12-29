@@ -23,6 +23,7 @@ import java.util.ResourceBundle;
 import static utils.Constants.*;
 import static utils.SQLQueries.SQLQueriesAgainstSubscription.insertSubscriptionToDB;
 import static utils.SQLQueries.SQLQueriesAgainstSubscription.updateSubscriptionBalance;
+import static utils.GeneralViewFunctions.alertToScreen;
 
 public class LoadSubscriptionPageController implements Initializable {
 
@@ -94,12 +95,7 @@ public class LoadSubscriptionPageController implements Initializable {
     }
 
     private void SucceededAlertAndGoToHomePage(ActionEvent event){
-        Alert alert=new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("אימות נתונים");
-        alert.setHeaderText(null);
-        alert.setContentText("מנוי נרכש בהצלחה !" );
-        alert.showAndWait();
-
+        alertToScreen(Alert.AlertType.INFORMATION,"אימות נתונים","מנוי נרכש בהצלחה !");
         try {
             Parent homePageParent=FXMLLoader.load(getClass().getResource("../../../../view/homePage/HomePage.fxml"));
             Scene homePageScene=new Scene(homePageParent);

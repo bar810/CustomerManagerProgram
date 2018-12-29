@@ -19,6 +19,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static utils.GeneralViewFunctions.alertToScreen;
 import static utils.SQLQueries.SQLQueriesAgainstCustomer.getAllCustomersFromDB;
 import static utils.SQLQueries.SQLQueriesAgainstCustomer.insertCustomerToDB;
 import static utils.Utils.isValidMail;
@@ -39,7 +40,7 @@ public class NewCustomerPageController implements Initializable {
 
     @FXML
     private void backButton(ActionEvent event){
-        try {
+            try {
             Parent homePageParent=FXMLLoader.load(getClass().getResource("../homePage/HomePage.fxml"));
             Scene homePageScene=new Scene(homePageParent);
             Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -59,27 +60,15 @@ public class NewCustomerPageController implements Initializable {
         String mail= this.mail.getText();
         // first - validate the input. first name, last name and phone are mandatory. than validate phone and mail (if inserted)
         if(firstName.isEmpty() || lastName.isEmpty() || phoneNumber.isEmpty()){
-            Alert alert=new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("אימות נתונים");
-            alert.setHeaderText(null);
-            alert.setContentText("חובה להכניס שם פרטי, שם משפחה וטלפון");
-            alert.showAndWait();
+            alertToScreen(Alert.AlertType.WARNING,"אימות נתונים","חובה להכניס שם פרטי, שם משפחה וטלפון");
             everythingIsGood=false;
         }
         if(everythingIsGood && (!isValidPhone(phoneNumber))){
-            Alert alert=new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("אימות נתונים");
-            alert.setHeaderText(null);
-            alert.setContentText("מספר הטלפון לא תקין- מספרים בלבד ובאורך תקין");
-            alert.showAndWait();
+            alertToScreen(Alert.AlertType.WARNING,"אימות נתונים","מספר הטלפון לא תקין- מספרים בלבד ובאורך תקין");
             everythingIsGood=false;
         }
         if(everythingIsGood && (!isValidMail(mail))){
-            Alert alert=new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("אימות נתונים");
-            alert.setHeaderText(null);
-            alert.setContentText("מבנה המייל לא תקין. חובה להכיל @, וסיומת (com.)");
-            alert.showAndWait();
+            alertToScreen(Alert.AlertType.WARNING,"אימות נתונים","מבנה המייל לא תקין. חובה להכיל @, וסיומת (com.)");
             everythingIsGood=false;
         }
 
@@ -88,11 +77,7 @@ public class NewCustomerPageController implements Initializable {
             List<Customer> customersInDB=getAllCustomersFromDB();
             for(Customer c :customersInDB){
                 if(c.getFirstName().equals(firstName) &&c.getLastName().equals(lastName)&& c.getPhoneNumber().equals(phoneNumber)){
-                    Alert alert=new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("אימות נתונים");
-                    alert.setHeaderText(null);
-                    alert.setContentText("הלקוח כבר נמצא במערכת. לקוח חדש חייב להיות בעל שם פרטי, שם משפחה או טלפון שונה מלקוח שכבר נמצא במערכת");
-                    alert.showAndWait();
+                    alertToScreen(Alert.AlertType.WARNING,"אימות נתונים","הלקוח כבר נמצא במערכת. לקוח חדש חייב להיות בעל שם פרטי, שם משפחה או טלפון שונה מלקוח שכבר נמצא במערכת");
                     everythingIsGood=false;
                     break;
                 }
@@ -102,19 +87,12 @@ public class NewCustomerPageController implements Initializable {
         if(everythingIsGood){
             //Here I have valid customer. insert the new customer to DB and if succeed -  print the number.
             int id=insertCustomerToDB(new Customer(firstName,lastName,mail,phoneNumber));
-            if(id==-1){//TODO Check if this this is the case for not good query
-                Alert alert=new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("אימות נתונים");
-                alert.setHeaderText(null);
-                alert.setContentText("שגיאה במהלך הכנסת הלקוח למערכת");
-                alert.showAndWait();
+            if(id==-1){
+                //TODO Check if this this is the case for not good query
+                alertToScreen(Alert.AlertType.WARNING,"אימות נתונים","שגיאה במהלך הכנסת הלקוח למערכת");
                 everythingIsGood=false;
             }else{
-               Alert alert=new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("אימות נתונים");
-                alert.setHeaderText(null);
-                alert.setContentText("לקוח חדש הוכנס בהצלחה. מספר לקוח: " +id);
-                alert.showAndWait();
+                alertToScreen(Alert.AlertType.INFORMATION,"אימות נתונים","לקוח חדש הוכנס בהצלחה. מספר לקוח: " +id);
             }
             try {
                 Parent homePageParent=FXMLLoader.load(getClass().getResource("../homePage/HomePage.fxml"));

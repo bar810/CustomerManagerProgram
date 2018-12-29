@@ -41,6 +41,11 @@
                <MenuItem mnemonicParsing="false" text="יציאה" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="עזרה">
+                <items>
+                    <MenuItem onAction="#aboutClicked" mnemonicParsing="false" text="אודות" />
+                </items>
+            </Menu>
         </menus>
       </MenuBar>
    </children>

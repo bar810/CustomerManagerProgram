@@ -14,8 +14,8 @@
    <center>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#loadVIP" prefHeight="91.0" prefWidth="120.0" text="חדש" />
-            <Button mnemonicParsing="false" onAction="#loadMeals" prefHeight="94.0" prefWidth="130.0" text="חדש" />
+            <Button mnemonicParsing="false"  prefHeight="91.0" prefWidth="120.0" text="חדש" />
+            <Button mnemonicParsing="false"  prefHeight="94.0" prefWidth="130.0" text="חדש" />
          </children>
          <opaqueInsets>
             <Insets />
