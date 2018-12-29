@@ -28,16 +28,12 @@ public class NewCustomerPageController implements Initializable {
 
     @FXML
     private Pane checkCustomerBalancePage;
-
     @FXML
     private TextField firstName;
-
     @FXML
     private TextField lastName;
-
     @FXML
     private TextField phone;
-
     @FXML
     private TextField mail;
 
@@ -52,7 +48,6 @@ public class NewCustomerPageController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     @FXML
@@ -104,8 +99,6 @@ public class NewCustomerPageController implements Initializable {
             }
         }
 
-
-
         if(everythingIsGood){
             //Here I have valid customer. insert the new customer to DB and if succeed -  print the number.
             int id=insertCustomerToDB(new Customer(firstName,lastName,mail,phoneNumber));
@@ -133,8 +126,6 @@ public class NewCustomerPageController implements Initializable {
                 e.printStackTrace();
             }
         }
-
-
     }
 
     @Override

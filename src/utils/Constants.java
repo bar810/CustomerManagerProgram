@@ -17,8 +17,12 @@ public final class Constants {
     public static final String MAIN_PROGRAM_TEXT = "שלי אוכל מוכן - ניהול מנויים";
 
     //Default values
-    public static final double DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT =12;
+    public static final double DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT =10;
     public static final double DEFAULT_VIP_SUBSCRIPTION_AMOUNT =400;
+    public static final double MEAL_PRICE =1;
+    public static final double HOT_MEAL_PRICE =0.4;
+    public static final double DRINK_PRICE =0.2;
+
 
     //format
     public static final String SAVE_LOG = "false";

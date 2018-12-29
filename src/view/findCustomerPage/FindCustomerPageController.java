@@ -25,9 +25,7 @@ import view.findCustomerPage.selectActionPage.SelectActionPageController;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static utils.Constants.MEALS_SUBSCRIPTION;
 import static utils.Constants.VIP_SUBSCRIPTION;
@@ -63,14 +61,11 @@ public class FindCustomerPageController implements Initializable {
     TableColumn<ViewCustomer,Integer> vip_col;
     @FXML
     TableColumn<ViewCustomer,Integer> lastPurchase_col;
-
-
     private List<ViewCustomer> viewCustomers=new ArrayList<>();
     private List<Subscription> subscriptions;
 
     @FXML
     private void findCustomer(ActionEvent event){
-
         List<ViewCustomer> newCustomerList=new ArrayList<>();
         String id= this.id.getText();
         String firstName= this.firstName.getText();
@@ -92,11 +87,9 @@ public class FindCustomerPageController implements Initializable {
                 newCustomerList.add(c);
             }
         }
-
         ObservableList<ViewCustomer> data=FXCollections.observableArrayList(newCustomerList);
         table.setItems(data);
     }
-
 
     @FXML
     private void backButton(ActionEvent event){
@@ -109,14 +102,13 @@ public class FindCustomerPageController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     @FXML
-    private void submit(ActionEvent event){
-
+    private void showAllCustomersClicked(){
+        ObservableList<ViewCustomer> data=FXCollections.observableArrayList(viewCustomers);
+        table.setItems(data);
     }
-
 
     @FXML
     private void customerClicked(MouseEvent event){
@@ -136,6 +128,7 @@ public class FindCustomerPageController implements Initializable {
             SelectActionPageController controller=loader.getController();
             controller.setCustomer(customer);
             controller.setSubscriptions(subscriptions);
+            controller.setLabels(customer);
             homePageParent=loader.getRoot();
             appStage.setScene(new Scene(homePageParent));
             appStage.show();
@@ -147,7 +140,7 @@ public class FindCustomerPageController implements Initializable {
         List<Customer> customersToShow=getAllCustomersFromDB();
         List<Purchase> purchase =getAllPurchasesFromDB();
         subscriptions=getAllSubscriptionsFromDB();
-        //TODO sort the purchases
+        purchase.sort(Comparator.comparing(Purchase::getDate));
 
         for(Customer c : customersToShow){
             double mealsBalance=0;
@@ -179,10 +172,7 @@ public class FindCustomerPageController implements Initializable {
         lastPurchase_col.setCellValueFactory(new PropertyValueFactory<ViewCustomer, Integer>("lastPurchase"));
         meals_col.setCellValueFactory(new PropertyValueFactory<ViewCustomer, Integer>("mealsBalance"));
         vip_col.setCellValueFactory(new PropertyValueFactory<ViewCustomer, Integer>("vipBalance"));
-
         table.setItems(data);
     }
-
-
 }
 

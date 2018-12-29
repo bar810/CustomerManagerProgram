@@ -1,4 +1,4 @@
-package view.findCustomerPage.selectActionPage.loadSubscriptionPage;
+package view.findCustomerPage.selectActionPage.buyVipPage;
 
 
 import entities.Subscription;
@@ -24,7 +24,7 @@ import static utils.Constants.*;
 import static utils.SQLQueries.SQLQueriesAgainstSubscription.insertSubscriptionToDB;
 import static utils.SQLQueries.SQLQueriesAgainstSubscription.updateSubscriptionBalance;
 
-public class LoadSubscriptionPageController implements Initializable {
+public class BuyVipPageController implements Initializable {
 
     private ViewCustomer Customer;
     private List<Subscription> subscriptions;
@@ -123,12 +123,12 @@ public class LoadSubscriptionPageController implements Initializable {
     public void setCustomer(ViewCustomer c){
         this.Customer=c;
     }
-
     public void setSubscriptions(List<Subscription> list){
         this.subscriptions=list;
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) { }
+    public void initialize(URL location, ResourceBundle resources) {
+        }
 }
 

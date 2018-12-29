@@ -12,7 +12,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import view.findCustomerPage.selectActionPage.buyMealsPage.BuyMealsPageController;
+import view.findCustomerPage.selectActionPage.buyVipPage.BuyVipPageController;
 import view.findCustomerPage.selectActionPage.loadSubscriptionPage.LoadSubscriptionPageController;
 
 import java.io.IOException;
@@ -23,11 +26,14 @@ import java.util.ResourceBundle;
 
 public class SelectActionPageController implements Initializable {
 
-
-
-    private ViewCustomer Customer;
+    @FXML
+    Label mealsBalanceLabel;
+    @FXML
+    Label vipBalanceLabel;
+    @FXML
+    Label customerIDLabel;
     private List<Subscription> subscriptions;
-
+    private ViewCustomer Customer;
 
     @FXML
     private void backButton(ActionEvent event){
@@ -52,14 +58,13 @@ public class SelectActionPageController implements Initializable {
         return result.get() == ButtonType.OK;
     }
 
-
     public void goToLoadSubscription(ActionEvent event){
 
         Parent homePageParent;
         Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
         FXMLLoader loader=new FXMLLoader();
-        loader.setLocation(getClass().getResource("loadSubscriptionPage/LoadSubscriptionPage.fxml"));
+        loader.setLocation(getClass().getResource("loadSubscriptionPage/loadSubscriptionPage.fxml"));
         try {
             loader.load();
         } catch (Exception ex) {
@@ -73,6 +78,41 @@ public class SelectActionPageController implements Initializable {
 
     }
 
+    public void goToBuyMeals(ActionEvent event){
+        Parent homePageParent;
+        Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        FXMLLoader loader=new FXMLLoader();
+        loader.setLocation(getClass().getResource("buyMealsPage/BuyMealsPage.fxml"));
+        try {
+            loader.load();
+        } catch (Exception ignored) {
+        }
+        BuyMealsPageController controller=loader.getController();
+        controller.setCustomer(Customer);
+        controller.setLabel(Customer.getFirstName(),Customer.getLastName(),Customer.getMealsBalance());
+        homePageParent=loader.getRoot();
+        appStage.setScene(new Scene(homePageParent));
+        appStage.show();
+    }
+
+    public void goToBuyVip(ActionEvent event){
+        Parent homePageParent;
+        Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+        FXMLLoader loader=new FXMLLoader();
+        loader.setLocation(getClass().getResource("buyVipPage/BuyVipPage.fxml"));
+        try {
+            loader.load();
+        } catch (Exception ex) {
+        }
+        BuyVipPageController controller=loader.getController();
+        controller.setCustomer(Customer);
+        controller.setSubscriptions(subscriptions);
+        homePageParent=loader.getRoot();
+        appStage.setScene(new Scene(homePageParent));
+        appStage.show();
+    }
 
 
     private void SucceededAlertAndGoToHomePage(ActionEvent event){
@@ -102,18 +142,23 @@ public class SelectActionPageController implements Initializable {
         return null;
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        }
-
-
-
-        public void setCustomer(ViewCustomer c){
+    public void setCustomer(ViewCustomer c){
         this.Customer=c;
-        }
-         public void setSubscriptions(List<Subscription> list){
+    }
+
+    public void setSubscriptions(List<Subscription> list){
         this.subscriptions=list;
     }
 
+    public void setLabels(ViewCustomer c){
+        this.mealsBalanceLabel.setText("יתרת לקוח ארוחות: "+c.getMealsBalance());
+        this.vipBalanceLabel.setText("יתרת לקוח ויאיפי: "+c.getVipBalance());
+        this.customerIDLabel.setText(c.getFirstName()+" "+c.getLastName());
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        }
 }
 

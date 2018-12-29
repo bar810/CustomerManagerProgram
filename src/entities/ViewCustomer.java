@@ -26,7 +26,6 @@ public class ViewCustomer {
 
     private SimpleStringProperty phone;
 
-
     private SimpleDoubleProperty mealsBalance;
 
     private SimpleDoubleProperty vipBalance;

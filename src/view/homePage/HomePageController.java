@@ -19,7 +19,6 @@ public class HomePageController implements Initializable {
     @FXML
     private GridPane homePage;
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -37,6 +36,7 @@ public class HomePageController implements Initializable {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void moveToLoadSubscriptionPage(ActionEvent event){
         try {
