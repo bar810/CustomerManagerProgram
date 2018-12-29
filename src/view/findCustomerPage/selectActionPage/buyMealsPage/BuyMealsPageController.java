@@ -1,8 +1,6 @@
 package view.findCustomerPage.selectActionPage.buyMealsPage;
 
 
-import entities.Purchase;
-import entities.ViewCustomer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,8 +17,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static utils.Constants.*;
-import static utils.SQLQueries.SQLQueriesAgainstPurchase.insertPurchaseToDB;
-import static utils.SQLQueries.SQLQueriesAgainstSubscription.updateSubscriptionBalance;
+import static utils.GlobalProperties.getCachedViewCustomer;
 
 public class BuyMealsPageController implements Initializable {
 
@@ -44,20 +41,21 @@ public class BuyMealsPageController implements Initializable {
     Button twoHotMealAndDrinkButton;
     @FXML
     Button twoDrinkButton;
-    private ViewCustomer Customer;
 
     @FXML
     private void backButton(ActionEvent event){
-        try {
-            Parent homePageParent=FXMLLoader.load(getClass().getResource("../../selectActionPage/SelectActionPage.fxml"));
-            Scene homePageScene=new Scene(homePageParent);
-            Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            appStage.setScene(homePageScene);
-            appStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Parent homePageParent;
+        Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
+        FXMLLoader loader=new FXMLLoader();
+        loader.setLocation(getClass().getResource("../../selectActionPage/SelectActionPage.fxml"));
+        try {
+            loader.load();
+        } catch (Exception ex) {
+        }
+        homePageParent=loader.getRoot();
+        appStage.setScene(new Scene(homePageParent));
+        appStage.show();
     }
 
     @FXML
@@ -109,24 +107,27 @@ public class BuyMealsPageController implements Initializable {
     }
 
     public void tryToMakePurchase(ActionEvent event,double amount) {
-        //check if there is enough balance
-        if (Customer.getMealsBalance() < amount) {
-            //TODO error
-        }
-        //TODO :: ask again
-        double newBalance=Customer.getMealsBalance()-amount;
-        updateSubscriptionBalance(Customer.getCustomerID(),newBalance);
-        insertPurchaseToDB(new Purchase(Customer.getCustomerID(),amount,newBalance));
-        //TODO :: message to screen and go to home screen
-        goToHomeScreen(event);
+        // //check if there is enough balance
+        // if (getCachedViewCustomer().getMealsBalance() < amount) {
+        //     //TODO error
+        // }
+        // //TODO :: ask again
+        // double newBalance=getCachedViewCustomer().getMealsBalance()-amount;
+        // Subscription subscription=getSubscriptionByCustoemrID(getCachedViewCustomer().getCustomerID());
+        // if(subscription==null){
+        //     //TODO error
+        // }
+        // updateSubscriptionBalance(subscription.getSubscriptionID(),newBalance);//TODO fatal error !! need here subscription ID
+        // insertPurchaseToDB(new Purchase(getCachedViewCustomer().getCustomerID(),amount,newBalance));
+        // //TODO :: message to screen and go to home screen
+        // goToHomeScreen(event);
 
     }
-    public void setCustomer(ViewCustomer c){
-        this.Customer=c;
-    }
 
-    public void setLabel(String fn,String ln ,double balance){
-        customer_name_label.setText(fn+" "+ln);
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        double balance=getCachedViewCustomer().getMealsBalance();
+        customer_name_label.setText(getCachedViewCustomer().getFirstName()+" "+getCachedViewCustomer().getLastName());
         customer_balance_label.setText("יתרת הלקוח: "+String.valueOf(balance)+" ארוחות");
 
         if(balance<MEAL_PRICE){
@@ -153,11 +154,6 @@ public class BuyMealsPageController implements Initializable {
         if(balance<2*DRINK_PRICE){
             twoDrinkButton.setDisable(true);
         }
-
-
     }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) { }
 }
 

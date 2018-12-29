@@ -2,7 +2,6 @@ package view.findCustomerPage.selectActionPage.buyVipPage;
 
 
 import entities.Subscription;
-import entities.ViewCustomer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,13 +13,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
+
+import static utils.GlobalProperties.getCachedSubscriptions;
 
 public class BuyVipPageController implements Initializable {
 
-    private ViewCustomer Customer;
-    private List<Subscription> subscriptions;
 
     @FXML
     private void backButton(ActionEvent event){
@@ -51,19 +49,12 @@ public class BuyVipPageController implements Initializable {
     }
 
     private Subscription isThisCustomerHaveSubscriptionAlready(int customerID,String type){
-        for (Subscription s: subscriptions){
+        for (Subscription s: getCachedSubscriptions()){
             if(s.getCoustomerID()==customerID && s.getType().equals(type)){
                 return s;
             }
         }
         return null;
-    }
-
-    public void setCustomer(ViewCustomer c){
-        this.Customer=c;
-    }
-    public void setSubscriptions(List<Subscription> list){
-        this.subscriptions=list;
     }
 
     @Override

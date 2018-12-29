@@ -2,7 +2,6 @@ package view.findCustomerPage.selectActionPage.loadSubscriptionPage;
 
 
 import entities.Subscription;
-import entities.ViewCustomer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,19 +15,17 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static utils.Constants.*;
+import static utils.GeneralViewFunctions.alertToScreen;
+import static utils.GlobalProperties.getCachedSubscriptions;
+import static utils.GlobalProperties.getCachedViewCustomer;
 import static utils.SQLQueries.SQLQueriesAgainstSubscription.insertSubscriptionToDB;
 import static utils.SQLQueries.SQLQueriesAgainstSubscription.updateSubscriptionBalance;
-import static utils.GeneralViewFunctions.alertToScreen;
 
 public class LoadSubscriptionPageController implements Initializable {
-
-    private ViewCustomer Customer;
-    private List<Subscription> subscriptions;
 
     @FXML
     private void backButton(ActionEvent event){
@@ -57,14 +54,14 @@ public class LoadSubscriptionPageController implements Initializable {
     private void loadMeals(ActionEvent event){
      if(alertForSubscription()){
          //check if there is subscription. - if yes just reload if no create new.
-         Subscription subscription=isThisCustomerHaveSubscriptionAlready(Customer.getCustomerID(),MEALS_SUBSCRIPTION);
+         Subscription subscription=isThisCustomerHaveSubscriptionAlready(getCachedViewCustomer().getCustomerID(),MEALS_SUBSCRIPTION);
          if(subscription!=null){
              //reload
              updateSubscriptionBalance(subscription.getSubscriptionID(),subscription.getBalance()+DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT);
          }
          else{
              //create new
-             insertSubscriptionToDB(new Subscription(Customer.getCustomerID(),DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT,MEALS_SUBSCRIPTION));
+             insertSubscriptionToDB(new Subscription(getCachedViewCustomer().getCustomerID(),DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT,MEALS_SUBSCRIPTION));
          }
          SucceededAlertAndGoToHomePage(event);
      }
@@ -77,14 +74,14 @@ public class LoadSubscriptionPageController implements Initializable {
     private void loadVIP(ActionEvent event){
         if(alertForSubscription()){
             //check if there is subscription. - if yes just reload if no create new.
-            Subscription subscription=isThisCustomerHaveSubscriptionAlready(Customer.getCustomerID(),VIP_SUBSCRIPTION);
+            Subscription subscription=isThisCustomerHaveSubscriptionAlready(getCachedViewCustomer().getCustomerID(),VIP_SUBSCRIPTION);
             if(subscription!=null){
                 //reload
                 updateSubscriptionBalance(subscription.getSubscriptionID(),subscription.getBalance()+DEFAULT_VIP_SUBSCRIPTION_AMOUNT);
             }
             else{
                 //create new
-                insertSubscriptionToDB(new Subscription(Customer.getCustomerID(),DEFAULT_VIP_SUBSCRIPTION_AMOUNT,VIP_SUBSCRIPTION));
+                insertSubscriptionToDB(new Subscription(getCachedViewCustomer().getCustomerID(),DEFAULT_VIP_SUBSCRIPTION_AMOUNT,VIP_SUBSCRIPTION));
             }
             //Alert
             SucceededAlertAndGoToHomePage(event);
@@ -108,7 +105,7 @@ public class LoadSubscriptionPageController implements Initializable {
     }
 
     private Subscription isThisCustomerHaveSubscriptionAlready(int customerID,String type){
-        for (Subscription s: subscriptions){
+        for (Subscription s: getCachedSubscriptions()){
             if(s.getCoustomerID()==customerID && s.getType().equals(type)){
                 return s;
             }
@@ -116,13 +113,6 @@ public class LoadSubscriptionPageController implements Initializable {
         return null;
     }
 
-    public void setCustomer(ViewCustomer c){
-        this.Customer=c;
-    }
-
-    public void setSubscriptions(List<Subscription> list){
-        this.subscriptions=list;
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) { }

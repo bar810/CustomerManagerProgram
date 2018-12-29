@@ -3,7 +3,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import utils.GlobalProperties;
+import utils.GlobalCommands;
 
 public class Main extends Application {
 
@@ -18,7 +18,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        GlobalProperties.init();
+        GlobalCommands.init();
         launch(args);
 
 
@@ -29,7 +29,7 @@ public class Main extends Application {
         //
         // insertPurchaseToDB(new Purchase(id,10,10));
 
-        GlobalProperties.closeConnections();
+        GlobalCommands.closeConnections();
 
     }
 }

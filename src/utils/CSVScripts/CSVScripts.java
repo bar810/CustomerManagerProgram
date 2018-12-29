@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static utils.Constants.*;
-import static utils.GlobalProperties._logger;
+import static utils.GlobalCommands._logger;
 
 /**
  * @author bbrownsh

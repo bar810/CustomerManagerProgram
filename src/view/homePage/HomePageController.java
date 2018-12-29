@@ -16,6 +16,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static utils.GeneralViewFunctions.alertToScreen;
+import static utils.GlobalProperties.setCachedCustomers;
+import static utils.GlobalProperties.setCachedPurchases;
+import static utils.GlobalProperties.setCachedSubscriptions;
+import static utils.SQLQueries.SQLQueriesAgainstCustomer.getAllCustomersFromDB;
+import static utils.SQLQueries.SQLQueriesAgainstPurchase.getAllPurchasesFromDB;
+import static utils.SQLQueries.SQLQueriesAgainstSubscription.getAllSubscriptionsFromDB;
 
 public class HomePageController implements Initializable {
 
@@ -24,7 +30,9 @@ public class HomePageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        setCachedSubscriptions(getAllSubscriptionsFromDB());
+        setCachedPurchases(getAllPurchasesFromDB());
+        setCachedCustomers(getAllCustomersFromDB());
     }
 
     @FXML

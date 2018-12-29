@@ -12,7 +12,7 @@ import org.hibernate.Session;
 import java.util.ArrayList;
 import java.util.List;
 
-import static utils.GlobalProperties._logger;
+import static utils.GlobalCommands._logger;
 import static utils.Utils.getSubscriptionSession;
 import static utils.Utils.isNotNullOrEmpty;
 
@@ -172,6 +172,7 @@ public class SQLQueriesAgainstSubscription {
         Subscription subscription=subscriptionSession.get(Subscription.class,subscriptionID);
         if(subscription==null){
             _logger.warning("subscription not found");
+            subscriptionSession.getTransaction().commit();
         }else{
             subscription.setBalance(newBalance);
             subscriptionSession.getTransaction().commit();

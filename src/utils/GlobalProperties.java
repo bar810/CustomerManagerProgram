@@ -9,64 +9,60 @@ package utils;
 import entities.Customer;
 import entities.Purchase;
 import entities.Subscription;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import entities.ViewCustomer;
 
-import java.util.logging.Level;
+import java.util.List;
 
 /**
  * @author bbrownsh
- * @since 12/25/2018
+ * @since 12/29/2018
  */
 public class GlobalProperties {
-
-    public static Logger _logger;
-
-    public static SessionFactory _customerFactory;
-    public static SessionFactory _purchaseFactory;
-    public static SessionFactory _SubscriptionFactory;
+    private static ViewCustomer cachedViewCustomer;
+    private static List<Subscription> cachedSubscriptions;
+    private static List<Purchase> cachedPurchases;
+    private static List<Customer> cachedCustomers;
 
 
-
-    public static void init() {
-        java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
-        _logger=new Logger();
-        openConnections();
-        _logger.debug("Global properties initialized");
+    public static ViewCustomer getCachedViewCustomer() {
+        return cachedViewCustomer;
     }
 
-    public static void openConnections(){
-        try {
-            _customerFactory =new Configuration()
-                    .configure("utils/hibernate.cfg.xml")
-                    .addAnnotatedClass(Customer.class)
-                    .buildSessionFactory();
+    public static void setCachedViewCustomer(ViewCustomer cachedViewCustomer) {
+        GlobalProperties.cachedViewCustomer = cachedViewCustomer;
+    }
 
-            _purchaseFactory =new Configuration()
-                    .configure("utils/hibernate.cfg.xml")
-                    .addAnnotatedClass(Purchase.class)
-                    .buildSessionFactory();
+    public static List<Subscription> getCachedSubscriptions() {
+        return cachedSubscriptions;
+    }
 
-            _SubscriptionFactory =new Configuration()
-                    .configure("utils/hibernate.cfg.xml")
-                    .addAnnotatedClass(Subscription.class)
-                    .buildSessionFactory();
-        } catch (Exception ex) {
-            _logger.error("Cannot open connection to DB");
-            _logger.CleanAndSaveLogIfNeeded(true);
+    public static void setCachedSubscriptions(List<Subscription> cachedSubscriptions) {
+        GlobalProperties.cachedSubscriptions = cachedSubscriptions;
+    }
+
+    public static List<Purchase> getCachedPurchases() {
+        return cachedPurchases;
+    }
+
+    public static void setCachedPurchases(List<Purchase> cachedPurchases) {
+        GlobalProperties.cachedPurchases = cachedPurchases;
+    }
+
+    public static List<Customer> getCachedCustomers() {
+        return cachedCustomers;
+    }
+
+    public static void setCachedCustomers(List<Customer> cachedCustomers) {
+        GlobalProperties.cachedCustomers = cachedCustomers;
+    }
+
+    public static Subscription getSubscriptionByCustoemrID(int id){
+        for(Subscription s: cachedSubscriptions){
+            if(s.getCoustomerID()==id){
+                return s;
+            }
         }
-
-
-
-
+        //TODO error
+        return null;
     }
-    public static void closeConnections(){
-        _customerFactory.close();
-        _purchaseFactory.close();
-        _SubscriptionFactory.close();
-
-        _logger.debug("Connection closed successfully");
-        _logger.CleanAndSaveLogIfNeeded(true);
-    }
-
 }

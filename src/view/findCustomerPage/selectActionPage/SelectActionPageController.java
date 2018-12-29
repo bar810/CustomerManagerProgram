@@ -2,7 +2,6 @@ package view.findCustomerPage.selectActionPage;
 
 
 import entities.Subscription;
-import entities.ViewCustomer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,17 +13,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import view.findCustomerPage.selectActionPage.buyMealsPage.BuyMealsPageController;
 import view.findCustomerPage.selectActionPage.buyVipPage.BuyVipPageController;
 import view.findCustomerPage.selectActionPage.loadSubscriptionPage.LoadSubscriptionPageController;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static utils.GeneralViewFunctions.alertToScreen;
+import static utils.GlobalProperties.getCachedSubscriptions;
+import static utils.GlobalProperties.getCachedViewCustomer;
 
 public class SelectActionPageController implements Initializable {
 
@@ -34,8 +33,6 @@ public class SelectActionPageController implements Initializable {
     Label vipBalanceLabel;
     @FXML
     Label customerIDLabel;
-    private List<Subscription> subscriptions;
-    private ViewCustomer Customer;
 
     @FXML
     private void backButton(ActionEvent event){
@@ -72,8 +69,6 @@ public class SelectActionPageController implements Initializable {
         } catch (Exception ex) {
         }
         LoadSubscriptionPageController controller=loader.getController();
-        controller.setCustomer(Customer);
-        controller.setSubscriptions(subscriptions);
         homePageParent=loader.getRoot();
         appStage.setScene(new Scene(homePageParent));
         appStage.show();
@@ -90,9 +85,6 @@ public class SelectActionPageController implements Initializable {
             loader.load();
         } catch (Exception ignored) {
         }
-        BuyMealsPageController controller=loader.getController();
-        controller.setCustomer(Customer);
-        controller.setLabel(Customer.getFirstName(),Customer.getLastName(),Customer.getMealsBalance());
         homePageParent=loader.getRoot();
         appStage.setScene(new Scene(homePageParent));
         appStage.show();
@@ -109,8 +101,6 @@ public class SelectActionPageController implements Initializable {
         } catch (Exception ex) {
         }
         BuyVipPageController controller=loader.getController();
-        controller.setCustomer(Customer);
-        controller.setSubscriptions(subscriptions);
         homePageParent=loader.getRoot();
         appStage.setScene(new Scene(homePageParent));
         appStage.show();
@@ -131,7 +121,7 @@ public class SelectActionPageController implements Initializable {
     }
 
     private Subscription isThisCustomerHaveSubscriptionAlready(int customerID,String type){
-        for (Subscription s: subscriptions){
+        for (Subscription s: getCachedSubscriptions()){
             if(s.getCoustomerID()==customerID && s.getType().equals(type)){
                 return s;
             }
@@ -139,23 +129,11 @@ public class SelectActionPageController implements Initializable {
         return null;
     }
 
-    public void setCustomer(ViewCustomer c){
-        this.Customer=c;
-    }
-
-    public void setSubscriptions(List<Subscription> list){
-        this.subscriptions=list;
-    }
-
-    public void setLabels(ViewCustomer c){
-        this.mealsBalanceLabel.setText("יתרת לקוח ארוחות: "+c.getMealsBalance());
-        this.vipBalanceLabel.setText("יתרת לקוח ויאיפי: "+c.getVipBalance());
-        this.customerIDLabel.setText(c.getFirstName()+" "+c.getLastName());
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        this.mealsBalanceLabel.setText("יתרת לקוח ארוחות: "+getCachedViewCustomer().getMealsBalance());
+        this.vipBalanceLabel.setText("יתרת לקוח ויאיפי: "+getCachedViewCustomer().getVipBalance());
+        this.customerIDLabel.setText(getCachedViewCustomer().getFirstName()+" "+getCachedViewCustomer().getLastName());
         }
 }
 

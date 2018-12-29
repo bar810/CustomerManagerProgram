@@ -21,17 +21,17 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import view.findCustomerPage.selectActionPage.SelectActionPageController;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.ResourceBundle;
 
 import static utils.Constants.MEALS_SUBSCRIPTION;
 import static utils.Constants.VIP_SUBSCRIPTION;
-import static utils.SQLQueries.SQLQueriesAgainstCustomer.getAllCustomersFromDB;
-import static utils.SQLQueries.SQLQueriesAgainstPurchase.getAllPurchasesFromDB;
-import static utils.SQLQueries.SQLQueriesAgainstSubscription.getAllSubscriptionsFromDB;
+import static utils.GlobalProperties.*;
 
 public class FindCustomerPageController implements Initializable {
 
@@ -62,7 +62,6 @@ public class FindCustomerPageController implements Initializable {
     @FXML
     TableColumn<ViewCustomer,Integer> lastPurchase_col;
     private List<ViewCustomer> viewCustomers=new ArrayList<>();
-    private List<Subscription> subscriptions;
 
     @FXML
     private void findCustomer(ActionEvent event){
@@ -112,8 +111,9 @@ public class FindCustomerPageController implements Initializable {
 
     @FXML
     private void customerClicked(MouseEvent event){
-        ViewCustomer customer=table.getSelectionModel().getSelectedItem();
-        if(customer==null){
+        setCachedViewCustomer(table.getSelectionModel().getSelectedItem());
+        if(getCachedViewCustomer()==null){
+            //TODO
             System.out.println("d");
         }else{
             Parent homePageParent;
@@ -125,10 +125,6 @@ public class FindCustomerPageController implements Initializable {
                 loader.load();
             } catch (Exception ex) {
             }
-            SelectActionPageController controller=loader.getController();
-            controller.setCustomer(customer);
-            controller.setSubscriptions(subscriptions);
-            controller.setLabels(customer);
             homePageParent=loader.getRoot();
             appStage.setScene(new Scene(homePageParent));
             appStage.show();
@@ -137,9 +133,8 @@ public class FindCustomerPageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        List<Customer> customersToShow=getAllCustomersFromDB();
-        List<Purchase> purchase =getAllPurchasesFromDB();
-        subscriptions=getAllSubscriptionsFromDB();
+        List<Customer> customersToShow=getCachedCustomers();
+        List<Purchase> purchase =getCachedPurchases();
         purchase.sort(Comparator.comparing(Purchase::getDate));
 
         for(Customer c : customersToShow){
@@ -147,7 +142,7 @@ public class FindCustomerPageController implements Initializable {
             double vipBalance=0;
             String lastPurchase="";
 
-            for(Subscription s : subscriptions){
+            for(Subscription s : getCachedSubscriptions()){
                 if(s.getCoustomerID()==c.getCustomerID()){
                     if(s.getType().equals(MEALS_SUBSCRIPTION)){
                         mealsBalance=s.getBalance();

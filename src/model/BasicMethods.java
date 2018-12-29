@@ -15,7 +15,7 @@ import java.util.List;
 import static utils.Constants.DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT;
 import static utils.Constants.DEFAULT_VIP_SUBSCRIPTION_AMOUNT;
 import static utils.Constants.MEALS_SUBSCRIPTION;
-import static utils.GlobalProperties._logger;
+import static utils.GlobalCommands._logger;
 import static utils.SQLQueries.SQLQueriesAgainstCustomer.getAllCustomersFromDBWithConditions;
 import static utils.SQLQueries.SQLQueriesAgainstCustomer.insertCustomerToDB;
 import static utils.SQLQueries.SQLQueriesAgainstPurchase.insertPurchaseToDB;
