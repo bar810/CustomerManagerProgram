@@ -15,8 +15,10 @@ import java.util.List;
 import static utils.Constants.*;
 import static utils.GlobalCommands._logger;
 import static utils.GlobalCommands.getProperty;
+import static utils.GlobalProperties.getCachedSubscriptions;
 import static utils.SQLQueries.SQLQueriesAgainstCustomer.getAllCustomersFromDBWithConditions;
 import static utils.SQLQueries.SQLQueriesAgainstCustomer.insertCustomerToDB;
+import static utils.SQLQueries.SQLQueriesAgainstCustomer.removeOneCustomer;
 import static utils.SQLQueries.SQLQueriesAgainstPurchase.insertPurchaseToDB;
 import static utils.SQLQueries.SQLQueriesAgainstSubscription.*;
 import static utils.Utils.getCurrentTimeStamp;
@@ -34,6 +36,18 @@ public class BasicMethods {
         }else {
             _logger.warning("Customer is already exist. "+customer.toString());
         }
+    }
+
+    public static void deleteCustomer(int customerId){
+        //delete his subscriptions before.
+        for(Subscription s : getCachedSubscriptions()){
+            if(s.getCoustomerID()==customerId){
+                //delete this subscription
+                removeOneSubscription(s.getSubscriptionID());
+            }
+        }
+        //finally, remove the customer
+        removeOneCustomer(customerId);
     }
     public static void buySubscription(Customer customer, String type){
         //check if there is customer.

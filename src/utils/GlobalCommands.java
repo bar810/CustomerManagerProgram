@@ -19,8 +19,7 @@ import java.io.OutputStream;
 import java.util.Properties;
 import java.util.logging.Level;
 
-import static utils.Constants.CONFIGURE_FILE_PATH;
-import static utils.Constants.SQL_CONNECTION_CONFIGURE_FILE_PATH;
+import static utils.Constants.*;
 
 /**
  * @author bbrownsh
@@ -50,10 +49,38 @@ public class GlobalCommands {
             InputStream is=new FileInputStream(CONFIGURE_FILE_PATH);
             _properties.load(is);
         } catch (Exception ex) {
-            //TODO
+            _logger.debug("error with properties");
+            _logger.CleanAndSaveLogIfNeeded(true);
+            System.exit(0);
+            //TODO :: close the program
         }
-        //TODO :: validate properties file. for example: check that some price can be cast to double.
+        if(!validateDoubles(new String[]{DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT,
+                DEFAULT_VIP_SUBSCRIPTION_AMOUNT,
+                MEAL_PRICE,
+                HOT_MEAL_PRICE,
+                DRINK_PRICE,
+                LOG_MAX_SIZE,})){
+            _logger.debug("error with properties");
+            _logger.CleanAndSaveLogIfNeeded(true);
+            System.exit(0);
+            //TODO :: close the program.
+        }
     }
+
+
+
+    private static boolean validateDoubles(String[] str){
+        for(String s:str){
+            try {
+
+                double d= Double.parseDouble(getProperty(s.replaceAll("\"","")));
+            } catch (Exception ex) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
     private static void set_properties(Properties p){
         try {

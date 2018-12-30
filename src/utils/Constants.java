@@ -21,6 +21,9 @@ public final class Constants {
     public static final String DRINK_PRICE ="drink_price";
     public static final String SAVE_LOG = "save_log";
     public static final String LOG_MAX_SIZE = "max_log_size";
+    public static final String MAIL_USER_NAME = "mail.user.name";
+    public static final String MAIL_PASSWORD= "mail.password";
+
 
     //Texts
     public static final String MAIN_PROGRAM_TEXT = "שלי אוכל מוכן - ניהול מנויים";
