@@ -56,9 +56,9 @@ public class GlobalProperties {
         GlobalProperties.cachedCustomers = cachedCustomers;
     }
 
-    public static Subscription getSubscriptionByCustoemrID(int id){
+    public static Subscription getSubscriptionByCustoemrID(int id,String type){
         for(Subscription s: cachedSubscriptions){
-            if(s.getCoustomerID()==id){
+            if(s.getCoustomerID()==id && s.getType().equals(type)){
                 return s;
             }
         }

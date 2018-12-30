@@ -81,6 +81,10 @@ public class GlobalCommands {
         return true;
     }
 
+    public static String formatDouble(double d){
+        return String.format("%.1f", d);
+    }
+
 
     private static void set_properties(Properties p){
         try {

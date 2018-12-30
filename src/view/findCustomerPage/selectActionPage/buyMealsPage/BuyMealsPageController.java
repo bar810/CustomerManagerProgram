@@ -1,6 +1,8 @@
 package view.findCustomerPage.selectActionPage.buyMealsPage;
 
 
+import entities.Purchase;
+import entities.Subscription;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,7 +10,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
@@ -17,8 +21,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static utils.Constants.*;
+import static utils.GeneralViewFunctions.alertToScreen;
+import static utils.GeneralViewFunctions.alertToScreenWithResponse;
 import static utils.GlobalCommands.getProperty;
 import static utils.GlobalProperties.getCachedViewCustomer;
+import static utils.GlobalProperties.getSubscriptionByCustoemrID;
+import static utils.SQLQueries.SQLQueriesAgainstPurchase.insertPurchaseToDB;
+import static utils.SQLQueries.SQLQueriesAgainstSubscription.updateSubscriptionBalance;
 
 public class BuyMealsPageController implements Initializable {
 
@@ -108,21 +117,25 @@ public class BuyMealsPageController implements Initializable {
     }
 
     public void tryToMakePurchase(ActionEvent event,double amount) {
-        // //check if there is enough balance
-        // if (getCachedViewCustomer().getMealsBalance() < amount) {
-        //     //TODO error
-        // }
-        // //TODO :: ask again
-        // double newBalance=getCachedViewCustomer().getMealsBalance()-amount;
-        // Subscription subscription=getSubscriptionByCustoemrID(getCachedViewCustomer().getCustomerID());
-        // if(subscription==null){
-        //     //TODO error
-        // }
-        // updateSubscriptionBalance(subscription.getSubscriptionID(),newBalance);//TODO fatal error !! need here subscription ID
-        // insertPurchaseToDB(new Purchase(getCachedViewCustomer().getCustomerID(),amount,newBalance));
-        // //TODO :: message to screen and go to home screen
-        // goToHomeScreen(event);
-
+        //check if there is enough balance
+        if (getCachedViewCustomer().getMealsBalance() < amount) {
+            alertToScreen(Alert.AlertType.INFORMATION,"שגיאה","ללקוח אין מספיק יתרה");
+            goToHomeScreen(event);
+        }
+        if(alertToScreenWithResponse(Alert.AlertType.CONFIRMATION,"אישור פעולה","האם אתה בטוח שברצונך לאשר את הפעולה ?")==ButtonType.OK){
+            double newBalance=getCachedViewCustomer().getMealsBalance()-amount;
+            Subscription subscription=getSubscriptionByCustoemrID(getCachedViewCustomer().getCustomerID(),MEALS_SUBSCRIPTION);
+            if(subscription==null){
+                alertToScreen(Alert.AlertType.INFORMATION,"שגיאה","שגיאה במהלך הקנייה.לא נמצא מנוי. לא בוצעה רכישה");
+                goToHomeScreen(event);
+            }
+            updateSubscriptionBalance(subscription.getSubscriptionID(),newBalance);
+            insertPurchaseToDB(new Purchase(getCachedViewCustomer().getCustomerID(),amount,newBalance));
+            alertToScreen(Alert.AlertType.INFORMATION,"רכישה","רכישה בוצעה בהצלחה");
+            goToHomeScreen(event);
+        }else{
+            this.backButton(event);
+        }
     }
 
     @Override

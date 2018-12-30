@@ -11,7 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import view.findCustomerPage.selectActionPage.buyVipPage.BuyVipPageController;
@@ -19,10 +18,10 @@ import view.findCustomerPage.selectActionPage.loadSubscriptionPage.LoadSubscript
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static utils.GeneralViewFunctions.alertToScreen;
+import static utils.GlobalCommands.formatDouble;
 import static utils.GlobalProperties.getCachedSubscriptions;
 import static utils.GlobalProperties.getCachedViewCustomer;
 
@@ -52,14 +51,6 @@ public class SelectActionPageController implements Initializable {
 
     }
 
-    private boolean alertForSubscription(){
-        Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("אישור פעולה");
-        alert.setHeaderText(null);
-        alert.setContentText("האם אתה בטוח שברצונך לאשר את הפעולה ?");
-        Optional<ButtonType> result = alert.showAndWait();
-        return result.get() == ButtonType.OK;
-    }
 
     public void goToLoadSubscription(ActionEvent event){
 
@@ -135,8 +126,8 @@ public class SelectActionPageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.mealsBalanceLabel.setText("יתרת לקוח ארוחות: "+getCachedViewCustomer().getMealsBalance());
-        this.vipBalanceLabel.setText("יתרת לקוח ויאיפי: "+getCachedViewCustomer().getVipBalance());
+        this.mealsBalanceLabel.setText("יתרת לקוח ארוחות: "+ formatDouble(getCachedViewCustomer().getMealsBalance()));
+        this.vipBalanceLabel.setText("יתרת לקוח ויאיפי: "+ formatDouble(getCachedViewCustomer().getVipBalance()));
         this.customerIDLabel.setText(getCachedViewCustomer().getFirstName()+" "+getCachedViewCustomer().getLastName());
 
         if(getCachedViewCustomer().getVipBalance()==0){

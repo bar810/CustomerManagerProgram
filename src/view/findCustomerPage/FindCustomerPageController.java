@@ -161,12 +161,12 @@ public class FindCustomerPageController implements Initializable {
         }
 
         ObservableList<ViewCustomer> data=FXCollections.observableArrayList(viewCustomers);
-        id_col.setCellValueFactory(new PropertyValueFactory<ViewCustomer, Integer>("customerID"));//the name like in the class
-        fn_col.setCellValueFactory(new PropertyValueFactory<ViewCustomer, Integer>("firstName"));
-        ln_col.setCellValueFactory(new PropertyValueFactory<ViewCustomer, Integer>("lastName"));
-        lastPurchase_col.setCellValueFactory(new PropertyValueFactory<ViewCustomer, Integer>("lastPurchase"));
-        meals_col.setCellValueFactory(new PropertyValueFactory<ViewCustomer, Integer>("mealsBalance"));
-        vip_col.setCellValueFactory(new PropertyValueFactory<ViewCustomer, Integer>("vipBalance"));
+        id_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));//the name like in the class
+        fn_col.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        ln_col.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        lastPurchase_col.setCellValueFactory(new PropertyValueFactory<>("lastPurchase"));
+        meals_col.setCellValueFactory(new PropertyValueFactory<>("mealsBalance"));
+        vip_col.setCellValueFactory(new PropertyValueFactory<>("vipBalance"));
         table.setItems(data);
     }
 }

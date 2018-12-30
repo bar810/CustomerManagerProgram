@@ -15,11 +15,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static utils.Constants.*;
 import static utils.GeneralViewFunctions.alertToScreen;
+import static utils.GeneralViewFunctions.alertToScreenWithResponse;
 import static utils.GlobalCommands.getProperty;
 import static utils.GlobalProperties.getCachedSubscriptions;
 import static utils.GlobalProperties.getCachedViewCustomer;
@@ -42,18 +42,9 @@ public class LoadSubscriptionPageController implements Initializable {
 
     }
 
-    private boolean alertForSubscription(){
-        Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("אישור פעולה");
-        alert.setHeaderText(null);
-        alert.setContentText("האם אתה בטוח שברצונך לאשר את הפעולה ?");
-        Optional<ButtonType> result = alert.showAndWait();
-        return result.get() == ButtonType.OK;
-    }
-
     @FXML
     private void loadMeals(ActionEvent event){
-     if(alertForSubscription()){
+     if(alertToScreenWithResponse(Alert.AlertType.CONFIRMATION,"אישור פעולה","האם אתה בטוח שברצונך לאשר את הפעולה ?")==ButtonType.OK){
          //check if there is subscription. - if yes just reload if no create new.
          Subscription subscription=isThisCustomerHaveSubscriptionAlready(getCachedViewCustomer().getCustomerID(),MEALS_SUBSCRIPTION);
          if(subscription!=null){
@@ -73,7 +64,7 @@ public class LoadSubscriptionPageController implements Initializable {
 
     @FXML
     private void loadVIP(ActionEvent event){
-        if(alertForSubscription()){
+        if(alertToScreenWithResponse(Alert.AlertType.CONFIRMATION,"אישור פעולה","האם אתה בטוח שברצונך לאשר את הפעולה ?")==ButtonType.OK){
             //check if there is subscription. - if yes just reload if no create new.
             Subscription subscription=isThisCustomerHaveSubscriptionAlready(getCachedViewCustomer().getCustomerID(),VIP_SUBSCRIPTION);
             if(subscription!=null){
