@@ -13,8 +13,8 @@ import entities.Subscription;
 import java.util.List;
 
 import static utils.Constants.*;
-import static utils.GlobalCommands._logger;
-import static utils.GlobalCommands.getProperty;
+import static model.GlobalCommands._logger;
+import static model.GlobalCommands.getProperty;
 import static utils.GlobalProperties.getCachedSubscriptions;
 import static utils.SQLQueries.SQLQueriesAgainstCustomer.getAllCustomersFromDBWithConditions;
 import static utils.SQLQueries.SQLQueriesAgainstCustomer.insertCustomerToDB;

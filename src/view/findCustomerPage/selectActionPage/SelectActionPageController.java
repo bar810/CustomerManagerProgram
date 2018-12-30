@@ -20,8 +20,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static utils.GeneralViewFunctions.alertToScreen;
-import static utils.GlobalCommands.formatDouble;
+import static model.GeneralViewFunctions.alertToScreen;
+import static model.GlobalCommands.formatDouble;
 import static utils.GlobalProperties.getCachedSubscriptions;
 import static utils.GlobalProperties.getCachedViewCustomer;
 

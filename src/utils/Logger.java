@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static utils.Constants.*;
-import static utils.GlobalCommands._logger;
-import static utils.GlobalCommands.getProperty;
+import static model.GlobalCommands._logger;
+import static model.GlobalCommands.getProperty;
 import static utils.Utils.getCurrentTimeStamp;
 
 /**

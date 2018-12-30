@@ -17,8 +17,8 @@ import java.util.Properties;
 
 import static utils.Constants.MAIL_PASSWORD;
 import static utils.Constants.MAIL_USER_NAME;
-import static utils.GlobalCommands._logger;
-import static utils.GlobalCommands.getProperty;
+import static model.GlobalCommands._logger;
+import static model.GlobalCommands.getProperty;
 
 /**
  * @author bbrownsh

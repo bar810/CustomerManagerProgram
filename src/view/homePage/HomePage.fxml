@@ -39,7 +39,7 @@
             <items>
                <MenuItem mnemonicParsing="false" text="ניהול" />
                 <MenuItem mnemonicParsing="false" text="הגדרות" />
-                <MenuItem mnemonicParsing="false" text="יציאה" />
+                <MenuItem mnemonicParsing="false" onAction="#exitClicked" text="יציאה" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="עזרה">

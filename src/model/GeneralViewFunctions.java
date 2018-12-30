@@ -4,7 +4,7 @@
  * CORPORATION OR ITS LICENSORS AND IS SUBJECT TO LICENSE TERMS.
  */
 
-package utils;
+package model;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -32,5 +32,10 @@ public class GeneralViewFunctions {
         alert.setContentText(content);
         Optional<ButtonType> result = alert.showAndWait();
         return result.get();//ButtonType.OK;
+    }
+
+    public static void exit(){
+        GlobalCommands.closeConnections();
+        System.exit(0);
     }
 }

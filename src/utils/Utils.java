@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static utils.Constants.DATE_FORMAT;
-import static utils.GlobalCommands.*;
+import static model.GlobalCommands.*;
 
 /**
  * @author bbrownsh

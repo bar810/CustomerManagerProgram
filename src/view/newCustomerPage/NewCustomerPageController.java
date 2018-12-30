@@ -19,7 +19,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static utils.GeneralViewFunctions.alertToScreen;
+import static model.GeneralViewFunctions.alertToScreen;
 import static utils.SQLQueries.SQLQueriesAgainstCustomer.getAllCustomersFromDB;
 import static utils.SQLQueries.SQLQueriesAgainstCustomer.insertCustomerToDB;
 import static utils.Utils.isValidMail;

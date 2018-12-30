@@ -10,7 +10,7 @@ import entities.Subscription;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import utils.GlobalCommands;
+import model.GlobalCommands;
 
 import java.util.List;
 

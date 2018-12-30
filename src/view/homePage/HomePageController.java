@@ -15,10 +15,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static utils.GeneralViewFunctions.alertToScreen;
-import static utils.GlobalProperties.setCachedCustomers;
-import static utils.GlobalProperties.setCachedPurchases;
-import static utils.GlobalProperties.setCachedSubscriptions;
+import static model.GeneralViewFunctions.alertToScreen;
+import static model.GeneralViewFunctions.exit;
+import static utils.GlobalProperties.*;
 import static utils.SQLQueries.SQLQueriesAgainstCustomer.getAllCustomersFromDB;
 import static utils.SQLQueries.SQLQueriesAgainstPurchase.getAllPurchasesFromDB;
 import static utils.SQLQueries.SQLQueriesAgainstSubscription.getAllSubscriptionsFromDB;
@@ -80,7 +79,7 @@ public class HomePageController implements Initializable {
     }
     @FXML
     private void exitClicked(ActionEvent event){
-
+        exit();
     }
 }
 

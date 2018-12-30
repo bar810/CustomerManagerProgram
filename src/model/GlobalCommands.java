@@ -4,13 +4,14 @@
  * CORPORATION OR ITS LICENSORS AND IS SUBJECT TO LICENSE TERMS.
  */
 
-package utils;
+package model;
 
 import entities.Customer;
 import entities.Purchase;
 import entities.Subscription;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import utils.Logger;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

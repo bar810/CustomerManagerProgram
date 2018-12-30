@@ -18,8 +18,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static utils.Constants.VIP_SUBSCRIPTION;
-import static utils.GeneralViewFunctions.alertToScreen;
-import static utils.GeneralViewFunctions.alertToScreenWithResponse;
+import static model.GeneralViewFunctions.alertToScreen;
+import static model.GeneralViewFunctions.alertToScreenWithResponse;
 import static utils.GlobalProperties.getCachedViewCustomer;
 import static utils.GlobalProperties.getSubscriptionByCustoemrID;
 import static utils.SQLQueries.SQLQueriesAgainstPurchase.insertPurchaseToDB;
