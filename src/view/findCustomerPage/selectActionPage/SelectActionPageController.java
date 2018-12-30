@@ -21,9 +21,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static model.GeneralViewFunctions.alertToScreen;
-import static model.GlobalCommands.formatDouble;
-import static utils.GlobalProperties.getCachedSubscriptions;
-import static utils.GlobalProperties.getCachedViewCustomer;
+import static model.GlobalProperties.formatDouble;
+import static model.GlobalProperties.getCachedSubscriptions;
+import static model.GlobalProperties.getCachedViewCustomer;
+
 
 public class SelectActionPageController implements Initializable {
 

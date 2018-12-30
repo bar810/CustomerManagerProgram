@@ -12,13 +12,9 @@ import entities.Subscription;
 
 import java.util.List;
 
+import static model.GlobalProperties.*;
 import static utils.Constants.*;
-import static model.GlobalCommands._logger;
-import static model.GlobalCommands.getProperty;
-import static utils.GlobalProperties.getCachedSubscriptions;
-import static utils.SQLQueries.SQLQueriesAgainstCustomer.getAllCustomersFromDBWithConditions;
-import static utils.SQLQueries.SQLQueriesAgainstCustomer.insertCustomerToDB;
-import static utils.SQLQueries.SQLQueriesAgainstCustomer.removeOneCustomer;
+import static utils.SQLQueries.SQLQueriesAgainstCustomer.*;
 import static utils.SQLQueries.SQLQueriesAgainstPurchase.insertPurchaseToDB;
 import static utils.SQLQueries.SQLQueriesAgainstSubscription.*;
 import static utils.Utils.getCurrentTimeStamp;

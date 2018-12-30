@@ -17,11 +17,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static utils.Constants.VIP_SUBSCRIPTION;
 import static model.GeneralViewFunctions.alertToScreen;
 import static model.GeneralViewFunctions.alertToScreenWithResponse;
-import static utils.GlobalProperties.getCachedViewCustomer;
-import static utils.GlobalProperties.getSubscriptionByCustoemrID;
+import static model.GlobalProperties.getCachedViewCustomer;
+import static model.GlobalProperties.getSubscriptionByCustomerID;
+import static utils.Constants.VIP_SUBSCRIPTION;
 import static utils.SQLQueries.SQLQueriesAgainstPurchase.insertPurchaseToDB;
 import static utils.SQLQueries.SQLQueriesAgainstSubscription.updateSubscriptionBalance;
 
@@ -61,7 +61,7 @@ public class BuyVipPageController implements Initializable {
                 if(alertToScreenWithResponse(Alert.AlertType.CONFIRMATION,"אישור פעולה","האם אתה בטוח שברצונך לאשר את הפעולה ?")==ButtonType.OK){
                     //
                     double newBalance=getCachedViewCustomer().getVipBalance()-amountAsDouble;
-                    Subscription subscription=getSubscriptionByCustoemrID(getCachedViewCustomer().getCustomerID(),VIP_SUBSCRIPTION);
+                    Subscription subscription= getSubscriptionByCustomerID(getCachedViewCustomer().getCustomerID(),VIP_SUBSCRIPTION);
                     if(subscription==null){
                         alertToScreen(Alert.AlertType.INFORMATION,"שגיאה","שגיאה במהלך הקנייה. לא נמצא מנוי. לא בוצעה רכישה");
                         goToHomeScreen(event);

@@ -17,12 +17,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static utils.Constants.*;
 import static model.GeneralViewFunctions.alertToScreen;
 import static model.GeneralViewFunctions.alertToScreenWithResponse;
-import static model.GlobalCommands.getProperty;
-import static utils.GlobalProperties.getCachedSubscriptions;
-import static utils.GlobalProperties.getCachedViewCustomer;
+import static model.GlobalProperties.*;
+import static utils.Constants.*;
 import static utils.SQLQueries.SQLQueriesAgainstSubscription.insertSubscriptionToDB;
 import static utils.SQLQueries.SQLQueriesAgainstSubscription.updateSubscriptionBalance;
 

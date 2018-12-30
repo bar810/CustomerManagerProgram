@@ -10,7 +10,7 @@ import entities.Subscription;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import model.GlobalCommands;
+import model.GlobalProperties;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class DBTest {
 
     @Before
     public void init() {
-        GlobalCommands.init();
+        GlobalProperties.init();
     }
 
     @Test
@@ -61,6 +61,6 @@ public class DBTest {
 
     @After
     public void finish() {
-        GlobalCommands.closeConnections();
+        GlobalProperties.closeConnections();
     }
 }

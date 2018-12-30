@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static utils.Constants.*;
-import static model.GlobalCommands._logger;
+import static model.GlobalProperties._logger;
 
 /**
  * @author bbrownsh

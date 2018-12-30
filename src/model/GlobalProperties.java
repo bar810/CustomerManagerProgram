@@ -9,6 +9,7 @@ package model;
 import entities.Customer;
 import entities.Purchase;
 import entities.Subscription;
+import entities.ViewCustomer;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import utils.Logger;
@@ -17,23 +18,28 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 
+import static model.GeneralViewFunctions.exit;
 import static utils.Constants.*;
 
 /**
  * @author bbrownsh
  * @since 12/25/2018
  */
-public class GlobalCommands {
+public class GlobalProperties {
 
     public static Logger _logger;
-
-    public static SessionFactory _customerFactory;
-    public static SessionFactory _purchaseFactory;
-    public static SessionFactory _SubscriptionFactory;
-    public static Properties _properties;
+    private static SessionFactory _customerFactory;
+    private static SessionFactory _purchaseFactory;
+    private static SessionFactory _SubscriptionFactory;
+    private static Properties _properties;
+    private static ViewCustomer cachedViewCustomer;
+    private static List<Subscription> cachedSubscriptions;
+    private static List<Purchase> cachedPurchases;
+    private static List<Customer> cachedCustomers;
 
     public static void init() {
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
@@ -42,7 +48,6 @@ public class GlobalCommands {
         openConnections();
         _logger.debug("Global properties initialized");
     }
-
     private static void initProperties(){
         _properties = new Properties();
 
@@ -52,8 +57,7 @@ public class GlobalCommands {
         } catch (Exception ex) {
             _logger.debug("error with properties");
             _logger.CleanAndSaveLogIfNeeded(true);
-            System.exit(0);
-            //TODO :: close the program
+            exit();
         }
         if(!validateDoubles(new String[]{DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT,
                 DEFAULT_VIP_SUBSCRIPTION_AMOUNT,
@@ -63,13 +67,9 @@ public class GlobalCommands {
                 LOG_MAX_SIZE,})){
             _logger.debug("error with properties");
             _logger.CleanAndSaveLogIfNeeded(true);
-            System.exit(0);
-            //TODO :: close the program.
+            exit();
         }
     }
-
-
-
     private static boolean validateDoubles(String[] str){
         for(String s:str){
             try {
@@ -81,18 +81,14 @@ public class GlobalCommands {
         }
         return true;
     }
-
     public static String formatDouble(double d){
         return String.format("%.1f", d);
     }
-
-
-    private static void set_properties(Properties p){
+    private static void storeProperties(Properties p){
         try {
             OutputStream os=new FileOutputStream(CONFIGURE_FILE_PATH);
             p.store(os,null);
         } catch (Exception ex) {
-            //TODO
         }
     }
     public static String getProperty(String name){
@@ -100,8 +96,6 @@ public class GlobalCommands {
         return retVal;
 
     }
-
-
     private static void openConnections(){
         try {
             _customerFactory =new Configuration()
@@ -122,10 +116,6 @@ public class GlobalCommands {
             _logger.error("Cannot open connection to DB");
             _logger.CleanAndSaveLogIfNeeded(true);
         }
-
-
-
-
     }
     public static void closeConnections(){
         _customerFactory.close();
@@ -135,4 +125,78 @@ public class GlobalCommands {
         _logger.debug("Connection closed successfully");
         _logger.CleanAndSaveLogIfNeeded(true);
     }
+
+    public static SessionFactory get_customerFactory() {
+        return _customerFactory;
+    }
+
+    public static void set_customerFactory(SessionFactory _customerFactory) {
+        GlobalProperties._customerFactory = _customerFactory;
+    }
+
+    public static SessionFactory get_purchaseFactory() {
+        return _purchaseFactory;
+    }
+
+    public static void set_purchaseFactory(SessionFactory _purchaseFactory) {
+        GlobalProperties._purchaseFactory = _purchaseFactory;
+    }
+
+    public static SessionFactory get_SubscriptionFactory() {
+        return _SubscriptionFactory;
+    }
+
+    public static void set_SubscriptionFactory(SessionFactory _SubscriptionFactory) {
+        GlobalProperties._SubscriptionFactory = _SubscriptionFactory;
+    }
+
+    public static ViewCustomer getCachedViewCustomer() {
+        return cachedViewCustomer;
+    }
+
+    public static void setCachedViewCustomer(ViewCustomer cvc) {
+        cachedViewCustomer = cvc;
+    }
+
+    public static List<Subscription> getCachedSubscriptions() {
+        return cachedSubscriptions;
+    }
+
+    public static void setCachedSubscriptions(List<Subscription> cs) {
+        cachedSubscriptions = cs;
+    }
+
+    public static List<Purchase> getCachedPurchases() {
+        return cachedPurchases;
+    }
+
+    public static void setCachedPurchases(List<Purchase> cp) {
+        cachedPurchases = cp;
+    }
+
+    public static List<Customer> getCachedCustomers() {
+        return cachedCustomers;
+    }
+
+    public static void setCachedCustomers(List<Customer> cs) {
+        cachedCustomers = cs;
+    }
+
+    public static Subscription getSubscriptionByCustomerID(int id, String type){
+        for(Subscription s: cachedSubscriptions){
+            if(s.getCoustomerID()==id && s.getType().equals(type)){
+                return s;
+            }
+        }
+        _logger.error("Cannot find Subscription for customer. Customer id: "+id);
+        return null;
+    }
+
+
+
+
+
+
+
+
 }

@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static utils.Constants.DATE_FORMAT;
-import static model.GlobalCommands.*;
+import static model.GlobalProperties.*;
 
 /**
  * @author bbrownsh
@@ -36,7 +36,7 @@ public class Utils {
     }
     public static Session getCustomerSession(){
         try {
-            return  _customerFactory.getCurrentSession();
+            return  get_customerFactory().getCurrentSession();
         } catch (Exception ex) {
             _logger.error("Exception while trying to get customer session. "+ ex.toString());
             return null;
@@ -44,7 +44,7 @@ public class Utils {
     }
     public static Session getPurchaseSession(){
         try {
-            return  _purchaseFactory.getCurrentSession();
+            return  get_purchaseFactory().getCurrentSession();
         } catch (Exception ex) {
             _logger.error("Exception while trying to get purchase session. "+ ex.toString());
             return null;
@@ -52,7 +52,7 @@ public class Utils {
     }
     public static Session getSubscriptionSession(){
         try {
-            return _SubscriptionFactory.getCurrentSession();
+            return get_SubscriptionFactory().getCurrentSession();
         } catch (Exception ex) {
             _logger.error("Exception while trying to get subscription session. "+ ex.toString());
             return null;

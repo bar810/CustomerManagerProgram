@@ -3,7 +3,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.GlobalCommands;
+import model.GlobalProperties;
 
 import static utils.Constants.MAIN_PROGRAM_TEXT;
 
@@ -18,8 +18,8 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        GlobalCommands.init();
+        GlobalProperties.init();
         launch(args);
-        GlobalCommands.closeConnections();
+        GlobalProperties.closeConnections();
     }
 }

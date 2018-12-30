@@ -12,7 +12,7 @@ import org.hibernate.Session;
 import java.util.ArrayList;
 import java.util.List;
 
-import static model.GlobalCommands._logger;
+import static model.GlobalProperties._logger;
 import static utils.Utils.getCustomerSession;
 import static utils.Utils.isNotNullOrEmpty;
 

@@ -35,7 +35,7 @@ public class GeneralViewFunctions {
     }
 
     public static void exit(){
-        GlobalCommands.closeConnections();
+        GlobalProperties.closeConnections();
         System.exit(0);
     }
 }

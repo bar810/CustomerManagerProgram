@@ -20,12 +20,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static utils.Constants.*;
 import static model.GeneralViewFunctions.alertToScreen;
 import static model.GeneralViewFunctions.alertToScreenWithResponse;
-import static model.GlobalCommands.getProperty;
-import static utils.GlobalProperties.getCachedViewCustomer;
-import static utils.GlobalProperties.getSubscriptionByCustoemrID;
+import static model.GlobalProperties.*;
+import static utils.Constants.*;
 import static utils.SQLQueries.SQLQueriesAgainstPurchase.insertPurchaseToDB;
 import static utils.SQLQueries.SQLQueriesAgainstSubscription.updateSubscriptionBalance;
 
@@ -99,7 +97,7 @@ public class BuyMealsPageController implements Initializable {
                 tryToMakePurchase(event,2*Double.parseDouble(getProperty(DRINK_PRICE)));
                 break;
             default:
-                //TODO
+                _logger.error("cannot parse what meal the customer choose. (should not be happen)");
                 break;
         }
     }
@@ -124,7 +122,7 @@ public class BuyMealsPageController implements Initializable {
         }
         if(alertToScreenWithResponse(Alert.AlertType.CONFIRMATION,"אישור פעולה","האם אתה בטוח שברצונך לאשר את הפעולה ?")==ButtonType.OK){
             double newBalance=getCachedViewCustomer().getMealsBalance()-amount;
-            Subscription subscription=getSubscriptionByCustoemrID(getCachedViewCustomer().getCustomerID(),MEALS_SUBSCRIPTION);
+            Subscription subscription= getSubscriptionByCustomerID(getCachedViewCustomer().getCustomerID(),MEALS_SUBSCRIPTION);
             if(subscription==null){
                 alertToScreen(Alert.AlertType.INFORMATION,"שגיאה","שגיאה במהלך הקנייה.לא נמצא מנוי. לא בוצעה רכישה");
                 goToHomeScreen(event);

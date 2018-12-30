@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 
 import static model.GeneralViewFunctions.alertToScreen;
 import static model.GeneralViewFunctions.exit;
-import static utils.GlobalProperties.*;
+import static model.GlobalProperties.*;
 import static utils.SQLQueries.SQLQueriesAgainstCustomer.getAllCustomersFromDB;
 import static utils.SQLQueries.SQLQueriesAgainstPurchase.getAllPurchasesFromDB;
 import static utils.SQLQueries.SQLQueriesAgainstSubscription.getAllSubscriptionsFromDB;
@@ -48,7 +48,7 @@ public class HomePageController implements Initializable {
     }
 
     @FXML
-    private void moveToLoadSubscriptionPage(ActionEvent event){
+    private void moveToFindCustomerPage(ActionEvent event){
         try {
             Parent homePageParent=FXMLLoader.load(getClass().getResource("../findCustomerPage/FindCustomerPage.fxml"));
             Scene homePageScene=new Scene(homePageParent);

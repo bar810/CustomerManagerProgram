@@ -29,9 +29,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static model.GlobalProperties.*;
 import static utils.Constants.MEALS_SUBSCRIPTION;
 import static utils.Constants.VIP_SUBSCRIPTION;
-import static utils.GlobalProperties.*;
 
 public class FindCustomerPageController implements Initializable {
 
@@ -113,8 +113,7 @@ public class FindCustomerPageController implements Initializable {
     private void customerClicked(MouseEvent event){
         setCachedViewCustomer(table.getSelectionModel().getSelectedItem());
         if(getCachedViewCustomer()==null){
-            //TODO - note- can be happen if the user trying to sort before selecting customer
-            System.out.println("d");
+            _logger.warning("try to find Cached view customer was made when it was equals to null");
         }else{
             Parent homePageParent;
             Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
