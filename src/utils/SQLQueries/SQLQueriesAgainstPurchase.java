@@ -20,7 +20,6 @@ import static utils.Utils.*;
  * @since 12/24/2018
  */
 public class SQLQueriesAgainstPurchase {
-        //TODO :: more update functions
     public static int insertPurchaseToDB(Purchase purchase) {
         _logger.debug("Inserting purchase to DB: "+purchase.toString());
         Session purchaseSession= getPurchaseSession();

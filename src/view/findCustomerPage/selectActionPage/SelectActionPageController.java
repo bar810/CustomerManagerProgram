@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -33,7 +34,10 @@ public class SelectActionPageController implements Initializable {
     Label vipBalanceLabel;
     @FXML
     Label customerIDLabel;
-
+    @FXML
+    Button buyVIPButton;
+    @FXML
+    Button buyMealsButton;
     @FXML
     private void backButton(ActionEvent event){
         try {
@@ -134,6 +138,13 @@ public class SelectActionPageController implements Initializable {
         this.mealsBalanceLabel.setText("יתרת לקוח ארוחות: "+getCachedViewCustomer().getMealsBalance());
         this.vipBalanceLabel.setText("יתרת לקוח ויאיפי: "+getCachedViewCustomer().getVipBalance());
         this.customerIDLabel.setText(getCachedViewCustomer().getFirstName()+" "+getCachedViewCustomer().getLastName());
+
+        if(getCachedViewCustomer().getVipBalance()==0){
+            buyVIPButton.setDisable(true);
+        }
+        if(getCachedViewCustomer().getMealsBalance()==0){
+            buyMealsButton.setDisable(true);
+        }
         }
 }
 

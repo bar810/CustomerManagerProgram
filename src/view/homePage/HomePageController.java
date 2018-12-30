@@ -78,5 +78,9 @@ public class HomePageController implements Initializable {
     private void aboutClicked(ActionEvent event){
         alertToScreen(Alert.AlertType.INFORMATION,"אודות","התוכנה נכתבה על ידי בר בראונשטיין 2018. גרסא - 1.0 ");
     }
+    @FXML
+    private void exitClicked(ActionEvent event){
+
+    }
 }
 

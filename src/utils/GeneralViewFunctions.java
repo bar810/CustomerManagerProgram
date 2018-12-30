@@ -7,6 +7,9 @@
 package utils;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+
+import java.util.Optional;
 
 /**
  * @author bbrownsh
@@ -22,4 +25,12 @@ public class GeneralViewFunctions {
         alert.showAndWait();
     }
 
+    public static ButtonType alertToScreenWithResponse(Alert.AlertType type, String title, String content){
+        Alert alert=new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.get();//ButtonType.OK;
+    }
 }

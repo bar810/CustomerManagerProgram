@@ -12,7 +12,15 @@ import entities.Subscription;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Properties;
 import java.util.logging.Level;
+
+import static utils.Constants.CONFIGURE_FILE_PATH;
+import static utils.Constants.SQL_CONNECTION_CONFIGURE_FILE_PATH;
 
 /**
  * @author bbrownsh
@@ -25,29 +33,57 @@ public class GlobalCommands {
     public static SessionFactory _customerFactory;
     public static SessionFactory _purchaseFactory;
     public static SessionFactory _SubscriptionFactory;
-
+    public static Properties _properties;
 
     public static void init() {
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
         _logger=new Logger();
+        initProperties();
         openConnections();
         _logger.debug("Global properties initialized");
     }
 
-    public static void openConnections(){
+    private static void initProperties(){
+        _properties = new Properties();
+
+        try {
+            InputStream is=new FileInputStream(CONFIGURE_FILE_PATH);
+            _properties.load(is);
+        } catch (Exception ex) {
+            //TODO
+        }
+        //TODO :: validate properties file. for example: check that some price can be cast to double.
+    }
+
+    private static void set_properties(Properties p){
+        try {
+            OutputStream os=new FileOutputStream(CONFIGURE_FILE_PATH);
+            p.store(os,null);
+        } catch (Exception ex) {
+            //TODO
+        }
+    }
+    public static String getProperty(String name){
+        String retVal= _properties.getProperty(name);
+        return retVal;
+
+    }
+
+
+    private static void openConnections(){
         try {
             _customerFactory =new Configuration()
-                    .configure("utils/hibernate.cfg.xml")
+                    .configure(SQL_CONNECTION_CONFIGURE_FILE_PATH)
                     .addAnnotatedClass(Customer.class)
                     .buildSessionFactory();
 
             _purchaseFactory =new Configuration()
-                    .configure("utils/hibernate.cfg.xml")
+                    .configure(SQL_CONNECTION_CONFIGURE_FILE_PATH)
                     .addAnnotatedClass(Purchase.class)
                     .buildSessionFactory();
 
             _SubscriptionFactory =new Configuration()
-                    .configure("utils/hibernate.cfg.xml")
+                    .configure(SQL_CONNECTION_CONFIGURE_FILE_PATH)
                     .addAnnotatedClass(Subscription.class)
                     .buildSessionFactory();
         } catch (Exception ex) {

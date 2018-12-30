@@ -20,6 +20,7 @@ import java.util.ResourceBundle;
 
 import static utils.Constants.*;
 import static utils.GeneralViewFunctions.alertToScreen;
+import static utils.GlobalCommands.getProperty;
 import static utils.GlobalProperties.getCachedSubscriptions;
 import static utils.GlobalProperties.getCachedViewCustomer;
 import static utils.SQLQueries.SQLQueriesAgainstSubscription.insertSubscriptionToDB;
@@ -57,11 +58,11 @@ public class LoadSubscriptionPageController implements Initializable {
          Subscription subscription=isThisCustomerHaveSubscriptionAlready(getCachedViewCustomer().getCustomerID(),MEALS_SUBSCRIPTION);
          if(subscription!=null){
              //reload
-             updateSubscriptionBalance(subscription.getSubscriptionID(),subscription.getBalance()+DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT);
+             updateSubscriptionBalance(subscription.getSubscriptionID(),subscription.getBalance()+Double.parseDouble(getProperty(DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT)));
          }
          else{
              //create new
-             insertSubscriptionToDB(new Subscription(getCachedViewCustomer().getCustomerID(),DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT,MEALS_SUBSCRIPTION));
+             insertSubscriptionToDB(new Subscription(getCachedViewCustomer().getCustomerID(),Double.parseDouble(getProperty(DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT)),MEALS_SUBSCRIPTION));
          }
          SucceededAlertAndGoToHomePage(event);
      }
@@ -77,11 +78,11 @@ public class LoadSubscriptionPageController implements Initializable {
             Subscription subscription=isThisCustomerHaveSubscriptionAlready(getCachedViewCustomer().getCustomerID(),VIP_SUBSCRIPTION);
             if(subscription!=null){
                 //reload
-                updateSubscriptionBalance(subscription.getSubscriptionID(),subscription.getBalance()+DEFAULT_VIP_SUBSCRIPTION_AMOUNT);
+                updateSubscriptionBalance(subscription.getSubscriptionID(),subscription.getBalance()+Double.parseDouble(getProperty(DEFAULT_VIP_SUBSCRIPTION_AMOUNT)));
             }
             else{
                 //create new
-                insertSubscriptionToDB(new Subscription(getCachedViewCustomer().getCustomerID(),DEFAULT_VIP_SUBSCRIPTION_AMOUNT,VIP_SUBSCRIPTION));
+                insertSubscriptionToDB(new Subscription(getCachedViewCustomer().getCustomerID(),Double.parseDouble(getProperty(DEFAULT_VIP_SUBSCRIPTION_AMOUNT)),VIP_SUBSCRIPTION));
             }
             //Alert
             SucceededAlertAndGoToHomePage(event);

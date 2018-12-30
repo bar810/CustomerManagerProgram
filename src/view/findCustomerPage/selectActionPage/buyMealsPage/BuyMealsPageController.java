@@ -17,6 +17,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static utils.Constants.*;
+import static utils.GlobalCommands.getProperty;
 import static utils.GlobalProperties.getCachedViewCustomer;
 
 public class BuyMealsPageController implements Initializable {
@@ -65,28 +66,28 @@ public class BuyMealsPageController implements Initializable {
         source1=source1.split(",")[0];
         switch (source1) {
             case "oneMealButton":
-                tryToMakePurchase(event,MEAL_PRICE);
+                tryToMakePurchase(event,Double.parseDouble(getProperty(MEAL_PRICE)));
                 break;
             case "oneHotMealButton":
-                tryToMakePurchase(event,HOT_MEAL_PRICE);
+                tryToMakePurchase(event,Double.parseDouble(getProperty(HOT_MEAL_PRICE)));
                 break;
             case "oneHotMealAndDrinkButton":
-                tryToMakePurchase(event,HOT_MEAL_PRICE+DRINK_PRICE);
+                tryToMakePurchase(event,Double.parseDouble(getProperty(HOT_MEAL_PRICE))+Double.parseDouble(getProperty(DRINK_PRICE)));
                 break;
             case "oneDrinkButton":
-                tryToMakePurchase(event,DRINK_PRICE);
+                tryToMakePurchase(event,Double.parseDouble(getProperty(DRINK_PRICE)));
                 break;
             case "twoMealButton":
-                tryToMakePurchase(event,2*MEAL_PRICE);
+                tryToMakePurchase(event,2*Double.parseDouble(getProperty(MEAL_PRICE)));
                 break;
             case "twoHotMealButton":
-                tryToMakePurchase(event,2*HOT_MEAL_PRICE);
+                tryToMakePurchase(event,2*Double.parseDouble(getProperty(HOT_MEAL_PRICE)));
                 break;
             case "twoHotMealAndDrinkButton":
-                tryToMakePurchase(event,2*(HOT_MEAL_PRICE+DRINK_PRICE));
+                tryToMakePurchase(event,2*(Double.parseDouble(getProperty(HOT_MEAL_PRICE))+Double.parseDouble(getProperty(DRINK_PRICE))));
                 break;
             case "twoDrinkButton":
-                tryToMakePurchase(event,2*DRINK_PRICE);
+                tryToMakePurchase(event,2*Double.parseDouble(getProperty(DRINK_PRICE)));
                 break;
             default:
                 //TODO
@@ -130,28 +131,28 @@ public class BuyMealsPageController implements Initializable {
         customer_name_label.setText(getCachedViewCustomer().getFirstName()+" "+getCachedViewCustomer().getLastName());
         customer_balance_label.setText("יתרת הלקוח: "+String.valueOf(balance)+" ארוחות");
 
-        if(balance<MEAL_PRICE){
+        if(balance<Double.parseDouble(getProperty(MEAL_PRICE))){
             oneMealButton.setDisable(true);
         }
-        if(balance<HOT_MEAL_PRICE){
+        if(balance<Double.parseDouble(getProperty(HOT_MEAL_PRICE))){
             oneHotMealButton.setDisable(true);
         }
-        if(balance<HOT_MEAL_PRICE+DRINK_PRICE){
+        if(balance<Double.parseDouble(getProperty(HOT_MEAL_PRICE))+Double.parseDouble(getProperty(DRINK_PRICE))){
             oneHotMealAndDrinkButton.setDisable(true);
         }
-        if(balance<DRINK_PRICE){
+        if(balance<Double.parseDouble(getProperty(DRINK_PRICE))){
             oneDrinkButton.setDisable(true);
         }
-        if(balance<2*MEAL_PRICE){
+        if(balance<2*Double.parseDouble(getProperty(MEAL_PRICE))){
             twoMealButton.setDisable(true);
         }
-        if(balance<2*HOT_MEAL_PRICE){
+        if(balance<2*Double.parseDouble(getProperty(HOT_MEAL_PRICE))){
             twoHotMealButton.setDisable(true);
         }
-        if(balance<2*(HOT_MEAL_PRICE+DRINK_PRICE)){
+        if(balance<2*(Double.parseDouble(getProperty(HOT_MEAL_PRICE))+Double.parseDouble(getProperty(DRINK_PRICE)))){
             twoHotMealAndDrinkButton.setDisable(true);
         }
-        if(balance<2*DRINK_PRICE){
+        if(balance<2*Double.parseDouble(getProperty(DRINK_PRICE))){
             twoDrinkButton.setDisable(true);
         }
     }

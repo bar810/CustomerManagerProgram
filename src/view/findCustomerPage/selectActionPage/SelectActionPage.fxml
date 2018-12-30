@@ -36,8 +36,8 @@
    <center>
       <HBox alignment="CENTER" prefHeight="434.0" prefWidth="800.0" spacing="40.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#goToBuyVip" prefHeight="91.0" prefWidth="120.0" text="קניית VIP" />
-            <Button mnemonicParsing="false" onAction="#goToBuyMeals" prefHeight="94.0" prefWidth="130.0" text="קניית ארוחה" />
+            <Button fx:id="buyVIPButton" mnemonicParsing="false" onAction="#goToBuyVip" prefHeight="91.0" prefWidth="120.0" text="קניית VIP" />
+            <Button fx:id="buyMealsButton" mnemonicParsing="false" onAction="#goToBuyMeals" prefHeight="94.0" prefWidth="130.0" text="קניית ארוחה" />
             <Button mnemonicParsing="false" onAction="#goToLoadSubscription" prefHeight="94.0" prefWidth="130.0" text="טעינת מנוי" />
          </children>
          <opaqueInsets>

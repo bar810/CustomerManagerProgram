@@ -21,7 +21,6 @@ import static utils.Utils.isNotNullOrEmpty;
  * @since 12/24/2018
  */
 public class SQLQueriesAgainstSubscription {
-        //TODO :: more update functions
     public static int insertSubscriptionToDB(Subscription subscription) {
         _logger.debug("Inserting subscription to DB: "+subscription.toString());
         Session subscriptionSession= getSubscriptionSession();

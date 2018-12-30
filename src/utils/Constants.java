@@ -13,23 +13,22 @@ package utils;
 public final class Constants {
 
 
+    //properties
+    public static final String DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT = "default_subscription_meals_amount";
+    public static final String DEFAULT_VIP_SUBSCRIPTION_AMOUNT = "default_subscription_vip_amount";
+    public static final String MEAL_PRICE ="meal_price";
+    public static final String HOT_MEAL_PRICE ="hot_meal_price";
+    public static final String DRINK_PRICE ="drink_price";
+    public static final String SAVE_LOG = "save_log";
+    public static final String LOG_MAX_SIZE = "max_log_size";
+
     //Texts
     public static final String MAIN_PROGRAM_TEXT = "שלי אוכל מוכן - ניהול מנויים";
 
-    //Default values
-    public static final double DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT =10;
-    public static final double DEFAULT_VIP_SUBSCRIPTION_AMOUNT =400;
-    public static final double MEAL_PRICE =1;
-    public static final double HOT_MEAL_PRICE =0.4;
-    public static final double DRINK_PRICE =0.2;
-
-
     //format
-    public static final String SAVE_LOG = "false";
-    public static final String LOG_FILE_NAME_EXTENSION = "log";
     public static final String CSV_SEPERATOR = ",";
-    public static final int LOG_MAX_SIZE = 1000;
     public static final String DATE_FORMAT = "dd-MM-yyyy HH:mm:ss";
+    public static final String LOG_FILE_NAME_EXTENSION = "log";
 
     //Subscription types
     public static final String MEALS_SUBSCRIPTION = "ארוחות";
@@ -39,6 +38,8 @@ public final class Constants {
     public static final String CUSTOMER_TABLE_LOCATION = "customers.csv";
     public static final String PURCHASE_TABLE_LOCATION = "purchases.csv";
     public static final String SUBSCRIPTION_TABLE_LOCATION = "subscriptions.csv";
+    public static final String SQL_CONNECTION_CONFIGURE_FILE_PATH = "utils/hibernate.cfg.xml";
+    public static final String CONFIGURE_FILE_PATH = "dataConfig.properties";
 
     //Customer table names
     public static final String CUSTOMER_TABLE_NAME = "לקוחות";
@@ -63,6 +64,4 @@ public final class Constants {
     public static final String SUBSCRIPTION_DATE_TABLE_NAME = "תאריך_רכישת_מנוי";
     public static final String SUBSCRIPTION_BALANCE_TABLE_NAME = "יתרה";
     public static final String SUBSCRIPTION_TYPE_TABLE_NAME = "סוג_מנוי";
-
-
 }

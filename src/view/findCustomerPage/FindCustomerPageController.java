@@ -113,7 +113,7 @@ public class FindCustomerPageController implements Initializable {
     private void customerClicked(MouseEvent event){
         setCachedViewCustomer(table.getSelectionModel().getSelectedItem());
         if(getCachedViewCustomer()==null){
-            //TODO
+            //TODO - note- can be happen if the user trying to sort before selecting customer
             System.out.println("d");
         }else{
             Parent homePageParent;

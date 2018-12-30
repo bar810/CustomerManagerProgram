@@ -12,10 +12,9 @@ import entities.Subscription;
 
 import java.util.List;
 
-import static utils.Constants.DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT;
-import static utils.Constants.DEFAULT_VIP_SUBSCRIPTION_AMOUNT;
-import static utils.Constants.MEALS_SUBSCRIPTION;
+import static utils.Constants.*;
 import static utils.GlobalCommands._logger;
+import static utils.GlobalCommands.getProperty;
 import static utils.SQLQueries.SQLQueriesAgainstCustomer.getAllCustomersFromDBWithConditions;
 import static utils.SQLQueries.SQLQueriesAgainstCustomer.insertCustomerToDB;
 import static utils.SQLQueries.SQLQueriesAgainstPurchase.insertPurchaseToDB;
@@ -47,7 +46,7 @@ public class BasicMethods {
             }
             else{
                 boolean createNewSubscription=list.size()==0;
-                double amount=type.equals(MEALS_SUBSCRIPTION)?DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT:DEFAULT_VIP_SUBSCRIPTION_AMOUNT;
+                double amount=type.equals(MEALS_SUBSCRIPTION)?Double.parseDouble(getProperty(DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT)):Double.parseDouble(getProperty(DEFAULT_VIP_SUBSCRIPTION_AMOUNT));
                 if(createNewSubscription){
                     insertSubscriptionToDB(new Subscription(customer.getCustomerID(),getCurrentTimeStamp(),amount,type));
                 }else{

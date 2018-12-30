@@ -21,7 +21,6 @@ import static utils.Utils.isNotNullOrEmpty;
  * @since 12/24/2018
  */
 public class SQLQueriesAgainstCustomer {
-        //TODO :: more update functions
     public static int insertCustomerToDB(Customer customer) {
         _logger.debug("Inserting Customer to DB: "+customer.toString());
         Session customerSession= getCustomerSession();
