@@ -30,6 +30,9 @@ import java.util.ResourceBundle;
 
 import static model.GlobalProperties.getCachedCustomers;
 import static model.GlobalProperties.getCachedPurchases;
+import static utils.Constants.MEALS_SUBSCRIPTION;
+import static utils.Constants.PURCHASE_SUBSCRIPTION_COMMENT;
+import static utils.Constants.VIP_SUBSCRIPTION;
 
 public class LastPurchasesPageController implements Initializable {
 
@@ -47,6 +50,8 @@ public class LastPurchasesPageController implements Initializable {
     private RadioButton mealsType;
     @FXML
     private RadioButton vipType;
+    @FXML
+    private RadioButton subscriptionsOnly;
     @FXML
     private TableView<ViewLastPurchase> table;
     @FXML
@@ -72,30 +77,42 @@ public class LastPurchasesPageController implements Initializable {
 
     @FXML
     private void findCustomer(ActionEvent event){
-        // List<ViewCustomer> newCustomerList=new ArrayList<>();
-        // String id= this.id.getText();
-        // String firstName= this.firstName.getText();
-        // String lastName= this.lastName.getText();
-        // String phoneNumber=phone.getText();
-        //
-        // boolean insertVar=true;
-        // for(ViewCustomer c:viewCustomers){
-        //     if((!id.isEmpty())&&(!String.valueOf(c.getCustomerID()).equals(id))){
-        //         insertVar=false;
-        //     }if((!firstName.isEmpty())&&(!c.getFirstName().equals(firstName))){
-        //         insertVar=false;
-        //     } if((!lastName.isEmpty())&&(!c.getLastName().equals(lastName))){
-        //         insertVar=false;
-        //     } if((!phoneNumber.isEmpty())&&(!String.valueOf(c.getCustomerID()).equals(id))){
-        //         insertVar=false;
-        //     }
-        //     if(insertVar){
-        //         newCustomerList.add(c);
-        //     }
-        // }
-        // ObservableList<ViewCustomer> data=FXCollections.observableArrayList(newCustomerList);
-        // table.setItems(data);
-    }
+        List<ViewLastPurchase> newCustomerList=new ArrayList<>();
+
+        String id= this.customerID.getText();
+        String firstName= this.firstName.getText();
+        String lastName= this.lastName.getText();
+        String date=this.date.getText();
+        boolean mealsOnly=mealsType.isSelected();
+        boolean vipOnly=vipType.isSelected();
+        boolean subscriptionsOnly= this.subscriptionsOnly.isSelected();
+
+        boolean insertVar=true;
+        for(ViewLastPurchase p:viewLastPurchases){
+            if((!id.isEmpty())&&(!String.valueOf(p.getCustomerID()).equals(id))){
+                insertVar=false;
+            }if((!firstName.isEmpty())&&(!p.getFirstName().equals(firstName))){
+                insertVar=false;
+            } if((!lastName.isEmpty())&&(!p.getLastName().equals(lastName))){
+                insertVar=false;
+            } if((!date.isEmpty())&&(!String.valueOf(p.getDate()).equals(date))){
+                insertVar=false;
+            }if(!mealsOnly && p.getType().equals(MEALS_SUBSCRIPTION)){
+                insertVar=false;
+            }if(!vipOnly && p.getType().equals(VIP_SUBSCRIPTION)){
+                insertVar=false;
+            }if(subscriptionsOnly && (!p.getComments().equals(PURCHASE_SUBSCRIPTION_COMMENT))){
+                insertVar=false;
+
+            }
+            if(insertVar){
+                newCustomerList.add(p);
+            }
+            insertVar=true;
+        }
+        ObservableList<ViewLastPurchase> data=FXCollections.observableArrayList(newCustomerList);
+        table.setItems(data);    }
+
 
     @FXML
     private void backButton(ActionEvent event){
@@ -118,6 +135,7 @@ public class LastPurchasesPageController implements Initializable {
 
     @FXML
     private void customerClicked(MouseEvent event){
+        //TODO - remove custoemr but not here
         // setCachedViewCustomer(table.getSelectionModel().getSelectedItem());
         // if(getCachedViewCustomer()==null){
         //     _logger.warning("try to find Cached view customer was made when it was equals to null");
@@ -165,6 +183,11 @@ public class LastPurchasesPageController implements Initializable {
         newBalance_col.setCellValueFactory(new PropertyValueFactory<>("newBalance"));//the name like in the class
         comments_col.setCellValueFactory(new PropertyValueFactory<>("comments"));//the name like in the class
         table.setItems(data);
+
+        mealsType.setSelected(true);
+        vipType.setSelected(true);
+        subscriptionsOnly.setSelected(false);
+
     }
 }
 

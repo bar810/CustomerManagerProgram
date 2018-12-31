@@ -85,6 +85,7 @@ public class FindCustomerPageController implements Initializable {
             if(insertVar){
                 newCustomerList.add(c);
             }
+            insertVar=true;
         }
         ObservableList<ViewCustomer> data=FXCollections.observableArrayList(newCustomerList);
         table.setItems(data);
