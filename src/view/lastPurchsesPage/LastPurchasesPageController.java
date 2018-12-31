@@ -12,10 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -28,11 +25,13 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static model.BasicMethods.addValueToCustomerSubscription;
+import static model.GeneralViewFunctions.alertToScreen;
+import static model.GeneralViewFunctions.alertToScreenWithResponse;
 import static model.GlobalProperties.getCachedCustomers;
 import static model.GlobalProperties.getCachedPurchases;
-import static utils.Constants.MEALS_SUBSCRIPTION;
-import static utils.Constants.PURCHASE_SUBSCRIPTION_COMMENT;
-import static utils.Constants.VIP_SUBSCRIPTION;
+import static utils.Constants.*;
+import static utils.SQLQueries.SQLQueriesAgainstPurchase.removeOnePurchase;
 
 public class LastPurchasesPageController implements Initializable {
 
@@ -54,6 +53,8 @@ public class LastPurchasesPageController implements Initializable {
     private RadioButton subscriptionsOnly;
     @FXML
     private TableView<ViewLastPurchase> table;
+    @FXML
+    private Button cancelPurchase;
     @FXML
     TableColumn<ViewLastPurchase,Integer> purchaseID_col;
     @FXML
@@ -135,24 +136,28 @@ public class LastPurchasesPageController implements Initializable {
 
     @FXML
     private void customerClicked(MouseEvent event){
-        //TODO - remove custoemr but not here
-        // setCachedViewCustomer(table.getSelectionModel().getSelectedItem());
-        // if(getCachedViewCustomer()==null){
-        //     _logger.warning("try to find Cached view customer was made when it was equals to null");
-        // }else{
-        //     Parent homePageParent;
-        //     Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        //
-        //     FXMLLoader loader=new FXMLLoader();
-        //     loader.setLocation(getClass().getResource("selectActionPage/SelectActionPage.fxml"));
-        //     try {
-        //         loader.load();
-        //     } catch (Exception ex) {
-        //     }
-        //     homePageParent=loader.getRoot();
-        //     appStage.setScene(new Scene(homePageParent));
-        //     appStage.show();
-        // }
+        ViewLastPurchase purchaseClicked=table.getSelectionModel().getSelectedItem();
+        if(purchaseClicked.getFirstName().equals("בר")){
+            cancelPurchase.setDisable(false);
+        }else{
+            cancelPurchase.setDisable(true);
+        }
+    }
+
+    @FXML
+    private void cancelPurchedButoon(ActionEvent event){
+        ViewLastPurchase purchaseClicked=table.getSelectionModel().getSelectedItem();
+        if(alertToScreenWithResponse(Alert.AlertType.CONFIRMATION,"אישור פעולה","האם אתה בטוח שברצונך לאשר את הפעולה ?")==ButtonType.OK) {
+            double amount=purchaseClicked.getAmount();
+            String type=purchaseClicked.getType();
+            //update the amount
+            addValueToCustomerSubscription(purchaseClicked.getCustomerID(),purchaseClicked.getType(),purchaseClicked.getAmount());
+            //remove purchase
+            removeOnePurchase(purchaseClicked.getPurchaseID());
+            System.out.println("ss");
+            alertToScreen(Alert.AlertType.INFORMATION,"ביטול רכישה","רכישה בוטלה בהצלחה !בוצע זיכוי ללקוח");
+            this.backButton(event);
+        }
     }
 
     @Override
@@ -187,7 +192,7 @@ public class LastPurchasesPageController implements Initializable {
         mealsType.setSelected(true);
         vipType.setSelected(true);
         subscriptionsOnly.setSelected(false);
-
+        cancelPurchase.setDisable(true);
     }
 }
 

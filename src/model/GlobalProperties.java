@@ -65,7 +65,8 @@ public class GlobalProperties {
                 MEAL_PRICE,
                 HOT_MEAL_PRICE,
                 DRINK_PRICE,
-                LOG_MAX_SIZE,})){
+                LOG_MAX_SIZE,
+                TIME_TILL_CANCEL_PURCHASE})){
             _logger.debug("error with properties");
             _logger.CleanAndSaveLogIfNeeded(true);
             exit();

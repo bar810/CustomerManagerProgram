@@ -23,6 +23,7 @@ public final class Constants {
     public static final String LOG_MAX_SIZE = "max_log_size";
     public static final String MAIL_USER_NAME = "mail.user.name";
     public static final String MAIL_PASSWORD= "mail.password";
+    public static final String TIME_TILL_CANCEL_PURCHASE= "time.till.cancel.purchase";
 
 
     //Texts

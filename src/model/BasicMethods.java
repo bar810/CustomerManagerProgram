@@ -96,4 +96,8 @@ public class BasicMethods {
         List<Customer> customers=getAllCustomersFromDBWithConditions("",customer.getFirstName(),customer.getLastName(),customer.getMailAddress(),customer.getPhoneNumber());
         return customers.size()==1;
     }
+
+    public static void addValueToCustomerSubscription(int customerId,String type,double amount){
+        //TODO
+    }
 }

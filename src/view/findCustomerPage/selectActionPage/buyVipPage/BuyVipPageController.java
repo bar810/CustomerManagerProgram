@@ -55,7 +55,11 @@ public class BuyVipPageController implements Initializable {
         String amount=amountToUse.getText();
         try {
             double amountAsDouble=Double.parseDouble(amount);
-            if(amountAsDouble>getCachedViewCustomer().getVipBalance()){
+            if(amountAsDouble<0){
+                alertToScreen(Alert.AlertType.INFORMATION,"שגיאה","נא להכניס סכום גדול מ 0");
+
+            }
+            else if(amountAsDouble>getCachedViewCustomer().getVipBalance()){
                 alertToScreen(Alert.AlertType.INFORMATION,"שגיאה","אין מספיק יתרה");
             }else{
                 if(alertToScreenWithResponse(Alert.AlertType.CONFIRMATION,"אישור פעולה","האם אתה בטוח שברצונך לאשר את הפעולה ?")==ButtonType.OK){
@@ -76,7 +80,7 @@ public class BuyVipPageController implements Initializable {
                 }
             }
         } catch (Exception ex) {
-            alertToScreen(Alert.AlertType.INFORMATION,"שגיאה","יתן להכניס מספרים בלבד");
+            alertToScreen(Alert.AlertType.INFORMATION,"שגיאה","ניתן להכניס מספרים בלבד");
         }
 
     }
@@ -93,7 +97,7 @@ public class BuyVipPageController implements Initializable {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        double balance=getCachedViewCustomer().getMealsBalance();
+        double balance=getCachedViewCustomer().getVipBalance();
         customer_name_label.setText(getCachedViewCustomer().getFirstName()+" "+getCachedViewCustomer().getLastName());
         customer_balance_label.setText("יתרת הלקוח: "+String.valueOf(balance)+" ארוחות");
         }
