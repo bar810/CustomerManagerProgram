@@ -36,6 +36,7 @@ public class GlobalProperties {
     private static SessionFactory _purchaseFactory;
     private static SessionFactory _SubscriptionFactory;
     private static Properties _properties;
+
     private static ViewCustomer cachedViewCustomer;
     private static List<Subscription> cachedSubscriptions;
     private static List<Purchase> cachedPurchases;

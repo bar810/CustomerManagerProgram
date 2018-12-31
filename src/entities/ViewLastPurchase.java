@@ -20,8 +20,6 @@ public class ViewLastPurchase {
 
     private String lastName;
 
-    private String phoneNumber;
-
     private String date;
 
     private String type;
@@ -30,20 +28,23 @@ public class ViewLastPurchase {
 
     private double newBalance;
 
+    private String comments;
+
+
     public ViewLastPurchase() {
 
     }
 
-    public ViewLastPurchase(int purchaseID, int customerID, String firstName, String lastName, String phoneNumber, String date, String type, double amount, double newBalance) {
+    public ViewLastPurchase(int purchaseID, int customerID, String firstName, String lastName, String date, String type, double amount, double newBalance,String comments) {
         this.purchaseID = purchaseID;
         this.customerID = customerID;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
         this.date = date;
         this.type = type;
         this.amount = amount;
         this.newBalance = newBalance;
+        this.comments=comments;
     }
 
     public int getPurchaseID() {
@@ -78,14 +79,6 @@ public class ViewLastPurchase {
         this.lastName = lastName;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public String getDate() {
         return date;
     }
@@ -116,5 +109,13 @@ public class ViewLastPurchase {
 
     public void setNewBalance(double newBalance) {
         this.newBalance = newBalance;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 }

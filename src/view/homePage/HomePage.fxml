@@ -29,7 +29,7 @@
          <children>
             <Button mnemonicParsing="false" onAction="#moveToNewCustomerPage" prefHeight="10000.0" prefWidth="10000.0" text="הכנס לקוח חדש" GridPane.columnIndex="1" />
             <Button maxHeight="10000.0" maxWidth="10000.0" mnemonicParsing="false" prefHeight="10000.0" prefWidth="10000.0" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false"  prefHeight="10000.0" prefWidth="10000.0" text="הצג רכישות אחרונות" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button mnemonicParsing="false" onAction="#moveToLastPurchsesPage" prefHeight="10000.0" prefWidth="10000.0" text="הצג רכישות אחרונות" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <Button mnemonicParsing="false" onAction="#moveToFindCustomerPage" prefHeight="10000.0" prefWidth="10000.0" text="חפש לקוח קיים" />
          </children>
       </GridPane>

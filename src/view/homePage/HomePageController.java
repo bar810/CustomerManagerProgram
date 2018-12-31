@@ -59,11 +59,27 @@ public class HomePageController implements Initializable {
             e.printStackTrace();
         }
     }
+    //
+    // @FXML
+    // private void moveToBuyMealPage(ActionEvent event){
+    //     try {
+    //         Parent homePageParent=FXMLLoader.load(getClass().getResource("../mealsPage/MealsPage.fxml"));
+    //         Scene homePageScene=new Scene(homePageParent);
+    //         Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    //         appStage.setScene(homePageScene);
+    //         appStage.show();
+    //     } catch (IOException e) {
+    //         e.printStackTrace();
+    //     }
+    // }
+
+
+
 
     @FXML
-    private void moveToBuyMealPage(ActionEvent event){
+    private void moveToLastPurchsesPage(ActionEvent event){
         try {
-            Parent homePageParent=FXMLLoader.load(getClass().getResource("../mealsPage/MealsPage.fxml"));
+            Parent homePageParent=FXMLLoader.load(getClass().getResource("../lastPurchsesPage/LastPurchsesPage.fxml"));
             Scene homePageScene=new Scene(homePageParent);
             Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
             appStage.setScene(homePageScene);
@@ -72,6 +88,7 @@ public class HomePageController implements Initializable {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     private void aboutClicked(ActionEvent event){
