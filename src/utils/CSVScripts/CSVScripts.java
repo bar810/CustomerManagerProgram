@@ -39,6 +39,10 @@ public class CSVScripts {
             oneLine.append(PURCHASE_AMOUNT_TABLE_NAME);
             oneLine.append(CSV_SEPERATOR);
             oneLine.append(PURCHASE_NEW_BALANCE_TABLE_NAME);
+            oneLine.append(CSV_SEPERATOR);
+            oneLine.append(PURCHASE_TYPE_TABLE_NAME);
+            oneLine.append(CSV_SEPERATOR);
+            oneLine.append(PURCHASE_COMMENTS_TABLE_NAME);
             bw.write(oneLine.toString());
             bw.newLine();
 
@@ -54,6 +58,10 @@ public class CSVScripts {
                 oneLine.append(purchase.getAmount()< 0? "" : purchase.getAmount());
                 oneLine.append(CSV_SEPERATOR);
                 oneLine.append(purchase.getNewBalance()<0? "" : purchase.getNewBalance());
+                oneLine.append(CSV_SEPERATOR);
+                oneLine.append(purchase.getType().trim().length() == 0? "" : purchase.getDate());
+                oneLine.append(CSV_SEPERATOR);
+                oneLine.append(purchase.getComments().trim().length() == 0? "" : purchase.getDate());
                 bw.write(oneLine.toString());
                 bw.newLine();
             }
@@ -84,7 +92,7 @@ public class CSVScripts {
                 int customerID= Integer.parseInt(con[1]);
                 double amount= Double.parseDouble(con[3]);
                 double newBalance= Double.parseDouble(con[4]);
-                purchases.add(new Purchase(customerID,amount,newBalance));
+                purchases.add(new Purchase(customerID,amount,newBalance,con[5],con[6]));
             } catch (Exception ex) {
                 _logger.debug("Purchase reading failed. probably cannot cast string to int");
             }

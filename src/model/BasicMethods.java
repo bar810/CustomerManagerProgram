@@ -85,7 +85,7 @@ public class BasicMethods {
                     //buy the product, update table
                     updateSubscriptionBalance(subscription.getSubscriptionID(),subscription.getBalance()-price);
                     //add this buying to purchase table
-                    insertPurchaseToDB(new Purchase(customer.getCustomerID(),price,subscription.getBalance()-price));
+                    insertPurchaseToDB(new Purchase(customer.getCustomerID(),price,subscription.getBalance()-price,type,""));
                 }else{
                     //do not enough balance
                 }

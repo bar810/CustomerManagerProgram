@@ -36,13 +36,22 @@ public class Purchase {
     @Column(name=PURCHASE_NEW_BALANCE_TABLE_NAME)
     private double newBalance;
 
+    @Column(name=PURCHASE_TYPE_TABLE_NAME)
+    private String type;
+
+    @Column(name=PURCHASE_COMMENTS_TABLE_NAME)
+    private String comments;
+
+
     public Purchase() {
     }
 
-    public Purchase(int customerID, double amount, double newBalance) {
+    public Purchase(int customerID, double amount, double newBalance,String type,String comments) {
         this.customerID = customerID;
         this.amount = amount;
         this.newBalance = newBalance;
+        this.type=type;
+        this.comments=comments;
         this.date=getCurrentTimeStamp();
     }
     public int getPurchaseID() {
@@ -77,6 +86,22 @@ public class Purchase {
     }
     public String toString(){
         return "Purchase: ID: "+purchaseID+", customer ID: "+customerID+", date: "+date+", amount: "+amount+", new Balance: "+newBalance;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 }
 

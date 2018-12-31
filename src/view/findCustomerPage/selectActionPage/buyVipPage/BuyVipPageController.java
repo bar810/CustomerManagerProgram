@@ -67,7 +67,7 @@ public class BuyVipPageController implements Initializable {
                         goToHomeScreen(event);
                     }
                     updateSubscriptionBalance(subscription.getSubscriptionID(),newBalance);
-                    insertPurchaseToDB(new Purchase(getCachedViewCustomer().getCustomerID(),amountAsDouble,newBalance));
+                    insertPurchaseToDB(new Purchase(getCachedViewCustomer().getCustomerID(),amountAsDouble,newBalance,VIP_SUBSCRIPTION,""));
                     alertToScreen(Alert.AlertType.INFORMATION,"רכישה","רכישה בוצעה בהצלחה");
                     goToHomeScreen(event);
                     //

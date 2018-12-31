@@ -128,7 +128,7 @@ public class BuyMealsPageController implements Initializable {
                 goToHomeScreen(event);
             }
             updateSubscriptionBalance(subscription.getSubscriptionID(),newBalance);
-            insertPurchaseToDB(new Purchase(getCachedViewCustomer().getCustomerID(),amount,newBalance));
+            insertPurchaseToDB(new Purchase(getCachedViewCustomer().getCustomerID(),amount,newBalance,MEALS_SUBSCRIPTION,""));
             alertToScreen(Alert.AlertType.INFORMATION,"רכישה","רכישה בוצעה בהצלחה");
             goToHomeScreen(event);
         }else{

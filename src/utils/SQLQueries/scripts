@@ -24,7 +24,10 @@ CREATE TABLE `רכישות` (
   `מספר_לקוח` nvarchar(45) DEFAULT NULL,
   `תאריך_רכישה` nvarchar (45) DEFAULT NULL,
   `סכום_רכישה` float(53) DEFAULT NULL,
-  `יתרת_לקוח` int(11) DEFAULT NULL,
+  `יתרת_לקוח` float(53) DEFAULT NULL,
+  `סוג_מנוי` nvarchar (45) DEFAULT NULL,
+  `הערות` nvarchar (45) DEFAULT NULL,
+
   PRIMARY KEY (`מספר_רכישה`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 

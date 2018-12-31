@@ -1,6 +1,7 @@
 package view.findCustomerPage.selectActionPage.loadSubscriptionPage;
 
 
+import entities.Purchase;
 import entities.Subscription;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,6 +22,7 @@ import static model.GeneralViewFunctions.alertToScreen;
 import static model.GeneralViewFunctions.alertToScreenWithResponse;
 import static model.GlobalProperties.*;
 import static utils.Constants.*;
+import static utils.SQLQueries.SQLQueriesAgainstPurchase.insertPurchaseToDB;
 import static utils.SQLQueries.SQLQueriesAgainstSubscription.insertSubscriptionToDB;
 import static utils.SQLQueries.SQLQueriesAgainstSubscription.updateSubscriptionBalance;
 
@@ -53,6 +55,7 @@ public class LoadSubscriptionPageController implements Initializable {
              //create new
              insertSubscriptionToDB(new Subscription(getCachedViewCustomer().getCustomerID(),Double.parseDouble(getProperty(DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT)),MEALS_SUBSCRIPTION));
          }
+         insertPurchaseToDB(new Purchase(getCachedViewCustomer().getCustomerID(),Double.parseDouble(getProperty(DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT)),Double.parseDouble(getProperty(DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT)),MEALS_SUBSCRIPTION,PURCHASE_SUBSCRIPTION_COMMENT));
          SucceededAlertAndGoToHomePage(event);
      }
      else{
@@ -73,7 +76,7 @@ public class LoadSubscriptionPageController implements Initializable {
                 //create new
                 insertSubscriptionToDB(new Subscription(getCachedViewCustomer().getCustomerID(),Double.parseDouble(getProperty(DEFAULT_VIP_SUBSCRIPTION_AMOUNT)),VIP_SUBSCRIPTION));
             }
-            //Alert
+            insertPurchaseToDB(new Purchase(getCachedViewCustomer().getCustomerID(),Double.parseDouble(getProperty(DEFAULT_VIP_SUBSCRIPTION_AMOUNT)),Double.parseDouble(getProperty(DEFAULT_VIP_SUBSCRIPTION_AMOUNT)),VIP_SUBSCRIPTION,PURCHASE_SUBSCRIPTION_COMMENT));
             SucceededAlertAndGoToHomePage(event);
         }
         else{

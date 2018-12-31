@@ -27,6 +27,7 @@ public final class Constants {
 
     //Texts
     public static final String MAIN_PROGRAM_TEXT = "שלי אוכל מוכן - ניהול מנויים";
+    public static final String PURCHASE_SUBSCRIPTION_COMMENT = "רכישת מנוי";
 
     //format
     public static final String CSV_SEPERATOR = ",";
@@ -57,6 +58,8 @@ public final class Constants {
     public static final String PURCHASE_ID_TABLE_NAME = "מספר_רכישה";
     public static final String PURCHASE_CUSTOMER_ID_TABLE_NAME = "מספר_לקוח";
     public static final String PURCHASE_DATE_TABLE_NAME = "תאריך_רכישה";
+    public static final String PURCHASE_TYPE_TABLE_NAME = "סוג_מנוי";
+    public static final String PURCHASE_COMMENTS_TABLE_NAME = "הערות";
     public static final String PURCHASE_AMOUNT_TABLE_NAME = "סכום_רכישה";
     public static final String PURCHASE_NEW_BALANCE_TABLE_NAME = "יתרת_לקוח";
 
