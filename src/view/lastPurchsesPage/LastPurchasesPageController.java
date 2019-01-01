@@ -26,12 +26,15 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import static model.BasicMethods.addValueToCustomerSubscription;
+import static model.BasicMethods.minBetweenDates;
 import static model.GeneralViewFunctions.alertToScreen;
 import static model.GeneralViewFunctions.alertToScreenWithResponse;
 import static model.GlobalProperties.getCachedCustomers;
 import static model.GlobalProperties.getCachedPurchases;
+import static model.GlobalProperties.getProperty;
 import static utils.Constants.*;
 import static utils.SQLQueries.SQLQueriesAgainstPurchase.removeOnePurchase;
+import static utils.Utils.getCurrentTimeStamp;
 
 public class LastPurchasesPageController implements Initializable {
 
@@ -137,7 +140,7 @@ public class LastPurchasesPageController implements Initializable {
     @FXML
     private void customerClicked(MouseEvent event){
         ViewLastPurchase purchaseClicked=table.getSelectionModel().getSelectedItem();
-        if(purchaseClicked.getFirstName().equals("בר")){
+        if(minBetweenDates(getCurrentTimeStamp(),purchaseClicked.getDate())<Integer.parseInt(getProperty(TIME_TILL_CANCEL_PURCHASE))) {
             cancelPurchase.setDisable(false);
         }else{
             cancelPurchase.setDisable(true);
@@ -145,18 +148,20 @@ public class LastPurchasesPageController implements Initializable {
     }
 
     @FXML
-    private void cancelPurchedButoon(ActionEvent event){
-        ViewLastPurchase purchaseClicked=table.getSelectionModel().getSelectedItem();
-        if(alertToScreenWithResponse(Alert.AlertType.CONFIRMATION,"אישור פעולה","האם אתה בטוח שברצונך לאשר את הפעולה ?")==ButtonType.OK) {
-            double amount=purchaseClicked.getAmount();
-            String type=purchaseClicked.getType();
-            //update the amount
-            addValueToCustomerSubscription(purchaseClicked.getCustomerID(),purchaseClicked.getType(),purchaseClicked.getAmount());
-            //remove purchase
-            removeOnePurchase(purchaseClicked.getPurchaseID());
-            System.out.println("ss");
-            alertToScreen(Alert.AlertType.INFORMATION,"ביטול רכישה","רכישה בוטלה בהצלחה !בוצע זיכוי ללקוח");
-            this.backButton(event);
+    private void cancelPurchedButoon(ActionEvent event) {
+        ViewLastPurchase purchaseClicked = table.getSelectionModel().getSelectedItem();
+        if (minBetweenDates(getCurrentTimeStamp(), purchaseClicked.getDate()) < Integer.parseInt(getProperty(TIME_TILL_CANCEL_PURCHASE))) {
+            if (alertToScreenWithResponse(Alert.AlertType.CONFIRMATION, "אישור פעולה", "האם אתה בטוח שברצונך לאשר את הפעולה ?") == ButtonType.OK) {
+                double amount = purchaseClicked.getAmount();
+                String type = purchaseClicked.getType();
+                //update the amount
+                addValueToCustomerSubscription(purchaseClicked.getCustomerID(), purchaseClicked.getType(), purchaseClicked.getAmount());
+                //remove purchase
+                removeOnePurchase(purchaseClicked.getPurchaseID());
+                System.out.println("ss");
+                alertToScreen(Alert.AlertType.INFORMATION, "ביטול רכישה", "רכישה בוטלה בהצלחה !בוצע זיכוי ללקוח");
+                this.backButton(event);
+            }
         }
     }
 

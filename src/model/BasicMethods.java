@@ -10,6 +10,8 @@ import entities.Customer;
 import entities.Purchase;
 import entities.Subscription;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import static model.GlobalProperties.*;
@@ -88,16 +90,45 @@ public class BasicMethods {
                     insertPurchaseToDB(new Purchase(customer.getCustomerID(),price,subscription.getBalance()-price,type,""));
                 }else{
                     //do not enough balance
+                    _logger.debug("Customer doesn't have enough balance . Customer: "+customer);
+
                 }
             }
         }
     }
     public static boolean thisCustomerExistingInDB(Customer customer){
         List<Customer> customers=getAllCustomersFromDBWithConditions("",customer.getFirstName(),customer.getLastName(),customer.getMailAddress(),customer.getPhoneNumber());
+        assert customers != null;
         return customers.size()==1;
     }
 
+    private static Subscription getSubscriptionByCustomerId(int customerId,String type){
+        for(Subscription s: getCachedSubscriptions()){
+            if(s.getCoustomerID()==customerId && s.getType().equals(type)){
+                return s;
+            }
+        }
+        return null;
+    }
+
     public static void addValueToCustomerSubscription(int customerId,String type,double amount){
-        //TODO
+        Subscription subscription=getSubscriptionByCustomerId(customerId,type);
+        assert subscription != null;
+        updateSubscriptionBalance(subscription.getSubscriptionID(),subscription.getBalance()+amount);
+
+    }
+
+    public static int minBetweenDates(String date1,String date2){
+        Date d1;
+        Date d2;
+        long difference;
+        try {
+            SimpleDateFormat myFormat = new SimpleDateFormat(DATE_FORMAT);
+            d1=myFormat.parse(date1);
+            d2=myFormat.parse(date2);
+            return (int) (d1.getTime() - d2.getTime())/6000;
+        } catch (Exception ex) {
+            return 10000;
+        }
     }
 }
