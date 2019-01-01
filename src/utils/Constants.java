@@ -18,6 +18,8 @@ public final class Constants {
     public static final String MAIL_PASSWORD= "mail.password";
     public static final String TIME_TILL_CANCEL_PURCHASE= "time.till.cancel.purchase";
     public static final String MANAGER_MAIL_ADDRESS= "manager.mail.address";
+    public static final String PROGRAM_USER= "program.user.name";
+    public static final String PROGRAM_PASSWORD= "program.password";
 
     //Texts
     public static final String MAIN_PROGRAM_TEXT = "שלי אוכל מוכן - ניהול מנויים";

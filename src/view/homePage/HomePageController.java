@@ -58,6 +58,18 @@ public class HomePageController implements Initializable {
         }
     }
     @FXML
+    private void goToAuth(ActionEvent event){
+        try {
+            Parent homePageParent=FXMLLoader.load(getClass().getResource("../loginPage/LoginPage.fxml"));
+            Scene homePageScene=new Scene(homePageParent);
+            Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            appStage.setScene(homePageScene);
+            appStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
     private void moveToLastPurchsesPage(ActionEvent event){
         try {
             Parent homePageParent=FXMLLoader.load(getClass().getResource("../lastPurchsesPage/LastPurchasesPage.fxml"));

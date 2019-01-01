@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.loginPage.LoginPageController">
+   <center>
+      <VBox alignment="CENTER" prefHeight="295.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" onAction="#goBack" text="חזור לדף הבית" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="user" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="שם משתמש" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="pass" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="סיסמא" />
+               </children>
+            </HBox>
+            <Button mnemonicParsing="false" onAction="#tryToAuth" text="היכנס" />
+            <Label fx:id="error" style="-fx-background-color: red;" text="Label" />
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

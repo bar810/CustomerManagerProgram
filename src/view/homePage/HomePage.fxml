@@ -28,7 +28,7 @@
         </rowConstraints>
          <children>
             <Button mnemonicParsing="false" onAction="#moveToNewCustomerPage" prefHeight="10000.0" prefWidth="10000.0" text="הכנס לקוח חדש" GridPane.columnIndex="1" />
-            <Button maxHeight="10000.0" maxWidth="10000.0" mnemonicParsing="false" prefHeight="10000.0" prefWidth="10000.0" GridPane.rowIndex="1" />
+            <Button maxHeight="10000.0" maxWidth="10000.0" mnemonicParsing="false" onAction="#goToAuth" prefHeight="10000.0" prefWidth="10000.0" text="הגדרות מנהל" GridPane.rowIndex="1" />
             <Button mnemonicParsing="false" onAction="#moveToLastPurchsesPage" prefHeight="10000.0" prefWidth="10000.0" text="הצג רכישות אחרונות" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <Button mnemonicParsing="false" onAction="#moveToFindCustomerPage" prefHeight="10000.0" prefWidth="10000.0" text="חפש לקוח קיים" />
          </children>
@@ -37,14 +37,12 @@
         <menus>
           <Menu mnemonicParsing="false" text="קובץ">
             <items>
-               <MenuItem mnemonicParsing="false" text="ניהול" />
-                <MenuItem mnemonicParsing="false" text="הגדרות" />
                 <MenuItem mnemonicParsing="false" onAction="#exitClicked" text="יציאה" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="עזרה">
                 <items>
-                    <MenuItem onAction="#aboutClicked" mnemonicParsing="false" text="אודות" />
+                    <MenuItem mnemonicParsing="false" onAction="#aboutClicked" text="אודות" />
                 </items>
             </Menu>
         </menus>
