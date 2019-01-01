@@ -91,7 +91,6 @@ public class FindCustomerPageController implements Initializable {
         ObservableList<ViewCustomer> data=FXCollections.observableArrayList(newCustomerList);
         table.setItems(data);
     }
-
     @FXML
     private void backButton(ActionEvent event){
         try {
@@ -104,13 +103,11 @@ public class FindCustomerPageController implements Initializable {
             e.printStackTrace();
         }
     }
-
     @FXML
     private void showAllCustomersClicked(){
         ObservableList<ViewCustomer> data=FXCollections.observableArrayList(viewCustomers);
         table.setItems(data);
     }
-
     @FXML
     private void customerClicked(MouseEvent event){
         setCachedViewCustomer(table.getSelectionModel().getSelectedItem());
@@ -131,7 +128,6 @@ public class FindCustomerPageController implements Initializable {
             appStage.show();
         }
     }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         List<Customer> customersToShow=getCachedCustomers();

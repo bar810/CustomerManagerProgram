@@ -19,7 +19,3 @@
         <property name="current_session_context_class">thread</property>
     </session-factory>
 </hibernate-configuration>
-
-<others-properties>
-    <property name="prop1">prop1</property>
-</others-properties>

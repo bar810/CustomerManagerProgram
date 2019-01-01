@@ -41,7 +41,6 @@ public class LoadSubscriptionPageController implements Initializable {
         }
 
     }
-
     @FXML
     private void loadMeals(ActionEvent event){
      if(alertToScreenWithResponse(Alert.AlertType.CONFIRMATION,"אישור פעולה","האם אתה בטוח שברצונך לאשר את הפעולה ?")==ButtonType.OK){
@@ -62,7 +61,6 @@ public class LoadSubscriptionPageController implements Initializable {
          this.backButton(event);
      }
     }
-
     @FXML
     private void loadVIP(ActionEvent event){
         if(alertToScreenWithResponse(Alert.AlertType.CONFIRMATION,"אישור פעולה","האם אתה בטוח שברצונך לאשר את הפעולה ?")==ButtonType.OK){
@@ -83,7 +81,6 @@ public class LoadSubscriptionPageController implements Initializable {
             this.backButton(event);
         }
     }
-
     private void SucceededAlertAndGoToHomePage(ActionEvent event){
         alertToScreen(Alert.AlertType.INFORMATION,"אימות נתונים","מנוי נרכש בהצלחה !");
         try {
@@ -96,7 +93,6 @@ public class LoadSubscriptionPageController implements Initializable {
             e.printStackTrace();
         }
     }
-
     private Subscription isThisCustomerHaveSubscriptionAlready(int customerID,String type){
         for (Subscription s: getCachedSubscriptions()){
             if(s.getCoustomerID()==customerID && s.getType().equals(type)){
@@ -105,8 +101,6 @@ public class LoadSubscriptionPageController implements Initializable {
         }
         return null;
     }
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) { }
 }

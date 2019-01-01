@@ -33,7 +33,6 @@ public class HomePageController implements Initializable {
         setCachedPurchases(getAllPurchasesFromDB());
         setCachedCustomers(getAllCustomersFromDB());
     }
-
     @FXML
     private void moveToNewCustomerPage(ActionEvent event){
         try {
@@ -46,7 +45,6 @@ public class HomePageController implements Initializable {
             e.printStackTrace();
         }
     }
-
     @FXML
     private void moveToFindCustomerPage(ActionEvent event){
         try {
@@ -59,27 +57,10 @@ public class HomePageController implements Initializable {
             e.printStackTrace();
         }
     }
-    //
-    // @FXML
-    // private void moveToBuyMealPage(ActionEvent event){
-    //     try {
-    //         Parent homePageParent=FXMLLoader.load(getClass().getResource("../mealsPage/MealsPage.fxml"));
-    //         Scene homePageScene=new Scene(homePageParent);
-    //         Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-    //         appStage.setScene(homePageScene);
-    //         appStage.show();
-    //     } catch (IOException e) {
-    //         e.printStackTrace();
-    //     }
-    // }
-
-
-
-
     @FXML
     private void moveToLastPurchsesPage(ActionEvent event){
         try {
-            Parent homePageParent=FXMLLoader.load(getClass().getResource("../lastPurchsesPage/LastPurchsesPage.fxml"));
+            Parent homePageParent=FXMLLoader.load(getClass().getResource("../lastPurchsesPage/LastPurchasesPage.fxml"));
             Scene homePageScene=new Scene(homePageParent);
             Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
             appStage.setScene(homePageScene);
@@ -88,8 +69,6 @@ public class HomePageController implements Initializable {
             e.printStackTrace();
         }
     }
-
-
     @FXML
     private void aboutClicked(ActionEvent event){
         alertToScreen(Alert.AlertType.INFORMATION,"אודות","התוכנה נכתבה על ידי בר בראונשטיין 2018. גרסא - 1.0 ");

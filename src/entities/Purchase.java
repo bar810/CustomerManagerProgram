@@ -1,9 +1,3 @@
-/**
- * Copyright 2013 Mentor Graphics Corporation All Rights Reserved
- * THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION WHICH IS THE PROPERTY OF MENTOR GRAPHICS
- * CORPORATION OR ITS LICENSORS AND IS SUBJECT TO LICENSE TERMS.
- */
-
 package entities;
 
 import javax.persistence.*;
@@ -23,29 +17,21 @@ public class Purchase {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name=PURCHASE_ID_TABLE_NAME)
     private int purchaseID;
-
     @Column(name=PURCHASE_CUSTOMER_ID_TABLE_NAME)
     private int customerID;
-
     @Column(name=PURCHASE_DATE_TABLE_NAME)
     private String date;
-
     @Column(name=PURCHASE_AMOUNT_TABLE_NAME)
     private double amount;
-
     @Column(name=PURCHASE_NEW_BALANCE_TABLE_NAME)
     private double newBalance;
-
     @Column(name=PURCHASE_TYPE_TABLE_NAME)
     private String type;
-
     @Column(name=PURCHASE_COMMENTS_TABLE_NAME)
     private String comments;
 
-
     public Purchase() {
     }
-
     public Purchase(int customerID, double amount, double newBalance,String type,String comments) {
         this.customerID = customerID;
         this.amount = amount;
@@ -87,19 +73,15 @@ public class Purchase {
     public String toString(){
         return "Purchase: ID: "+purchaseID+", customer ID: "+customerID+", date: "+date+", amount: "+amount+", new Balance: "+newBalance;
     }
-
     public String getType() {
         return type;
     }
-
     public void setType(String type) {
         this.type = type;
     }
-
     public String getComments() {
         return comments;
     }
-
     public void setComments(String comments) {
         this.comments = comments;
     }

@@ -1,9 +1,3 @@
-/**
- * Copyright 2013 Mentor Graphics Corporation All Rights Reserved
- * THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION WHICH IS THE PROPERTY OF MENTOR GRAPHICS
- * CORPORATION OR ITS LICENSORS AND IS SUBJECT TO LICENSE TERMS.
- */
-
 package utils.SQLQueries;
 
 import entities.Subscription;
@@ -54,7 +48,6 @@ public class SQLQueriesAgainstSubscription {
         }
         return counter;
     }
-
     public static Subscription getSubscriptionByID(int id){
         _logger.debug("getting Subscription from DB by ID: "+id);
         Session subscriptionSession;
@@ -76,7 +69,6 @@ public class SQLQueriesAgainstSubscription {
         }
         return subscription;
     }
-
     public static List<Subscription> getAllSubscriptionsFromDB(){
         _logger.debug("Getting all Subscriptions from DB");
         List<Subscription> Subscriptions=new ArrayList<>();
@@ -93,7 +85,6 @@ public class SQLQueriesAgainstSubscription {
         _logger.debug("Getting all Subscriptions query succeeded. Subscriptions founds: "+Subscriptions.size());
         return Subscriptions;
     }
-
     public static List<Subscription> getAllSubscriptionFromDBWithConditions(String ID, String customerID, String date, String balance, String type){
         boolean putFirstPrefix=false;
         String query="from Subscription";
@@ -191,7 +182,6 @@ public class SQLQueriesAgainstSubscription {
             _logger.debug("subscription updated successfully. subscription: "+subscription.toString());
         }
     }
-
     public static void removeOneSubscription(int subscriptionID){
         _logger.debug("removing Subscription. ID: "+subscriptionID);
         Session subscriptionSession;

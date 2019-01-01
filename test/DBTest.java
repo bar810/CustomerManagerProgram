@@ -1,9 +1,3 @@
-/**
- * Copyright 2013 Mentor Graphics Corporation All Rights Reserved
- * THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION WHICH IS THE PROPERTY OF MENTOR GRAPHICS
- * CORPORATION OR ITS LICENSORS AND IS SUBJECT TO LICENSE TERMS.
- */
-
 import entities.Customer;
 import entities.Purchase;
 import entities.Subscription;
@@ -31,12 +25,10 @@ import static utils.SQLQueries.SQLQueriesAgainstSubscription.insertSubscriptionT
  * @since 12/30/2018
  */
 public class DBTest {
-
     @Before
     public void init() {
         GlobalProperties.init();
     }
-
     @Test
     public void CleanDB() {
         removeAllDataFromAllDBTables();
@@ -47,7 +39,6 @@ public class DBTest {
         assertEquals(purchases.size(), 0);
         assertEquals(subscriptions.size(), 0);
     }
-
     @Test
     public void addOneCustomerToDB(){
         String name="n";
@@ -63,10 +54,6 @@ public class DBTest {
         assertEquals(list.get(0).getMailAddress(), mail);
         assertEquals(list.get(0).getPhoneNumber(), phone);
     }
-
-
-
-
     @Test
     public void CSVAndDB() {
         this.CleanDB();
@@ -156,9 +143,7 @@ public class DBTest {
         this.CleanDB();
 
     }
-
-
-        @After
+    @After
     public void finish() {
         GlobalProperties.closeConnections();
     }

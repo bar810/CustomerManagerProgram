@@ -1,9 +1,3 @@
-/**
- * Copyright 2013 Mentor Graphics Corporation All Rights Reserved
- * THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION WHICH IS THE PROPERTY OF MENTOR GRAPHICS
- * CORPORATION OR ITS LICENSORS AND IS SUBJECT TO LICENSE TERMS.
- */
-
 package entities;
 
 import javax.persistence.*;
@@ -22,19 +16,14 @@ public class Customer {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name=CUSTOMER_ID_TABLE_NAME)
     private int customerID;
-
     @Column(name=CUSTOMER_FIRST_NAME_TABLE_NAME)
     private String firstName;
-
     @Column(name=CUSTOMER_LAST_NAME_TABLE_NAME)
     private String lastName;
-
     @Column(name=CUSTOMER_MAIL_TABLE_NAME)
     private String mailAddress;
-
     @Column(name=CUSTOMER_PHONE_TABLE_NAME)
     private String phoneNumber;
-
 
     public Customer() {
     }

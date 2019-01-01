@@ -1,9 +1,3 @@
-/**
- * Copyright 2013 Mentor Graphics Corporation All Rights Reserved
- * THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION WHICH IS THE PROPERTY OF MENTOR GRAPHICS
- * CORPORATION OR ITS LICENSORS AND IS SUBJECT TO LICENSE TERMS.
- */
-
 package utils;
 
 /**
@@ -11,7 +5,6 @@ package utils;
  * @since 12/23/2018
  */
 public final class Constants {
-
 
     //properties
     public static final String DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT = "default_subscription_meals_amount";
@@ -24,7 +17,7 @@ public final class Constants {
     public static final String MAIL_USER_NAME = "mail.user.name";
     public static final String MAIL_PASSWORD= "mail.password";
     public static final String TIME_TILL_CANCEL_PURCHASE= "time.till.cancel.purchase";
-
+    public static final String MANAGER_MAIL_ADDRESS= "manager.mail.address";
 
     //Texts
     public static final String MAIN_PROGRAM_TEXT = "שלי אוכל מוכן - ניהול מנויים";
@@ -51,7 +44,6 @@ public final class Constants {
     public static final String YESTERDAY_OPTON = "אתמול";
     public static final String THIS_WEEK_OPTION = "השבוע";
     public static final String THIS_MONTH_OPTION = "החודש";
-
 
     //Customer table names
     public static final String CUSTOMER_TABLE_NAME = "לקוחות";

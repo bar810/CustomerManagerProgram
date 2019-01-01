@@ -49,7 +49,6 @@ public class BuyVipPageController implements Initializable {
         }
 
     }
-
     @FXML
     private void buyClicked(ActionEvent event){
         String amount=amountToUse.getText();

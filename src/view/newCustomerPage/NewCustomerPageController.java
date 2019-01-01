@@ -50,7 +50,6 @@ public class NewCustomerPageController implements Initializable {
             e.printStackTrace();
         }
     }
-
     @FXML
     private void submit(ActionEvent event){
         boolean everythingIsGood=true;
@@ -104,7 +103,6 @@ public class NewCustomerPageController implements Initializable {
             }
         }
     }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

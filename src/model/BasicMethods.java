@@ -1,9 +1,3 @@
-/**
- * Copyright 2013 Mentor Graphics Corporation All Rights Reserved
- * THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION WHICH IS THE PROPERTY OF MENTOR GRAPHICS
- * CORPORATION OR ITS LICENSORS AND IS SUBJECT TO LICENSE TERMS.
- */
-
 package model;
 
 import entities.Customer;
@@ -36,7 +30,6 @@ public class BasicMethods {
             _logger.warning("Customer is already exist. "+customer.toString());
         }
     }
-
     public static void deleteCustomer(int customerId){
         //delete his subscriptions before.
         for(Subscription s : getCachedSubscriptions()){
@@ -97,12 +90,11 @@ public class BasicMethods {
             }
         }
     }
-    public static boolean thisCustomerExistingInDB(Customer customer){
+    private static boolean thisCustomerExistingInDB(Customer customer){
         List<Customer> customers=getAllCustomersFromDBWithConditions("",customer.getFirstName(),customer.getLastName(),customer.getMailAddress(),customer.getPhoneNumber());
         assert customers != null;
         return customers.size()==1;
     }
-
     private static Subscription getSubscriptionByCustomerId(int customerId,String type){
         for(Subscription s: getCachedSubscriptions()){
             if(s.getCoustomerID()==customerId && s.getType().equals(type)){
@@ -111,14 +103,12 @@ public class BasicMethods {
         }
         return null;
     }
-
     public static void addValueToCustomerSubscription(int customerId,String type,double amount){
         Subscription subscription=getSubscriptionByCustomerId(customerId,type);
         assert subscription != null;
         updateSubscriptionBalance(subscription.getSubscriptionID(),subscription.getBalance()+amount);
 
     }
-
     public static int minBetweenDates(String date1,String date2){
         Date d1;
         Date d2;
@@ -132,8 +122,7 @@ public class BasicMethods {
             return 10000;
         }
     }
-
-    public static Date StringToDte(String str){
+    public static Date StringToDate(String str){
         try {
             SimpleDateFormat myFormat = new SimpleDateFormat(DATE_FORMAT);
             return myFormat.parse(str);

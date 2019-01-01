@@ -1,9 +1,3 @@
-/**
- * Copyright 2013 Mentor Graphics Corporation All Rights Reserved
- * THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION WHICH IS THE PROPERTY OF MENTOR GRAPHICS
- * CORPORATION OR ITS LICENSORS AND IS SUBJECT TO LICENSE TERMS.
- */
-
 package utils;
 
 import org.hibernate.Session;
@@ -19,7 +13,6 @@ import static model.GlobalProperties.*;
  * @since 12/23/2018
  */
 public class Utils {
-
     public static String getCurrentTimeStamp() {
         try {
             SimpleDateFormat sdfDate = new SimpleDateFormat(DATE_FORMAT);//dd/MM/yyyy
@@ -58,7 +51,6 @@ public class Utils {
             return null;
         }
     }
-
     public static boolean isValidMail(String mail){
         if(mail.isEmpty()){
             return true;
@@ -82,5 +74,4 @@ public class Utils {
         }
 
     }
-
 }

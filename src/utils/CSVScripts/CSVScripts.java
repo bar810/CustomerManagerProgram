@@ -1,9 +1,3 @@
-/**
- * Copyright 2013 Mentor Graphics Corporation All Rights Reserved
- * THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION WHICH IS THE PROPERTY OF MENTOR GRAPHICS
- * CORPORATION OR ITS LICENSORS AND IS SUBJECT TO LICENSE TERMS.
- */
-
 package utils.CSVScripts;
 
 import entities.Customer;
@@ -22,7 +16,6 @@ import static model.GlobalProperties._logger;
  * @since 12/25/2018
  */
 public class CSVScripts {
-
     public static void exportPurchasesToCsv(List<Purchase> list,String location) {
         try
         {

@@ -1,24 +1,22 @@
-package utils; /**
- * Copyright 2013 Mentor Graphics Corporation All Rights Reserved
- * THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION WHICH IS THE PROPERTY OF MENTOR GRAPHICS
- * CORPORATION OR ITS LICENSORS AND IS SUBJECT TO LICENSE TERMS.
- */
-import javax.mail.Message;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
+package utils;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Properties;
 
-import static utils.Constants.MAIL_PASSWORD;
-import static utils.Constants.MAIL_USER_NAME;
 import static model.GlobalProperties._logger;
 import static model.GlobalProperties.getProperty;
+import static utils.Constants.MAIL_PASSWORD;
+import static utils.Constants.MAIL_USER_NAME;
 
 /**
  * @author bbrownsh
@@ -27,18 +25,17 @@ import static model.GlobalProperties.getProperty;
 public class MailSender {
     private static final String senderEmail = getProperty(MAIL_USER_NAME);
     private static final String senderPassword = getProperty(MAIL_PASSWORD);
-
     /*
     can be sent as HTML. for more details can take a loo here:
     https://www.logicbig.com/tutorials/java-ee-tutorial/java-mail/java-mail-quick-example.html
      */
-    public static void sendAsHtml(String to, String title, String html) {
+    public static void sendAsHtml(String to, String title, String html,String attachmentPath) {
         _logger.debug("Sending email to " + to);
         try {
             Session session = createSession();
             //create message using session
             MimeMessage message = new MimeMessage(session);
-            prepareEmailMessage(message, to, title, html);
+            prepareEmailMessage(message, to, title, html,attachmentPath);
             //sending message
             Transport.send(message);
 
@@ -48,15 +45,23 @@ public class MailSender {
         _logger.debug("mail sent successfully");
 
     }
-
-    private static void prepareEmailMessage(MimeMessage message, String to, String title, String html)
-            throws javax.mail.MessagingException {
+    private static void prepareEmailMessage(MimeMessage message, String to, String title, String html,String attachmentPath) throws javax.mail.MessagingException {
         message.setContent(html, "text/html; charset=utf-8");
         message.setFrom(new InternetAddress(senderEmail));
         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
         message.setSubject(title);
+        if(attachmentPath!=null &&!attachmentPath.isEmpty()){
+            // Create a multipar message
+            Multipart multipart = new MimeMultipart();
+            // Part two is attachment
+            BodyPart  messageBodyPart = new MimeBodyPart();
+            DataSource source = new FileDataSource(attachmentPath);
+            messageBodyPart.setDataHandler(new DataHandler(source));
+            messageBodyPart.setFileName(attachmentPath);
+            multipart.addBodyPart(messageBodyPart);
+            message.setContent(multipart);
+        }
     }
-
     private static Session createSession() {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");//Outgoing server requires authentication
@@ -71,7 +76,6 @@ public class MailSender {
         });
         return session;
     }
-
     public static String getHTML(String urlToRead) throws Exception {
         StringBuilder result = new StringBuilder();
         URL url = new URL(urlToRead);

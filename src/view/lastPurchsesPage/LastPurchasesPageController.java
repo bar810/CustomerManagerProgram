@@ -44,10 +44,6 @@ public class LastPurchasesPageController implements Initializable {
     private ComboBox comboBoxDate;
     @FXML
     private ComboBox comboBoxType;
-    // @FXML
-    // private RadioButton mealsType;
-    // @FXML
-    // private RadioButton vipType;
     @FXML
     private RadioButton showSubscriptions;
     @FXML
@@ -116,13 +112,12 @@ public class LastPurchasesPageController implements Initializable {
         ObservableList<ViewLastPurchase> data=FXCollections.observableArrayList(newCustomerList);
         table.setItems(data);
     }
-
-private boolean handleDateCondition(String condition,String date) {
+    private boolean handleDateCondition(String condition,String date) {
     if (condition==null ||condition.isEmpty()) {
         return false;
     }
-    Date nowTime = StringToDte(getCurrentTimeStamp());
-    Date purchaseDate = StringToDte(date);
+    Date nowTime = StringToDate(getCurrentTimeStamp());
+    Date purchaseDate = StringToDate(date);
     Calendar c = Calendar.getInstance();
     c.setFirstDayOfWeek(Calendar.SUNDAY);
     boolean sameDay = nowTime.getDay() == purchaseDate.getDay();
@@ -142,9 +137,6 @@ private boolean handleDateCondition(String condition,String date) {
     }
     return false;
 }
-
-
-
     @FXML
     private void backButton(ActionEvent event){
         try {
@@ -157,13 +149,11 @@ private boolean handleDateCondition(String condition,String date) {
             e.printStackTrace();
         }
     }
-
     @FXML
     private void showAllCustomersClicked(){
         ObservableList<ViewLastPurchase> data=FXCollections.observableArrayList(viewLastPurchases);
         table.setItems(data);
     }
-
     @FXML
     private void customerClicked(MouseEvent event){
         ViewLastPurchase purchaseClicked=table.getSelectionModel().getSelectedItem();
@@ -173,7 +163,6 @@ private boolean handleDateCondition(String condition,String date) {
             cancelPurchase.setDisable(true);
         }
     }
-
     @FXML
     private void cancelPurchedButoon(ActionEvent event) {
         ViewLastPurchase purchaseClicked = table.getSelectionModel().getSelectedItem();
@@ -191,7 +180,6 @@ private boolean handleDateCondition(String condition,String date) {
             }
         }
     }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         List<Customer> customersToShow=getCachedCustomers();
@@ -206,7 +194,9 @@ private boolean handleDateCondition(String condition,String date) {
                     break;
                 }
             }
-            viewLastPurchases.add(new ViewLastPurchase(p.getPurchaseID(),p.getCustomerID(),customer.getFirstName(), customer.getLastName(),p.getDate(),p.getType(),p.getAmount(),p.getNewBalance(),p.getComments()));
+            if(customer!=null){
+                viewLastPurchases.add(new ViewLastPurchase(p.getPurchaseID(),p.getCustomerID(),customer.getFirstName(), customer.getLastName(),p.getDate(),p.getType(),p.getAmount(),p.getNewBalance(),p.getComments()));
+            }
         }
 
         ObservableList<ViewLastPurchase> data=FXCollections.observableArrayList(viewLastPurchases);

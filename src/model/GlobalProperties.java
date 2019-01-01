@@ -1,9 +1,3 @@
-/**
- * Copyright 2013 Mentor Graphics Corporation All Rights Reserved
- * THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION WHICH IS THE PROPERTY OF MENTOR GRAPHICS
- * CORPORATION OR ITS LICENSORS AND IS SUBJECT TO LICENSE TERMS.
- */
-
 package model;
 
 import entities.Customer;
@@ -36,7 +30,6 @@ public class GlobalProperties {
     private static SessionFactory _purchaseFactory;
     private static SessionFactory _SubscriptionFactory;
     private static Properties _properties;
-
     private static ViewCustomer cachedViewCustomer;
     private static List<Subscription> cachedSubscriptions;
     private static List<Purchase> cachedPurchases;
@@ -127,63 +120,48 @@ public class GlobalProperties {
         _logger.debug("Connection closed successfully");
         _logger.CleanAndSaveLogIfNeeded(true);
     }
-
     public static SessionFactory get_customerFactory() {
         return _customerFactory;
     }
-
     public static void set_customerFactory(SessionFactory _customerFactory) {
         GlobalProperties._customerFactory = _customerFactory;
     }
-
     public static SessionFactory get_purchaseFactory() {
         return _purchaseFactory;
     }
-
     public static void set_purchaseFactory(SessionFactory _purchaseFactory) {
         GlobalProperties._purchaseFactory = _purchaseFactory;
     }
-
     public static SessionFactory get_SubscriptionFactory() {
         return _SubscriptionFactory;
     }
-
     public static void set_SubscriptionFactory(SessionFactory _SubscriptionFactory) {
         GlobalProperties._SubscriptionFactory = _SubscriptionFactory;
     }
-
     public static ViewCustomer getCachedViewCustomer() {
         return cachedViewCustomer;
     }
-
     public static void setCachedViewCustomer(ViewCustomer cvc) {
         cachedViewCustomer = cvc;
     }
-
     public static List<Subscription> getCachedSubscriptions() {
         return cachedSubscriptions;
     }
-
     public static void setCachedSubscriptions(List<Subscription> cs) {
         cachedSubscriptions = cs;
     }
-
     public static List<Purchase> getCachedPurchases() {
         return cachedPurchases;
     }
-
     public static void setCachedPurchases(List<Purchase> cp) {
         cachedPurchases = cp;
     }
-
     public static List<Customer> getCachedCustomers() {
         return cachedCustomers;
     }
-
     public static void setCachedCustomers(List<Customer> cs) {
         cachedCustomers = cs;
     }
-
     public static Subscription getSubscriptionByCustomerID(int id, String type){
         for(Subscription s: cachedSubscriptions){
             if(s.getCoustomerID()==id && s.getType().equals(type)){
@@ -193,12 +171,4 @@ public class GlobalProperties {
         _logger.error("Cannot find Subscription for customer. Customer id: "+id);
         return null;
     }
-
-
-
-
-
-
-
-
 }

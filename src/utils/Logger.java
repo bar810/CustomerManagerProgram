@@ -1,9 +1,3 @@
-/**
- * Copyright 2013 Mentor Graphics Corporation All Rights Reserved
- * THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION WHICH IS THE PROPERTY OF MENTOR GRAPHICS
- * CORPORATION OR ITS LICENSORS AND IS SUBJECT TO LICENSE TERMS.
- */
-
 package utils;
 
 import java.io.FileOutputStream;
@@ -26,7 +20,6 @@ public class Logger {
     public enum logType {
         DEBUG, WARNNING, ERROR;
     }
-
     public class Log {
         private String date;
         private logType type;
@@ -47,34 +40,28 @@ public class Logger {
         }
 
     }
-
     List<Log> logs;
-
     public Logger() {
         this.logs = new ArrayList<Log>();
     }
-
     public void debug(String message){
         Log log=new Log(getCurrentTimeStamp(),logType.DEBUG,message);
         log.printToConsole();
         logs.add(log);
         CleanAndSaveLogIfNeeded(false);
     }
-
     public void warning(String message){
         Log log=new Log(getCurrentTimeStamp(),logType.WARNNING,message);
         log.printToConsole();
         logs.add(log);
         CleanAndSaveLogIfNeeded(false);
     }
-
     public void error(String message){
         Log log=new Log(getCurrentTimeStamp(),logType.ERROR,message);
         log.printToConsole();
         logs.add(log);
         CleanAndSaveLogIfNeeded(false);
     }
-
     public void CleanAndSaveLogIfNeeded(boolean force){
         if((logs.size()>Integer.parseInt(getProperty(LOG_MAX_SIZE)) || force)&& SAVE_LOG.toLowerCase().equals("true")){
             //save log
@@ -93,8 +80,6 @@ public class Logger {
             }
         }
     }
-
-
 }
 
 

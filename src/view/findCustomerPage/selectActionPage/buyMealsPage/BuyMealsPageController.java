@@ -65,7 +65,6 @@ public class BuyMealsPageController implements Initializable {
         appStage.setScene(new Scene(homePageParent));
         appStage.show();
     }
-
     @FXML
     private void MealsChosen(ActionEvent event){
         String source1 = event.getSource().toString();
@@ -101,7 +100,6 @@ public class BuyMealsPageController implements Initializable {
                 break;
         }
     }
-
     private void goToHomeScreen(ActionEvent event){
         try {
             Parent homePageParent=FXMLLoader.load(getClass().getResource("../../../homePage/HomePage.fxml"));
@@ -113,7 +111,6 @@ public class BuyMealsPageController implements Initializable {
             e.printStackTrace();
         }
     }
-
     public void tryToMakePurchase(ActionEvent event,double amount) {
         //check if there is enough balance
         if (getCachedViewCustomer().getMealsBalance() < amount) {
@@ -135,7 +132,6 @@ public class BuyMealsPageController implements Initializable {
             this.backButton(event);
         }
     }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         double balance=getCachedViewCustomer().getMealsBalance();
