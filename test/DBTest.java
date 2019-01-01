@@ -153,6 +153,8 @@ public class DBTest {
         file1.delete();
         file2.delete();
         file3.delete();
+        this.CleanDB();
+
     }
 
 

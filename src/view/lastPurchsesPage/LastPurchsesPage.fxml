@@ -59,9 +59,8 @@
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="תאריך" />
                           <ComboBox fx:id="comboBoxDate" prefWidth="150.0" />
                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="סוג מנוי" />
-                          <RadioButton fx:id="mealsType" mnemonicParsing="false" text="ארוחות" />
-                          <RadioButton fx:id="vipType" mnemonicParsing="false" text="VIP" />
-                  <RadioButton fx:id="subscriptionsOnly" mnemonicParsing="false" text="הצג רכישות מנויים בלבד" />
+                  <ComboBox fx:id="comboBoxType" prefWidth="150.0" />
+                  <RadioButton fx:id="showSubscriptions" mnemonicParsing="false" text="הצג רכישות מנויים בלבד" />
                         <Button fx:id="fc" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#findCustomer" prefHeight="26.0" prefWidth="82.0" text="סנן לקוחות">
                             <VBox.margin>
                                 <Insets bottom="10.0" left="10.0" right="15.0" top="15.0" />

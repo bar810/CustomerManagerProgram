@@ -20,18 +20,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
-import static model.BasicMethods.addValueToCustomerSubscription;
-import static model.BasicMethods.minBetweenDates;
+import static model.BasicMethods.*;
 import static model.GeneralViewFunctions.alertToScreen;
 import static model.GeneralViewFunctions.alertToScreenWithResponse;
-import static model.GlobalProperties.getCachedCustomers;
-import static model.GlobalProperties.getCachedPurchases;
-import static model.GlobalProperties.getProperty;
+import static model.GlobalProperties.*;
 import static utils.Constants.*;
 import static utils.SQLQueries.SQLQueriesAgainstPurchase.removeOnePurchase;
 import static utils.Utils.getCurrentTimeStamp;
@@ -47,13 +41,15 @@ public class LastPurchasesPageController implements Initializable {
     @FXML
     private TextField lastName;
     @FXML
-    private ComboBox<String> comboBoxDate;
+    private ComboBox comboBoxDate;
     @FXML
-    private RadioButton mealsType;
+    private ComboBox comboBoxType;
+    // @FXML
+    // private RadioButton mealsType;
+    // @FXML
+    // private RadioButton vipType;
     @FXML
-    private RadioButton vipType;
-    @FXML
-    private RadioButton subscriptionsOnly;
+    private RadioButton showSubscriptions;
     @FXML
     private TableView<ViewLastPurchase> table;
     @FXML
@@ -87,26 +83,28 @@ public class LastPurchasesPageController implements Initializable {
         String firstName= this.firstName.getText();
         String lastName= this.lastName.getText();
         String date=(String) comboBoxDate.getValue();
-        boolean mealsOnly=mealsType.isSelected();
-        boolean vipOnly=vipType.isSelected();
-        boolean subscriptionsOnly= this.subscriptionsOnly.isSelected();
-
+        boolean mealsOnly= comboBoxType.getValue() != null && comboBoxType.getValue().equals(MEALS_SUBSCRIPTION);
+        boolean vipOnly= comboBoxType.getValue() != null && comboBoxType.getValue().equals(VIP_SUBSCRIPTION);
+        boolean showSubscriptions= this.showSubscriptions.isSelected();
+        if(comboBoxType.getValue() == null||(comboBoxType.getValue() != null && comboBoxType.getValue().equals("הכל"))){
+            mealsOnly= true;
+            vipOnly=true;
+        }
         boolean insertVar=true;
         for(ViewLastPurchase p:viewLastPurchases){
             if((!id.isEmpty())&&(!String.valueOf(p.getCustomerID()).equals(id))){
                 insertVar=false;
             }if((!firstName.isEmpty())&&(!p.getFirstName().equals(firstName))){
                 insertVar=false;
-            } if((!lastName.isEmpty())&&(!p.getLastName().equals(lastName))){
+            }if((!lastName.isEmpty())&&(!p.getLastName().equals(lastName))){
                 insertVar=false;
-            // } if((!date.isEmpty())&&(!String.valueOf(p.getDate()).equals(date))){
-            //     //TODO :: the date condition
-            //     insertVar=false;
+            }if(handleDateCondition(date,p.getDate())){
+                 insertVar=false;
             }if(!mealsOnly && p.getType().equals(MEALS_SUBSCRIPTION)){
                 insertVar=false;
             }if(!vipOnly && p.getType().equals(VIP_SUBSCRIPTION)){
                 insertVar=false;
-            }if(subscriptionsOnly && (!p.getComments().equals(PURCHASE_SUBSCRIPTION_COMMENT))){
+            }if(!showSubscriptions && (p.getComments().equals(PURCHASE_SUBSCRIPTION_COMMENT))){
                 insertVar=false;
 
             }
@@ -116,7 +114,35 @@ public class LastPurchasesPageController implements Initializable {
             insertVar=true;
         }
         ObservableList<ViewLastPurchase> data=FXCollections.observableArrayList(newCustomerList);
-        table.setItems(data);    }
+        table.setItems(data);
+    }
+
+private boolean handleDateCondition(String condition,String date) {
+    if (condition==null ||condition.isEmpty()) {
+        return false;
+    }
+    Date nowTime = StringToDte(getCurrentTimeStamp());
+    Date purchaseDate = StringToDte(date);
+    Calendar c = Calendar.getInstance();
+    c.setFirstDayOfWeek(Calendar.SUNDAY);
+    boolean sameDay = nowTime.getDay() == purchaseDate.getDay();
+    boolean sameMonth = nowTime.getMonth() == purchaseDate.getMonth();
+    boolean sameYear = nowTime.getYear() == purchaseDate.getYear();
+    boolean dayBefore = nowTime.getDay() - 1 == purchaseDate.getDay();
+
+    switch (condition) {
+        case TODAY_OPTION:
+            return !(sameDay && sameMonth && sameYear);
+        case YESTERDAY_OPTON:
+            return !(dayBefore && sameMonth && sameYear);
+        case THIS_WEEK_OPTION:
+            return !(isDateInCurrentWeek(purchaseDate));
+        case THIS_MONTH_OPTION:
+            return !(sameMonth && sameYear);
+    }
+    return false;
+}
+
 
 
     @FXML
@@ -195,22 +221,10 @@ public class LastPurchasesPageController implements Initializable {
         comments_col.setCellValueFactory(new PropertyValueFactory<>("comments"));//the name like in the class
         table.setItems(data);
 
-        mealsType.setSelected(true);
-        vipType.setSelected(true);
-        subscriptionsOnly.setSelected(false);
+        showSubscriptions.setSelected(true);
         cancelPurchase.setDisable(true);
-        comboBoxDate=new ComboBox<String>();
-        comboBoxDate.getItems().addAll("היום","אתמול","השבוע","החודש");
-
-        // Weekdays
-        String week_days[] =
-                { "Monday", "Tuesday", "Wednesday",
-                        "Thrusday", "Friday" };
-
-        // Create a combo box
-        comboBoxDate=
-                new ComboBox(FXCollections
-                        .observableArrayList(week_days));
+        comboBoxDate.getItems().addAll(TODAY_OPTION,YESTERDAY_OPTON,THIS_WEEK_OPTION,THIS_MONTH_OPTION);
+        comboBoxType.getItems().addAll("הכל",MEALS_SUBSCRIPTION,VIP_SUBSCRIPTION);
     }
 }
 

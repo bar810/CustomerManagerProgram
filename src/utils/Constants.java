@@ -46,6 +46,13 @@ public final class Constants {
     public static final String SQL_CONNECTION_CONFIGURE_FILE_PATH = "utils/hibernate.cfg.xml";
     public static final String CONFIGURE_FILE_PATH = "dataConfig.properties";
 
+    //dates option
+    public static final String TODAY_OPTION= "היום";
+    public static final String YESTERDAY_OPTON = "אתמול";
+    public static final String THIS_WEEK_OPTION = "השבוע";
+    public static final String THIS_MONTH_OPTION = "החודש";
+
+
     //Customer table names
     public static final String CUSTOMER_TABLE_NAME = "לקוחות";
     public static final String CUSTOMER_ID_TABLE_NAME = "מספר_לקוח";
