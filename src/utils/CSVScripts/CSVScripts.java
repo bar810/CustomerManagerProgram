@@ -59,9 +59,9 @@ public class CSVScripts {
                 oneLine.append(CSV_SEPERATOR);
                 oneLine.append(purchase.getNewBalance()<0? "" : purchase.getNewBalance());
                 oneLine.append(CSV_SEPERATOR);
-                oneLine.append(purchase.getType().trim().length() == 0? "" : purchase.getDate());
+                oneLine.append(purchase.getType().trim().length() == 0? "" : purchase.getType());
                 oneLine.append(CSV_SEPERATOR);
-                oneLine.append(purchase.getComments().trim().length() == 0? "" : purchase.getDate());
+                oneLine.append(purchase.getComments().trim().length() == 0? "" : purchase.getComments());
                 bw.write(oneLine.toString());
                 bw.newLine();
             }
@@ -92,7 +92,8 @@ public class CSVScripts {
                 int customerID= Integer.parseInt(con[1]);
                 double amount= Double.parseDouble(con[3]);
                 double newBalance= Double.parseDouble(con[4]);
-                purchases.add(new Purchase(customerID,amount,newBalance,con[5],con[6]));
+                String comments= con.length==7 ?con[6] : "";
+                purchases.add(new Purchase(customerID,amount,newBalance,con[5],comments));
             } catch (Exception ex) {
                 _logger.debug("Purchase reading failed. probably cannot cast string to int");
             }

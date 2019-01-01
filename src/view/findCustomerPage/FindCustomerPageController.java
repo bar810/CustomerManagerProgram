@@ -70,6 +70,7 @@ public class FindCustomerPageController implements Initializable {
         String firstName= this.firstName.getText();
         String lastName= this.lastName.getText();
         String phoneNumber=phone.getText();
+        phoneNumber=phoneNumber.replaceAll("-","");
 
         boolean insertVar=true;
         for(ViewCustomer c:viewCustomers){
@@ -79,7 +80,7 @@ public class FindCustomerPageController implements Initializable {
                 insertVar=false;
             } if((!lastName.isEmpty())&&(!c.getLastName().equals(lastName))){
                 insertVar=false;
-            } if((!phoneNumber.isEmpty())&&(!String.valueOf(c.getCustomerID()).equals(id))){
+            } if((!phoneNumber.isEmpty())&&(!String.valueOf(c.getPhone()).equals(phoneNumber))){
                 insertVar=false;
             }
             if(insertVar){

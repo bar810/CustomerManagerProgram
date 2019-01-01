@@ -47,7 +47,7 @@ public class LastPurchasesPageController implements Initializable {
     @FXML
     private TextField lastName;
     @FXML
-    private TextField date;
+    private ComboBox<String> comboBoxDate;
     @FXML
     private RadioButton mealsType;
     @FXML
@@ -86,7 +86,7 @@ public class LastPurchasesPageController implements Initializable {
         String id= this.customerID.getText();
         String firstName= this.firstName.getText();
         String lastName= this.lastName.getText();
-        String date=this.date.getText();
+        String date=(String) comboBoxDate.getValue();
         boolean mealsOnly=mealsType.isSelected();
         boolean vipOnly=vipType.isSelected();
         boolean subscriptionsOnly= this.subscriptionsOnly.isSelected();
@@ -99,8 +99,9 @@ public class LastPurchasesPageController implements Initializable {
                 insertVar=false;
             } if((!lastName.isEmpty())&&(!p.getLastName().equals(lastName))){
                 insertVar=false;
-            } if((!date.isEmpty())&&(!String.valueOf(p.getDate()).equals(date))){
-                insertVar=false;
+            // } if((!date.isEmpty())&&(!String.valueOf(p.getDate()).equals(date))){
+            //     //TODO :: the date condition
+            //     insertVar=false;
             }if(!mealsOnly && p.getType().equals(MEALS_SUBSCRIPTION)){
                 insertVar=false;
             }if(!vipOnly && p.getType().equals(VIP_SUBSCRIPTION)){
@@ -198,6 +199,18 @@ public class LastPurchasesPageController implements Initializable {
         vipType.setSelected(true);
         subscriptionsOnly.setSelected(false);
         cancelPurchase.setDisable(true);
+        comboBoxDate=new ComboBox<String>();
+        comboBoxDate.getItems().addAll("היום","אתמול","השבוע","החודש");
+
+        // Weekdays
+        String week_days[] =
+                { "Monday", "Tuesday", "Wednesday",
+                        "Thrusday", "Friday" };
+
+        // Create a combo box
+        comboBoxDate=
+                new ComboBox(FXCollections
+                        .observableArrayList(week_days));
     }
 }
 

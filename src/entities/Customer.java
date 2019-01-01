@@ -38,6 +38,13 @@ public class Customer {
 
     public Customer() {
     }
+    public Customer(int id,String firstName, String lastName, String mailAddress, String phoneNumber) {
+        customerID=id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.mailAddress = mailAddress;
+        this.phoneNumber = phoneNumber;
+    }
     public Customer(String firstName, String lastName, String mailAddress, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
