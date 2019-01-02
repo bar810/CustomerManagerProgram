@@ -39,7 +39,7 @@ public final class Constants {
     public static final String PURCHASE_TABLE_LOCATION = "purchases.csv";
     public static final String SUBSCRIPTION_TABLE_LOCATION = "subscriptions.csv";
     public static final String SQL_CONNECTION_CONFIGURE_FILE_PATH = "utils/hibernate.cfg.xml";
-    public static final String CONFIGURE_FILE_PATH = "dataConfig.properties";
+    public static final String CONFIGURE_FILE_PATH = "C:\\Bar_Personal\\CustomerManager\\dataConfig.properties";//"dataConfig.properties";
 
     //dates option
     public static final String TODAY_OPTION= "היום";

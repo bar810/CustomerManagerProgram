@@ -113,7 +113,7 @@ public class LastPurchasesPageController implements Initializable {
         table.setItems(data);
     }
     private boolean handleDateCondition(String condition,String date) {
-    if (condition==null ||condition.isEmpty()) {
+    if (condition==null ||condition.isEmpty()|| condition.equals("הכל")) {
         return false;
     }
     Date nowTime = StringToDate(getCurrentTimeStamp());
@@ -213,7 +213,7 @@ public class LastPurchasesPageController implements Initializable {
 
         showSubscriptions.setSelected(true);
         cancelPurchase.setDisable(true);
-        comboBoxDate.getItems().addAll(TODAY_OPTION,YESTERDAY_OPTON,THIS_WEEK_OPTION,THIS_MONTH_OPTION);
+        comboBoxDate.getItems().addAll("הכל",TODAY_OPTION,YESTERDAY_OPTON,THIS_WEEK_OPTION,THIS_MONTH_OPTION);
         comboBoxType.getItems().addAll("הכל",MEALS_SUBSCRIPTION,VIP_SUBSCRIPTION);
     }
 }
