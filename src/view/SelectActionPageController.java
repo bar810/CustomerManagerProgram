@@ -53,7 +53,7 @@ public class SelectActionPageController implements Initializable {
         Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
         FXMLLoader loader=new FXMLLoader();
-        loader.setLocation(getClass().getResource("loadSubscriptionPage.fxml"));
+        loader.setLocation(getClass().getResource("LoadSubscriptionPage.fxml"));
         try {
             loader.load();
         } catch (Exception ex) {
