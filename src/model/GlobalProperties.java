@@ -49,7 +49,7 @@ public class GlobalProperties {
             InputStream is=new FileInputStream(CONFIGURE_FILE_PATH);
             _properties.load(is);
         } catch (Exception ex) {
-            _logger.debug("error with properties");
+            _logger.error("error with properties");
             _logger.CleanAndSaveLogIfNeeded(true);
             exit();
         }

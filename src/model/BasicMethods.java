@@ -10,7 +10,9 @@ import java.util.Date;
 import java.util.List;
 
 import static model.GlobalProperties.*;
+import static model.GlobalProperties.getProperty;
 import static utils.Constants.*;
+import static utils.MailSender.sendAsHtml;
 import static utils.SQLQueries.SQLQueriesAgainstCustomer.*;
 import static utils.SQLQueries.SQLQueriesAgainstPurchase.insertPurchaseToDB;
 import static utils.SQLQueries.SQLQueriesAgainstSubscription.*;
@@ -29,6 +31,46 @@ public class BasicMethods {
         }else {
             _logger.warning("Customer is already exist. "+customer.toString());
         }
+    }
+    public static void sendDailyReport(String date){
+        //only numbers
+        int numOfVIPSubscriptionsBought=0;
+        int numOfMealsSubscriptionsBought=0;
+        double amountOfVIPPurchases=0;
+        double amountOfMealsPurchases=0;
+
+        Date dateToCheck= StringToDate(date);
+
+        for(Purchase p:getCachedPurchases()){
+            Date p_date= StringToDate(p.getDate());
+            if(p_date.getDay()==dateToCheck.getDay()&&p_date.getMonth()==dateToCheck.getMonth()&&p_date.getYear()==dateToCheck.getYear()){
+                //they are from the same day
+                if(p.getComments().equals(PURCHASE_SUBSCRIPTION_COMMENT)){
+                    if(p.getType().equals(MEALS_SUBSCRIPTION)){
+                        numOfMealsSubscriptionsBought++;
+                    }else{
+                        numOfVIPSubscriptionsBought++;
+                    }
+                }else{
+                    if(p.getType().equals(MEALS_SUBSCRIPTION)){
+                        amountOfMealsPurchases+=p.getAmount();
+                    }else{
+                        amountOfVIPPurchases+=p.getAmount();
+                    }
+                }
+            }
+
+        }
+        String msg1=numOfMealsSubscriptionsBought+"מנויי ארוחות שנקנו: ";
+        String msg2=numOfVIPSubscriptionsBought+", מנויי ויאיפי שנקנו: ";
+        String msg3=amountOfMealsPurchases+", רכישות ארוחות: ";
+        String msg4=amountOfVIPPurchases+", רכישות ויאיפי: ";
+
+        sendAsHtml(getProperty(MANAGER_MAIL_ADDRESS),"dd", "dd","");
+
+        //how much meals bought
+        //how much VIP bought
+        //how many subscriptions bought from each one
     }
     public static void deleteCustomer(int customerId){
         //delete his subscriptions before.

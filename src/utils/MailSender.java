@@ -38,11 +38,10 @@ public class MailSender {
             prepareEmailMessage(message, to, title, html,attachmentPath);
             //sending message
             Transport.send(message);
-
+            _logger.debug("mail sent successfully");
         } catch (Exception ex) {
             _logger.error("Error with sending mail");
             }
-        _logger.debug("mail sent successfully");
 
     }
     private static void prepareEmailMessage(MimeMessage message, String to, String title, String html,String attachmentPath) throws javax.mail.MessagingException {

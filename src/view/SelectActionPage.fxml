@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SelectActionPageController">
+   <top>
+      <StackPane prefHeight="44.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#backButton" text="חזור לחיפוש לקוח">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin></Button>
+                  <Label fx:id="customerIDLabel" alignment="CENTER" prefHeight="18.0" prefWidth="321.0" text="שם">
+                     <VBox.margin>
+                        <Insets top="40.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="vipBalanceLabel" alignment="CENTER" prefHeight="18.0" prefWidth="321.0" text="יתרה1">
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding></Label>
+                  <Label fx:id="mealsBalanceLabel" alignment="CENTER" prefHeight="18.0" prefWidth="322.0" text="יתרה 2" />
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
+   </top>
+   <center>
+      <HBox alignment="CENTER" prefHeight="434.0" prefWidth="800.0" spacing="40.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="buyVIPButton" mnemonicParsing="false" onAction="#goToBuyVip" prefHeight="91.0" prefWidth="120.0" text="קניית VIP" />
+            <Button fx:id="buyMealsButton" mnemonicParsing="false" onAction="#goToBuyMeals" prefHeight="94.0" prefWidth="130.0" text="קניית ארוחה" />
+            <Button mnemonicParsing="false" onAction="#goToLoadSubscription" prefHeight="94.0" prefWidth="130.0" text="טעינת מנוי" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </HBox>
+   </center>
+</BorderPane>
