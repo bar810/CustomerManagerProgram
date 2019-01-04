@@ -5,7 +5,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.GlobalProperties;
 
-import static utils.Constants.*;
+import static utils.Constants.MAIN_PROGRAM_TEXT;
 
 public class Main extends Application {
 
@@ -13,14 +13,13 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("view/HomePage.fxml"));
         primaryStage.setTitle(MAIN_PROGRAM_TEXT);
+        //primaryStage.setMaximized(true);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
-
     }
 
     public static void main(String[] args) {
         GlobalProperties.init();
-        //sendDailyReport(getCurrentTimeStamp());
         launch(args);
         GlobalProperties.closeConnections();
     }

@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -16,6 +17,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static model.GeneralViewFunctions.alertToScreen;
+import static model.GeneralViewFunctions.alertToScreenWithResponse;
 import static model.GeneralViewFunctions.exit;
 import static model.GlobalProperties.*;
 import static utils.SQLQueries.SQLQueriesAgainstCustomer.getAllCustomersFromDB;
@@ -40,6 +42,7 @@ public class HomePageController implements Initializable {
             Scene homePageScene=new Scene(homePageParent);
             Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
             appStage.setScene(homePageScene);
+            appStage.setMaximized(true);
             appStage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -64,6 +67,7 @@ public class HomePageController implements Initializable {
             Scene homePageScene=new Scene(homePageParent);
             Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
             appStage.setScene(homePageScene);
+            appStage.setMaximized(true);
             appStage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -76,6 +80,7 @@ public class HomePageController implements Initializable {
             Scene homePageScene=new Scene(homePageParent);
             Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
             appStage.setScene(homePageScene);
+            appStage.setMaximized(true);
             appStage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -87,7 +92,9 @@ public class HomePageController implements Initializable {
     }
     @FXML
     private void exitClicked(ActionEvent event){
-        exit();
+        if(alertToScreenWithResponse(Alert.AlertType.CONFIRMATION,"אישור פעולה","האם אתה בטוח שברצונך לסגור את התוכנה ?")==ButtonType.OK) {
+            exit();
+        }
     }
 }
 

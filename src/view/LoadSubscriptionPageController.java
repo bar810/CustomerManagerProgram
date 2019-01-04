@@ -46,15 +46,18 @@ public class LoadSubscriptionPageController implements Initializable {
      if(alertToScreenWithResponse(Alert.AlertType.CONFIRMATION,"אישור פעולה","האם אתה בטוח שברצונך לאשר את הפעולה ?")==ButtonType.OK){
          //check if there is subscription. - if yes just reload if no create new.
          Subscription subscription=isThisCustomerHaveSubscriptionAlready(getCachedViewCustomer().getCustomerID(),MEALS_SUBSCRIPTION);
+         double newBalnce;
          if(subscription!=null){
              //reload
              updateSubscriptionBalance(subscription.getSubscriptionID(),subscription.getBalance()+Double.parseDouble(getProperty(DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT)));
+             newBalnce=subscription.getBalance()+Double.parseDouble(getProperty(DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT));
          }
          else{
              //create new
              insertSubscriptionToDB(new Subscription(getCachedViewCustomer().getCustomerID(),Double.parseDouble(getProperty(DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT)),MEALS_SUBSCRIPTION));
+             newBalnce=Double.parseDouble(getProperty(DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT));
          }
-         insertPurchaseToDB(new Purchase(getCachedViewCustomer().getCustomerID(),Double.parseDouble(getProperty(DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT)),Double.parseDouble(getProperty(DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT)),MEALS_SUBSCRIPTION,PURCHASE_SUBSCRIPTION_COMMENT));
+         insertPurchaseToDB(new Purchase(getCachedViewCustomer().getCustomerID(),Double.parseDouble(getProperty(DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT)),newBalnce,MEALS_SUBSCRIPTION,PURCHASE_SUBSCRIPTION_COMMENT));
          SucceededAlertAndGoToHomePage(event);
      }
      else{
@@ -66,15 +69,20 @@ public class LoadSubscriptionPageController implements Initializable {
         if(alertToScreenWithResponse(Alert.AlertType.CONFIRMATION,"אישור פעולה","האם אתה בטוח שברצונך לאשר את הפעולה ?")==ButtonType.OK){
             //check if there is subscription. - if yes just reload if no create new.
             Subscription subscription=isThisCustomerHaveSubscriptionAlready(getCachedViewCustomer().getCustomerID(),VIP_SUBSCRIPTION);
+            double newBalnce;
             if(subscription!=null){
                 //reload
                 updateSubscriptionBalance(subscription.getSubscriptionID(),subscription.getBalance()+Double.parseDouble(getProperty(DEFAULT_VIP_SUBSCRIPTION_AMOUNT)));
+                newBalnce=subscription.getBalance()+Double.parseDouble(getProperty(DEFAULT_VIP_SUBSCRIPTION_AMOUNT));
+
             }
             else{
                 //create new
                 insertSubscriptionToDB(new Subscription(getCachedViewCustomer().getCustomerID(),Double.parseDouble(getProperty(DEFAULT_VIP_SUBSCRIPTION_AMOUNT)),VIP_SUBSCRIPTION));
+                newBalnce=Double.parseDouble(getProperty(DEFAULT_VIP_SUBSCRIPTION_AMOUNT));
+
             }
-            insertPurchaseToDB(new Purchase(getCachedViewCustomer().getCustomerID(),Double.parseDouble(getProperty(DEFAULT_VIP_SUBSCRIPTION_AMOUNT)),Double.parseDouble(getProperty(DEFAULT_VIP_SUBSCRIPTION_AMOUNT)),VIP_SUBSCRIPTION,PURCHASE_SUBSCRIPTION_COMMENT));
+            insertPurchaseToDB(new Purchase(getCachedViewCustomer().getCustomerID(),Double.parseDouble(getProperty(DEFAULT_VIP_SUBSCRIPTION_AMOUNT)),newBalnce,VIP_SUBSCRIPTION,PURCHASE_SUBSCRIPTION_COMMENT));
             SucceededAlertAndGoToHomePage(event);
         }
         else{
@@ -88,6 +96,7 @@ public class LoadSubscriptionPageController implements Initializable {
             Scene homePageScene=new Scene(homePageParent);
             Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
             appStage.setScene(homePageScene);
+            appStage.setMaximized(true);
             appStage.show();
         } catch (IOException e) {
             e.printStackTrace();

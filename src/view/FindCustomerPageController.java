@@ -97,6 +97,7 @@ public class FindCustomerPageController implements Initializable {
             Parent homePageParent=FXMLLoader.load(getClass().getResource("HomePage.fxml"));
             Scene homePageScene=new Scene(homePageParent);
             Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            appStage.setMaximized(true);
             appStage.setScene(homePageScene);
             appStage.show();
         } catch (IOException e) {
@@ -124,6 +125,7 @@ public class FindCustomerPageController implements Initializable {
             } catch (Exception ex) {
             }
             homePageParent=loader.getRoot();
+            appStage.setMaximized(true);
             appStage.setScene(new Scene(homePageParent));
             appStage.show();
         }

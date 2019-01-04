@@ -45,6 +45,7 @@ public class NewCustomerPageController implements Initializable {
             Scene homePageScene=new Scene(homePageParent);
             Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
             appStage.setScene(homePageScene);
+                appStage.setMaximized(true);
             appStage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -97,6 +98,7 @@ public class NewCustomerPageController implements Initializable {
                 Scene homePageScene=new Scene(homePageParent);
                 Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
                 appStage.setScene(homePageScene);
+                appStage.setMaximized(true);
                 appStage.show();
             } catch (IOException e) {
                 e.printStackTrace();

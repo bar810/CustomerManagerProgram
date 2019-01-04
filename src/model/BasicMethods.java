@@ -4,6 +4,7 @@ import entities.Customer;
 import entities.Purchase;
 import entities.Subscription;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,6 +14,7 @@ import static model.GlobalProperties.*;
 import static model.GlobalProperties.getProperty;
 import static utils.Constants.*;
 import static utils.MailSender.sendAsHtml;
+import static utils.SQLQueries.GeneralScripts.DBToCsv;
 import static utils.SQLQueries.SQLQueriesAgainstCustomer.*;
 import static utils.SQLQueries.SQLQueriesAgainstPurchase.insertPurchaseToDB;
 import static utils.SQLQueries.SQLQueriesAgainstSubscription.*;
@@ -66,7 +68,7 @@ public class BasicMethods {
         String msg3=amountOfMealsPurchases+", רכישות ארוחות: ";
         String msg4=amountOfVIPPurchases+", רכישות ויאיפי: ";
 
-        sendAsHtml(getProperty(MANAGER_MAIL_ADDRESS),"dd", "dd","");
+        sendAsHtml(getProperty(MANAGER_MAIL_ADDRESS),"סיכום יומי", msg1+", "+msg2+", "+msg3+", "+msg4,"");
 
         //how much meals bought
         //how much VIP bought
@@ -181,5 +183,18 @@ public class BasicMethods {
         int targetWeek = targetCalendar.get(Calendar.WEEK_OF_YEAR);
         int targetYear = targetCalendar.get(Calendar.YEAR);
         return week == targetWeek && year == targetYear;
+    }
+    public static void backupDataToMail(){
+        DBToCsv(CUSTOMER_TABLE_LOCATION, PURCHASE_TABLE_LOCATION, SUBSCRIPTION_TABLE_LOCATION);
+        sendAsHtml(getProperty(MANAGER_MAIL_ADDRESS),"גיבוי נתונים: " +getCurrentTimeStamp(), "לקוחות",CUSTOMER_TABLE_LOCATION);
+        sendAsHtml(getProperty(MANAGER_MAIL_ADDRESS),"גיבוי נתונים: " +getCurrentTimeStamp(), "מנויים",SUBSCRIPTION_TABLE_LOCATION);
+        sendAsHtml(getProperty(MANAGER_MAIL_ADDRESS),"גיבוי נתונים: " +getCurrentTimeStamp(), "רכישות",PURCHASE_TABLE_LOCATION);
+
+        File file1 = new File(CUSTOMER_TABLE_LOCATION);
+        File file2 = new File(PURCHASE_TABLE_LOCATION);
+        File file3 = new File(SUBSCRIPTION_TABLE_LOCATION);
+        file1.delete();
+        file2.delete();
+        file3.delete();
     }
 }

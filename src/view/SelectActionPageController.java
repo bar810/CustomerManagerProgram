@@ -61,6 +61,7 @@ public class SelectActionPageController implements Initializable {
         LoadSubscriptionPageController controller=loader.getController();
         homePageParent=loader.getRoot();
         appStage.setScene(new Scene(homePageParent));
+        appStage.setMaximized(true);
         appStage.show();
 
     }
@@ -77,6 +78,7 @@ public class SelectActionPageController implements Initializable {
         }
         homePageParent=loader.getRoot();
         appStage.setScene(new Scene(homePageParent));
+        appStage.setMaximized(true);
         appStage.show();
     }
     @FXML
@@ -93,6 +95,7 @@ public class SelectActionPageController implements Initializable {
         BuyVipPageController controller=loader.getController();
         homePageParent=loader.getRoot();
         appStage.setScene(new Scene(homePageParent));
+        appStage.setMaximized(true);
         appStage.show();
     }
     @Override
