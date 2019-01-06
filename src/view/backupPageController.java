@@ -43,10 +43,10 @@ public class backupPageController extends AbstractView {
 
     @FXML
     private void goBack(ActionEvent event){
-        goTo(event,"ManagmentPage.fxml");
+        goTo("ManagmentPage.fxml");
     }
 
     private void goToHomeScreen(ActionEvent event){
-        goTo(event,"HomePage.fxml");
+        goTo("HomePage.fxml");
     }
 }

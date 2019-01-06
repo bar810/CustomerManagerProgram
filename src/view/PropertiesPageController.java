@@ -17,6 +17,6 @@ public class PropertiesPageController  extends AbstractView {
 
     @FXML
     private void goBack(ActionEvent event){
-        goTo(event,"ManagmentPage.fxml");
+        goTo("ManagmentPage.fxml");
     }
 }

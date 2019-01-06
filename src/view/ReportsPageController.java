@@ -28,12 +28,12 @@ public class ReportsPageController  extends AbstractView {
         if(alertToScreenWithResponse(Alert.AlertType.CONFIRMATION,"אישור פעולה","האם אתה בטוח שברצונך לבצע את הפעולה ?")==ButtonType.OK) {
             Thread t1 = new Thread(() -> sendDailyReport(getCurrentTimeStamp()));
             t1.start();
-            goTo(event,"HomePage.fxml");
+            goTo("HomePage.fxml");
         }
     }
 
     @FXML
     private void goBack(ActionEvent event){
-        goTo(event,"ManagmentPage.fxml");
+        goTo("ManagmentPage.fxml");
     }
 }

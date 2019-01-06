@@ -25,7 +25,7 @@ public class LoginPageController extends AbstractView {
 
     @FXML
     private void goBack(ActionEvent event){
-        goTo(event,"HomePage.fxml");
+        goTo("HomePage.fxml");
     }
 
     @FXML
@@ -35,7 +35,7 @@ public class LoginPageController extends AbstractView {
         String userFromProperties= getProperty(PROGRAM_USER);
         String passFromProperties= getProperty(PROGRAM_PASSWORD);
         if(userName.equals(userFromProperties) && password.equals(passFromProperties)){
-            goTo(event,"ManagmentPage.fxml");
+            goTo("ManagmentPage.fxml");
         }else{
             alertToScreen(Alert.AlertType.INFORMATION,"שגיאה","שם משתמש או סיסמא לא נכונים");
 

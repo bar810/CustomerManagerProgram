@@ -17,26 +17,26 @@ public class ManagmentPageController extends AbstractView {
 
     @FXML
     private void goToHomePage(ActionEvent event){
-        goTo(event,"HomePage.fxml");
+        goTo("HomePage.fxml");
     }
 
     @FXML
     private void moveToBackup(ActionEvent event){
-        goTo(event,"backupPage.fxml");
+        goTo("backupPage.fxml");
     }
 
     @FXML
     private void moveToProperties(ActionEvent event){
-        goTo(event,"PropertiesPage.fxml");
+        goTo("PropertiesPage.fxml");
     }
 
     @FXML
     private void moveToReports(ActionEvent event){
-        goTo(event,"ReportsPage.fxml");
+        goTo("ReportsPage.fxml");
     }
 
     @FXML
     private void moveToEditCustomer(ActionEvent event){
-        goTo(event,"EditCustomerPage.fxml");
+        goTo("EditCustomerPage.fxml");
     }
 }

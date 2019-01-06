@@ -4,6 +4,8 @@ import entities.Customer;
 import entities.Purchase;
 import entities.Subscription;
 import entities.ViewCustomer;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import utils.Logger;
@@ -34,6 +36,7 @@ public class GlobalProperties {
     private static List<Subscription> cachedSubscriptions;
     private static List<Purchase> cachedPurchases;
     private static List<Customer> cachedCustomers;
+    private static Scene scene;
 
     public static void init() {
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
@@ -170,5 +173,16 @@ public class GlobalProperties {
         }
         _logger.error("Cannot find Subscription for customer. Customer id: "+id);
         return null;
+    }
+
+    public static Scene getScene() {
+        return scene;
+    }
+
+    public static void setScene(Parent value) {
+        scene.setRoot(value);
+    }
+    public static void initScene(Parent root ){
+        scene=new Scene(root);
     }
 }

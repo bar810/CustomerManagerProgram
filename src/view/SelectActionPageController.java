@@ -28,19 +28,19 @@ public class SelectActionPageController extends AbstractView {
 
     @FXML
     private void backButton(ActionEvent event){
-        goTo(event,"FindCustomerPage.fxml");
+        goTo("FindCustomerPage.fxml");
     }
     @FXML
     private void goToLoadSubscription(ActionEvent event){
-        goTo(event,"LoadSubscriptionPage.fxml");
+        goTo("LoadSubscriptionPage.fxml");
     }
     @FXML
     private void goToBuyMeals(ActionEvent event){
-        goTo(event,"BuyMealsPage.fxml");
+        goTo("BuyMealsPage.fxml");
     }
     @FXML
     private void goToBuyVip(ActionEvent event){
-        goTo(event,"BuyVipPage.fxml");
+        goTo("BuyVipPage.fxml");
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {

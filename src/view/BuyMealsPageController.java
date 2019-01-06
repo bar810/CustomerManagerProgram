@@ -45,7 +45,7 @@ public class BuyMealsPageController extends AbstractView {
 
     @FXML
     private void backButton(ActionEvent event){
-        goTo(event,"SelectActionPage.fxml");
+        goTo("SelectActionPage.fxml");
     }
     @FXML
     private void MealsChosen(ActionEvent event){
@@ -87,19 +87,19 @@ public class BuyMealsPageController extends AbstractView {
         //check if there is enough balance
         if (getCachedViewCustomer().getMealsBalance() < amount) {
             alertToScreen(Alert.AlertType.INFORMATION,"שגיאה","ללקוח אין מספיק יתרה");
-            goTo(event,"HomePage.fxml");
+            goTo("HomePage.fxml");
         }
         if(alertToScreenWithResponse(Alert.AlertType.CONFIRMATION,"אישור פעולה","האם אתה בטוח שברצונך לאשר את הפעולה ?")==ButtonType.OK){
             double newBalance=getCachedViewCustomer().getMealsBalance()-amount;
             Subscription subscription= getSubscriptionByCustomerID(getCachedViewCustomer().getCustomerID(),MEALS_SUBSCRIPTION);
             if(subscription==null){
                 alertToScreen(Alert.AlertType.INFORMATION,"שגיאה","שגיאה במהלך הקנייה.לא נמצא מנוי. לא בוצעה רכישה");
-                goTo(event,"HomePage.fxml");
+                goTo("HomePage.fxml");
                 }
             updateSubscriptionBalance(subscription.getSubscriptionID(),newBalance);
             insertPurchaseToDB(new Purchase(getCachedViewCustomer().getCustomerID(),amount,newBalance,MEALS_SUBSCRIPTION,""));
             alertToScreen(Alert.AlertType.INFORMATION,"רכישה","רכישה בוצעה בהצלחה");
-            goTo(event,"HomePage.fxml");
+            goTo("HomePage.fxml");
         }else{
             this.backButton(event);
         }

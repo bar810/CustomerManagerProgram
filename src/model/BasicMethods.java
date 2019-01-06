@@ -139,7 +139,7 @@ public class BasicMethods {
         assert customers != null;
         return customers.size()==1;
     }
-    private static Subscription getSubscriptionByCustomerId(int customerId,String type){
+    public static Subscription getSubscriptionByCustomerId(int customerId,String type){
         for(Subscription s: getCachedSubscriptions()){
             if(s.getCoustomerID()==customerId && s.getType().equals(type)){
                 return s;

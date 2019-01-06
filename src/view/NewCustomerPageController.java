@@ -31,7 +31,7 @@ public class NewCustomerPageController extends AbstractView {
 
     @FXML
     private void backButton(ActionEvent event){
-        goTo(event,"HomePage.fxml");
+        goTo("HomePage.fxml");
     }
     @FXML
     private void submit(ActionEvent event){
@@ -75,7 +75,7 @@ public class NewCustomerPageController extends AbstractView {
             }else{
                 alertToScreen(Alert.AlertType.INFORMATION,"אימות נתונים","לקוח חדש הוכנס בהצלחה. מספר לקוח: " +id);
             }
-                goTo(event,"HomePage.fxml");
+                goTo("HomePage.fxml");
         }
     }
 }

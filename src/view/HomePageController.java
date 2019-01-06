@@ -29,19 +29,19 @@ public class HomePageController extends AbstractView {
 
     @FXML
     private void moveToNewCustomerPage(ActionEvent event){
-        goTo(event ,"NewCustomerPage.fxml");
+        goTo("NewCustomerPage.fxml");
     }
     @FXML
     private void moveToFindCustomerPage(ActionEvent event){
-        goTo(event ,"FindCustomerPage.fxml");
+        goTo("FindCustomerPage.fxml");
     }
     @FXML
     private void goToAuth(ActionEvent event){
-        goTo(event ,"LoginPage.fxml");
+        goTo("LoginPage.fxml");
     }
     @FXML
     private void moveToLastPurchsesPage(ActionEvent event){
-        goTo(event ,"LastPurchasesPage.fxml");
+        goTo("LastPurchasesPage.fxml");
 
     }
     @FXML

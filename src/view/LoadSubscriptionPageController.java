@@ -20,7 +20,7 @@ public class LoadSubscriptionPageController extends AbstractView {
 
     @FXML
     private void backButton(ActionEvent event){
-        goTo(event,"SelectActionPage.fxml");
+        goTo("SelectActionPage.fxml");
     }
     @FXML
     private void loadMeals(ActionEvent event){
@@ -72,7 +72,7 @@ public class LoadSubscriptionPageController extends AbstractView {
     }
     private void SucceededAlertAndGoToHomePage(ActionEvent event){
         alertToScreen(Alert.AlertType.INFORMATION,"אימות נתונים","מנוי נרכש בהצלחה !");
-        goTo(event,"HomePage.fxml");
+        goTo("HomePage.fxml");
     }
     private Subscription isThisCustomerHaveSubscriptionAlready(int customerID,String type){
         for (Subscription s: getCachedSubscriptions()){

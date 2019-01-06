@@ -31,7 +31,7 @@ public class BuyVipPageController extends AbstractView {
 
     @FXML
     private void backButton(ActionEvent event){
-        goTo(event,"SelectActionPage.fxml");
+        goTo("SelectActionPage.fxml");
     }
     @FXML
     private void buyClicked(ActionEvent event){
@@ -51,12 +51,12 @@ public class BuyVipPageController extends AbstractView {
                     Subscription subscription= getSubscriptionByCustomerID(getCachedViewCustomer().getCustomerID(),VIP_SUBSCRIPTION);
                     if(subscription==null){
                         alertToScreen(Alert.AlertType.INFORMATION,"שגיאה","שגיאה במהלך הקנייה. לא נמצא מנוי. לא בוצעה רכישה");
-                        goTo(event,"HomePage.fxml");
+                        goTo("HomePage.fxml");
                     }
                     updateSubscriptionBalance(subscription.getSubscriptionID(),newBalance);
                     insertPurchaseToDB(new Purchase(getCachedViewCustomer().getCustomerID(),amountAsDouble,newBalance,VIP_SUBSCRIPTION,""));
                     alertToScreen(Alert.AlertType.INFORMATION,"רכישה","רכישה בוצעה בהצלחה");
-                    goTo(event,"HomePage.fxml");
+                    goTo("HomePage.fxml");
                     //
                 }else{
                     this.backButton(event);

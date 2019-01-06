@@ -86,7 +86,7 @@ public class FindCustomerPageController extends AbstractView {
     }
     @FXML
     private void backButton(ActionEvent event){
-        goTo(event,"HomePage.fxml");
+        goTo("HomePage.fxml");
     }
     @FXML
     private void showAllCustomersClicked(){
@@ -99,7 +99,7 @@ public class FindCustomerPageController extends AbstractView {
         if(getCachedViewCustomer()==null){
             _logger.warning("try to find Cached view customer was made when it was equals to null");
         }else{
-            goTo(event,"SelectActionPage.fxml");
+            goTo("SelectActionPage.fxml");
         }
     }
     @Override

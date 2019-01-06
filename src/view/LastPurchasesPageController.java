@@ -132,7 +132,7 @@ public class LastPurchasesPageController extends AbstractView {
 }
     @FXML
     private void backButton(ActionEvent event){
-        goTo(event,"HomePage.fxml");
+        goTo("HomePage.fxml");
     }
     @FXML
     private void showAllCustomersClicked(){

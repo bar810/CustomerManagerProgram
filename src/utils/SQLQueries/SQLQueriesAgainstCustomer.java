@@ -165,6 +165,19 @@ public class SQLQueriesAgainstCustomer {
             _logger.debug("Customer updated successfully. customer: "+customer.toString());
         }
     }
+    public static void updateCustomerLastName(int customerID,String newLastName){
+        _logger.debug("update customer last name. Customer ID: "+customerID+". new name: "+newLastName);
+        Session customerSession= getCustomerSession();
+        customerSession.beginTransaction();
+        Customer customer=customerSession.get(Customer.class,customerID);
+        if(customer==null){
+            _logger.warning("Customer not found");
+        }else{
+            customer.setLastName(newLastName);
+            customerSession.getTransaction().commit();
+            _logger.debug("Customer updated successfully. customer: "+customer.toString());
+        }
+    }
     public static void removeOneCustomer(int customerID){
         _logger.debug("removing customer. ID: "+customerID);
         Session customerSession= getCustomerSession();
