@@ -5,18 +5,11 @@ import entities.Purchase;
 import entities.Subscription;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -27,7 +20,7 @@ import static utils.Constants.*;
 import static utils.SQLQueries.SQLQueriesAgainstPurchase.insertPurchaseToDB;
 import static utils.SQLQueries.SQLQueriesAgainstSubscription.updateSubscriptionBalance;
 
-public class BuyMealsPageController implements Initializable {
+public class BuyMealsPageController extends AbstractView {
 
     @FXML
     Label customer_balance_label;
@@ -52,19 +45,7 @@ public class BuyMealsPageController implements Initializable {
 
     @FXML
     private void backButton(ActionEvent event){
-        Parent homePageParent;
-        Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-        FXMLLoader loader=new FXMLLoader();
-        loader.setLocation(getClass().getResource("SelectActionPage.fxml"));
-        try {
-            loader.load();
-        } catch (Exception ex) {
-        }
-        homePageParent=loader.getRoot();
-        appStage.setScene(new Scene(homePageParent));
-        appStage.setMaximized(true);
-        appStage.show();
+        goTo(event,"SelectActionPage.fxml");
     }
     @FXML
     private void MealsChosen(ActionEvent event){
@@ -101,35 +82,24 @@ public class BuyMealsPageController implements Initializable {
                 break;
         }
     }
-    private void goToHomeScreen(ActionEvent event){
-        try {
-            Parent homePageParent=FXMLLoader.load(getClass().getResource("HomePage.fxml"));
-            Scene homePageScene=new Scene(homePageParent);
-            Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            appStage.setScene(homePageScene);
-            appStage.setMaximized(true);
-            appStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    public void tryToMakePurchase(ActionEvent event,double amount) {
+
+    private void tryToMakePurchase(ActionEvent event, double amount) {
         //check if there is enough balance
         if (getCachedViewCustomer().getMealsBalance() < amount) {
             alertToScreen(Alert.AlertType.INFORMATION,"שגיאה","ללקוח אין מספיק יתרה");
-            goToHomeScreen(event);
+            goTo(event,"HomePage.fxml");
         }
         if(alertToScreenWithResponse(Alert.AlertType.CONFIRMATION,"אישור פעולה","האם אתה בטוח שברצונך לאשר את הפעולה ?")==ButtonType.OK){
             double newBalance=getCachedViewCustomer().getMealsBalance()-amount;
             Subscription subscription= getSubscriptionByCustomerID(getCachedViewCustomer().getCustomerID(),MEALS_SUBSCRIPTION);
             if(subscription==null){
                 alertToScreen(Alert.AlertType.INFORMATION,"שגיאה","שגיאה במהלך הקנייה.לא נמצא מנוי. לא בוצעה רכישה");
-                goToHomeScreen(event);
-            }
+                goTo(event,"HomePage.fxml");
+                }
             updateSubscriptionBalance(subscription.getSubscriptionID(),newBalance);
             insertPurchaseToDB(new Purchase(getCachedViewCustomer().getCustomerID(),amount,newBalance,MEALS_SUBSCRIPTION,""));
             alertToScreen(Alert.AlertType.INFORMATION,"רכישה","רכישה בוצעה בהצלחה");
-            goToHomeScreen(event);
+            goTo(event,"HomePage.fxml");
         }else{
             this.backButton(event);
         }

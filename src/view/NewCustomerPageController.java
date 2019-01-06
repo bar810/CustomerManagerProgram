@@ -4,20 +4,11 @@ package view;
 import entities.Customer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import static model.GeneralViewFunctions.alertToScreen;
 import static utils.SQLQueries.SQLQueriesAgainstCustomer.getAllCustomersFromDB;
@@ -25,7 +16,7 @@ import static utils.SQLQueries.SQLQueriesAgainstCustomer.insertCustomerToDB;
 import static utils.Utils.isValidMail;
 import static utils.Utils.isValidPhone;
 
-public class NewCustomerPageController implements Initializable {
+public class NewCustomerPageController extends AbstractView {
 
     @FXML
     private Pane checkCustomerBalancePage;
@@ -40,16 +31,7 @@ public class NewCustomerPageController implements Initializable {
 
     @FXML
     private void backButton(ActionEvent event){
-            try {
-            Parent homePageParent=FXMLLoader.load(getClass().getResource("HomePage.fxml"));
-            Scene homePageScene=new Scene(homePageParent);
-            Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            appStage.setScene(homePageScene);
-                appStage.setMaximized(true);
-            appStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        goTo(event,"HomePage.fxml");
     }
     @FXML
     private void submit(ActionEvent event){
@@ -93,21 +75,8 @@ public class NewCustomerPageController implements Initializable {
             }else{
                 alertToScreen(Alert.AlertType.INFORMATION,"אימות נתונים","לקוח חדש הוכנס בהצלחה. מספר לקוח: " +id);
             }
-            try {
-                Parent homePageParent=FXMLLoader.load(getClass().getResource("HomePage.fxml"));
-                Scene homePageScene=new Scene(homePageParent);
-                Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-                appStage.setScene(homePageScene);
-                appStage.setMaximized(true);
-                appStage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+                goTo(event,"HomePage.fxml");
         }
-    }
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
     }
 }
 

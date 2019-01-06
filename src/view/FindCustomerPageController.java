@@ -9,20 +9,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -33,7 +26,7 @@ import static model.GlobalProperties.*;
 import static utils.Constants.MEALS_SUBSCRIPTION;
 import static utils.Constants.VIP_SUBSCRIPTION;
 
-public class FindCustomerPageController implements Initializable {
+public class FindCustomerPageController extends AbstractView {
 
     @FXML
     private Pane checkCustomerBalancePage;
@@ -93,16 +86,7 @@ public class FindCustomerPageController implements Initializable {
     }
     @FXML
     private void backButton(ActionEvent event){
-        try {
-            Parent homePageParent=FXMLLoader.load(getClass().getResource("HomePage.fxml"));
-            Scene homePageScene=new Scene(homePageParent);
-            Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            appStage.setMaximized(true);
-            appStage.setScene(homePageScene);
-            appStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        goTo(event,"HomePage.fxml");
     }
     @FXML
     private void showAllCustomersClicked(){
@@ -115,19 +99,7 @@ public class FindCustomerPageController implements Initializable {
         if(getCachedViewCustomer()==null){
             _logger.warning("try to find Cached view customer was made when it was equals to null");
         }else{
-            Parent homePageParent;
-            Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-            FXMLLoader loader=new FXMLLoader();
-            loader.setLocation(getClass().getResource("SelectActionPage.fxml"));
-            try {
-                loader.load();
-            } catch (Exception ex) {
-            }
-            homePageParent=loader.getRoot();
-            appStage.setMaximized(true);
-            appStage.setScene(new Scene(homePageParent));
-            appStage.show();
+            goTo(event,"SelectActionPage.fxml");
         }
     }
     @Override

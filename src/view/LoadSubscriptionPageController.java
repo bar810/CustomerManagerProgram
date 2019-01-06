@@ -5,18 +5,8 @@ import entities.Purchase;
 import entities.Subscription;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import static model.GeneralViewFunctions.alertToScreen;
 import static model.GeneralViewFunctions.alertToScreenWithResponse;
@@ -26,20 +16,11 @@ import static utils.SQLQueries.SQLQueriesAgainstPurchase.insertPurchaseToDB;
 import static utils.SQLQueries.SQLQueriesAgainstSubscription.insertSubscriptionToDB;
 import static utils.SQLQueries.SQLQueriesAgainstSubscription.updateSubscriptionBalance;
 
-public class LoadSubscriptionPageController implements Initializable {
+public class LoadSubscriptionPageController extends AbstractView {
 
     @FXML
     private void backButton(ActionEvent event){
-        try {
-            Parent homePageParent=FXMLLoader.load(getClass().getResource("SelectActionPage.fxml"));
-            Scene homePageScene=new Scene(homePageParent);
-            Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            appStage.setScene(homePageScene);
-            appStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        goTo(event,"SelectActionPage.fxml");
     }
     @FXML
     private void loadMeals(ActionEvent event){
@@ -91,16 +72,7 @@ public class LoadSubscriptionPageController implements Initializable {
     }
     private void SucceededAlertAndGoToHomePage(ActionEvent event){
         alertToScreen(Alert.AlertType.INFORMATION,"אימות נתונים","מנוי נרכש בהצלחה !");
-        try {
-            Parent homePageParent=FXMLLoader.load(getClass().getResource("HomePage.fxml"));
-            Scene homePageScene=new Scene(homePageParent);
-            Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            appStage.setScene(homePageScene);
-            appStage.setMaximized(true);
-            appStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        goTo(event,"HomePage.fxml");
     }
     private Subscription isThisCustomerHaveSubscriptionAlready(int customerID,String type){
         for (Subscription s: getCachedSubscriptions()){
@@ -110,7 +82,5 @@ public class LoadSubscriptionPageController implements Initializable {
         }
         return null;
     }
-    @Override
-    public void initialize(URL location, ResourceBundle resources) { }
 }
 

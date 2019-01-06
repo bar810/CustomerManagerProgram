@@ -2,29 +2,20 @@ package view;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static model.GeneralViewFunctions.alertToScreen;
-import static model.GeneralViewFunctions.alertToScreenWithResponse;
-import static model.GeneralViewFunctions.exit;
+import static model.GeneralViewFunctions.*;
 import static model.GlobalProperties.*;
 import static utils.SQLQueries.SQLQueriesAgainstCustomer.getAllCustomersFromDB;
 import static utils.SQLQueries.SQLQueriesAgainstPurchase.getAllPurchasesFromDB;
 import static utils.SQLQueries.SQLQueriesAgainstSubscription.getAllSubscriptionsFromDB;
 
-public class HomePageController implements Initializable {
+public class HomePageController extends AbstractView {
 
     @FXML
     private GridPane homePage;
@@ -35,56 +26,23 @@ public class HomePageController implements Initializable {
         setCachedPurchases(getAllPurchasesFromDB());
         setCachedCustomers(getAllCustomersFromDB());
     }
+
     @FXML
     private void moveToNewCustomerPage(ActionEvent event){
-        try {
-            Parent homePageParent=FXMLLoader.load(getClass().getResource("NewCustomerPage.fxml"));
-            Scene homePageScene=new Scene(homePageParent);
-            Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            appStage.setScene(homePageScene);
-            appStage.setMaximized(true);
-            appStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        goTo(event ,"NewCustomerPage.fxml");
     }
     @FXML
     private void moveToFindCustomerPage(ActionEvent event){
-        try {
-            Parent homePageParent=FXMLLoader.load(getClass().getResource("FindCustomerPage.fxml"));
-            Scene homePageScene=new Scene(homePageParent);
-            Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            appStage.setScene(homePageScene);
-            appStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        goTo(event ,"FindCustomerPage.fxml");
     }
     @FXML
     private void goToAuth(ActionEvent event){
-        try {
-            Parent homePageParent=FXMLLoader.load(getClass().getResource("LoginPage.fxml"));
-            Scene homePageScene=new Scene(homePageParent);
-            Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            appStage.setScene(homePageScene);
-            appStage.setMaximized(true);
-            appStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        goTo(event ,"LoginPage.fxml");
     }
     @FXML
     private void moveToLastPurchsesPage(ActionEvent event){
-        try {
-            Parent homePageParent=FXMLLoader.load(getClass().getResource("LastPurchasesPage.fxml"));
-            Scene homePageScene=new Scene(homePageParent);
-            Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            appStage.setScene(homePageScene);
-            appStage.setMaximized(true);
-            appStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        goTo(event ,"LastPurchasesPage.fxml");
+
     }
     @FXML
     private void aboutClicked(ActionEvent event){

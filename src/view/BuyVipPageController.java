@@ -5,15 +5,8 @@ import entities.Purchase;
 import entities.Subscription;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -25,7 +18,7 @@ import static utils.Constants.VIP_SUBSCRIPTION;
 import static utils.SQLQueries.SQLQueriesAgainstPurchase.insertPurchaseToDB;
 import static utils.SQLQueries.SQLQueriesAgainstSubscription.updateSubscriptionBalance;
 
-public class BuyVipPageController implements Initializable {
+public class BuyVipPageController extends AbstractView {
 
     @FXML
     Label customer_balance_label;
@@ -38,17 +31,7 @@ public class BuyVipPageController implements Initializable {
 
     @FXML
     private void backButton(ActionEvent event){
-        try {
-            Parent homePageParent=FXMLLoader.load(getClass().getResource("SelectActionPage.fxml"));
-            Scene homePageScene=new Scene(homePageParent);
-            Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            appStage.setScene(homePageScene);
-            appStage.setMaximized(true);
-            appStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        goTo(event,"SelectActionPage.fxml");
     }
     @FXML
     private void buyClicked(ActionEvent event){
@@ -68,12 +51,12 @@ public class BuyVipPageController implements Initializable {
                     Subscription subscription= getSubscriptionByCustomerID(getCachedViewCustomer().getCustomerID(),VIP_SUBSCRIPTION);
                     if(subscription==null){
                         alertToScreen(Alert.AlertType.INFORMATION,"שגיאה","שגיאה במהלך הקנייה. לא נמצא מנוי. לא בוצעה רכישה");
-                        goToHomeScreen(event);
+                        goTo(event,"HomePage.fxml");
                     }
                     updateSubscriptionBalance(subscription.getSubscriptionID(),newBalance);
                     insertPurchaseToDB(new Purchase(getCachedViewCustomer().getCustomerID(),amountAsDouble,newBalance,VIP_SUBSCRIPTION,""));
                     alertToScreen(Alert.AlertType.INFORMATION,"רכישה","רכישה בוצעה בהצלחה");
-                    goToHomeScreen(event);
+                    goTo(event,"HomePage.fxml");
                     //
                 }else{
                     this.backButton(event);
@@ -84,18 +67,7 @@ public class BuyVipPageController implements Initializable {
         }
 
     }
-    private void goToHomeScreen(ActionEvent event){
-        try {
-            Parent homePageParent=FXMLLoader.load(getClass().getResource("HomePage.fxml"));
-            Scene homePageScene=new Scene(homePageParent);
-            Stage appStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            appStage.setScene(homePageScene);
-            appStage.setMaximized(true);
-            appStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         double balance=getCachedViewCustomer().getVipBalance();

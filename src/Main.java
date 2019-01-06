@@ -13,7 +13,6 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("view/HomePage.fxml"));
         primaryStage.setTitle(MAIN_PROGRAM_TEXT);
-        //primaryStage.setMaximized(true);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
