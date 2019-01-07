@@ -24,7 +24,7 @@
                 <TableView fx:id="table" editable="true" prefHeight="200.0" prefWidth="371.0">
                     <columns>
                         <TableColumn fx:id="lastPurchase_col" prefWidth="75.0" text="רכישה אחרונה" />
-                        <TableColumn fx:id="vip_col" prefWidth="75.0" text="VIP" />
+                        <TableColumn fx:id="vip_col" onEditCommit="#changeCustomerVipSubscriptionValue" prefWidth="75.0" text="VIP" />
                         <TableColumn fx:id="meals_col" onEditCommit="#changeCustomerMealsSubscriptionValue" prefWidth="75.0" text="ארוחות" />
                         <TableColumn fx:id="ln_col" onEditCommit="#changeCustomerLastName"  prefWidth="75.0" text="שם משפחה" />
                         <TableColumn fx:id="fn_col" onEditCommit="#changeCustomerFirstName" prefWidth="75.0" text="שם פרטי" />

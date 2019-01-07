@@ -14,9 +14,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.Pane;
@@ -27,12 +25,15 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static model.BasicMethods.getSubscriptionByCustomerId;
+import static model.GeneralViewFunctions.alertToScreen;
+import static model.GeneralViewFunctions.alertToScreenWithResponse;
 import static model.GlobalProperties.*;
 import static utils.Constants.MEALS_SUBSCRIPTION;
 import static utils.Constants.VIP_SUBSCRIPTION;
 import static utils.SQLQueries.SQLQueriesAgainstCustomer.*;
 import static utils.SQLQueries.SQLQueriesAgainstPurchase.getAllPurchasesFromDB;
-import static utils.SQLQueries.SQLQueriesAgainstSubscription.getAllSubscriptionsFromDB;
+import static utils.SQLQueries.SQLQueriesAgainstSubscription.*;
 
 /**
  * @author bbrownsh
@@ -64,9 +65,9 @@ public class EditCustomerPageController extends AbstractView {
     @FXML
     TableColumn<ViewCustomer, String> meals_col;
     @FXML
-    TableColumn<ViewCustomer,Integer> vip_col;
+    TableColumn<ViewCustomer,String> vip_col;
     @FXML
-    TableColumn<ViewCustomer,Integer> lastPurchase_col;
+    TableColumn<ViewCustomer,String> lastPurchase_col;
     private List<ViewCustomer> viewCustomers=new ArrayList<>();
 
     @FXML
@@ -112,9 +113,7 @@ public class EditCustomerPageController extends AbstractView {
         String newFirstName=editCell.getNewValue().toString();
         //check if it is valid
         updateCustomerFirstName(c.getCustomerID(),newFirstName);
-        setCachedSubscriptions(getAllSubscriptionsFromDB());
-        setCachedPurchases(getAllPurchasesFromDB());
-        setCachedCustomers(getAllCustomersFromDB());
+        refreshTable();
     }
 
     @FXML
@@ -123,36 +122,75 @@ public class EditCustomerPageController extends AbstractView {
         String newLastName=editCell.getNewValue().toString();
         //check if it is valid
         updateCustomerLastName(c.getCustomerID(),newLastName);
-        setCachedSubscriptions(getAllSubscriptionsFromDB());
-        setCachedPurchases(getAllPurchasesFromDB());
-        setCachedCustomers(getAllCustomersFromDB());
+        refreshTable();
+
     }
 
     @FXML
     private void changeCustomerMealsSubscriptionValue(TableColumn.CellEditEvent editCell ){
-        // ViewCustomer c= table.getSelectionModel().getSelectedItem();
-        // String newMealsValue=editCell.getNewValue().toString();
-        // int mealsValue=0;
-        // try {
-        //     mealsValue=Integer.parseInt(newMealsValue);
-        //     if(mealsValue<0) {
-        //         throw new Exception();
-        //     }
-        //     //check if exist
-        //     Subscription s=getSubscriptionByCustomerId(c.getCustomerID(),MEALS_SUBSCRIPTION);
-        //     if(s==null){
-        //         //TODO ask the user if he want to create subscription
-        //     }else{
-        //         updateSubscriptionBalance(s.getSubscriptionID(),mealsValue);
-        //         setCachedSubscriptions(getAllSubscriptionsFromDB());
-        //         setCachedPurchases(getAllPurchasesFromDB());
-        //         setCachedCustomers(getAllCustomersFromDB());
-        //     }
-        //
-        // } catch (Exception ex) {
-        //     alertToScreen(Alert.AlertType.INFORMATION,"עדכון לקוח","נא להזמין ערך מספרי חיובי בלבד");
-        //
-        // }
+        ViewCustomer c= table.getSelectionModel().getSelectedItem();
+        String newMealsValue=editCell.getNewValue().toString();
+        double mealsValue=0;
+        try {
+            mealsValue=Double.parseDouble(newMealsValue);
+            if(mealsValue<0) {
+                throw new Exception();
+            }
+            //check if exist
+            Subscription s=getSubscriptionByCustomerId(c.getCustomerID(),MEALS_SUBSCRIPTION);
+            if(s==null){
+                if(alertToScreenWithResponse(Alert.AlertType.CONFIRMATION,"אישור פעולה","ללקוח אין מנוי ארוחות פעיל. האם ברצונך ליצור אחד ?")==ButtonType.OK) {
+                        //create subscription
+                    insertSubscriptionToDB(new Subscription(c.getCustomerID(),mealsValue,MEALS_SUBSCRIPTION));
+                }
+                }else{
+                updateSubscriptionBalance(s.getSubscriptionID(),mealsValue);
+
+            }
+        } catch (Exception ex) {
+            alertToScreen(Alert.AlertType.INFORMATION,"עדכון לקוח","נא להזמין ערך מספרי חיובי בלבד");
+        }
+        refreshTable();
+    }
+
+
+    @FXML
+    private void changeCustomerVipSubscriptionValue(TableColumn.CellEditEvent editCell ){
+        ViewCustomer c= table.getSelectionModel().getSelectedItem();
+        String newVipValue=editCell.getNewValue().toString();
+        double vipValue=0;
+        try {
+            vipValue=Double.parseDouble(newVipValue);
+            if(vipValue<0) {
+                throw new Exception();
+            }
+            //check if exist
+            Subscription s=getSubscriptionByCustomerId(c.getCustomerID(),VIP_SUBSCRIPTION);
+            if(s==null){
+                if(alertToScreenWithResponse(Alert.AlertType.CONFIRMATION,"אישור פעולה","ללקוח אין מנוי ויאיפי פעיל. האם ברצונך ליצור אחד ?")==ButtonType.OK) {
+                    //create subscription
+                    insertSubscriptionToDB(new Subscription(c.getCustomerID(),vipValue,VIP_SUBSCRIPTION));
+                }
+            }else{
+                updateSubscriptionBalance(s.getSubscriptionID(),vipValue);
+            }
+        } catch (Exception ex) {
+            alertToScreen(Alert.AlertType.INFORMATION,"עדכון לקוח","נא להזמין ערך מספרי חיובי בלבד");
+        }
+        refreshTable();
+    }
+
+
+
+
+
+    private void refreshTable(){
+        setCachedSubscriptions(getAllSubscriptionsFromDB());
+        setCachedPurchases(getAllPurchasesFromDB());
+        setCachedCustomers(getAllCustomersFromDB());
+        //TODO fix it
+        //table.refresh();
+        goTo("EditCustomerPage.fxml");
     }
 
     @Override
@@ -181,7 +219,7 @@ public class EditCustomerPageController extends AbstractView {
                     lastPurchase=p.getDate();
                 }
             }
-            viewCustomers.add(new ViewCustomer(c.getCustomerID(),c.getFirstName(),c.getLastName(),lastPurchase,mealsBalance,vipBalance,c.getPhoneNumber()));
+            viewCustomers.add(new ViewCustomer(c.getCustomerID(),c.getFirstName(),c.getLastName(),lastPurchase,String.valueOf(mealsBalance),String.valueOf(vipBalance),c.getPhoneNumber()));
         }
 
         ObservableList<ViewCustomer> data=FXCollections.observableArrayList(viewCustomers);
@@ -195,5 +233,7 @@ public class EditCustomerPageController extends AbstractView {
         table.setEditable(true);
         fn_col.setCellFactory(TextFieldTableCell.forTableColumn());
         ln_col.setCellFactory(TextFieldTableCell.forTableColumn());
+        meals_col.setCellFactory(TextFieldTableCell.forTableColumn());
+        vip_col.setCellFactory(TextFieldTableCell.forTableColumn());
     }
 }

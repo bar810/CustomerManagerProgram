@@ -142,7 +142,7 @@ public class LastPurchasesPageController extends AbstractView {
     @FXML
     private void customerClicked(MouseEvent event){
         ViewLastPurchase purchaseClicked=table.getSelectionModel().getSelectedItem();
-        if(minBetweenDates(getCurrentTimeStamp(),purchaseClicked.getDate())<Integer.parseInt(getProperty(TIME_TILL_CANCEL_PURCHASE))) {
+        if(getIsManager()||(minBetweenDates(getCurrentTimeStamp(),purchaseClicked.getDate())<Integer.parseInt(getProperty(TIME_TILL_CANCEL_PURCHASE)))) {
             cancelPurchase.setDisable(false);
         }else{
             cancelPurchase.setDisable(true);
@@ -151,7 +151,7 @@ public class LastPurchasesPageController extends AbstractView {
     @FXML
     private void cancelPurchedButoon(ActionEvent event) {
         ViewLastPurchase purchaseClicked = table.getSelectionModel().getSelectedItem();
-        if (minBetweenDates(getCurrentTimeStamp(), purchaseClicked.getDate()) < Integer.parseInt(getProperty(TIME_TILL_CANCEL_PURCHASE))) {
+        if (getIsManager()||(minBetweenDates(getCurrentTimeStamp(), purchaseClicked.getDate()) < Integer.parseInt(getProperty(TIME_TILL_CANCEL_PURCHASE)))) {
             if (alertToScreenWithResponse(Alert.AlertType.CONFIRMATION, "אישור פעולה", "האם אתה בטוח שברצונך לאשר את הפעולה ?") == ButtonType.OK) {
                 double amount = purchaseClicked.getAmount();
                 String type = purchaseClicked.getType();

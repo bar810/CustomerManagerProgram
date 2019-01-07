@@ -25,6 +25,7 @@ public class HomePageController extends AbstractView {
         setCachedSubscriptions(getAllSubscriptionsFromDB());
         setCachedPurchases(getAllPurchasesFromDB());
         setCachedCustomers(getAllCustomersFromDB());
+        setIsManager(false);
     }
 
     @FXML

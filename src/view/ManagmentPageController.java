@@ -9,6 +9,11 @@ package view;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import static model.GlobalProperties.setIsManager;
+
 /**
  * @author bbrownsh
  * @since 1/1/2019
@@ -38,5 +43,15 @@ public class ManagmentPageController extends AbstractView {
     @FXML
     private void moveToEditCustomer(ActionEvent event){
         goTo("EditCustomerPage.fxml");
+    }
+
+    @FXML
+    private void moveToCancelPurchase(ActionEvent event){
+        goTo("LastPurchasesPage.fxml");
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        setIsManager(true);
     }
 }

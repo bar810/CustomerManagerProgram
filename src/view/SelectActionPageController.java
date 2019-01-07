@@ -44,14 +44,14 @@ public class SelectActionPageController extends AbstractView {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.mealsBalanceLabel.setText("יתרת לקוח ארוחות: "+ formatDouble(getCachedViewCustomer().getMealsBalance()));
-        this.vipBalanceLabel.setText("יתרת לקוח ויאיפי: "+ formatDouble(getCachedViewCustomer().getVipBalance()));
+        this.mealsBalanceLabel.setText("יתרת לקוח ארוחות: "+ formatDouble(Double.parseDouble(getCachedViewCustomer().getMealsBalance())));
+        this.vipBalanceLabel.setText("יתרת לקוח ויאיפי: "+ formatDouble(Double.parseDouble(getCachedViewCustomer().getVipBalance())));
         this.customerIDLabel.setText(getCachedViewCustomer().getFirstName()+" "+getCachedViewCustomer().getLastName());
 
-        if(getCachedViewCustomer().getVipBalance()==0){
+        if(Double.parseDouble(getCachedViewCustomer().getVipBalance())==0){
             buyVIPButton.setDisable(true);
         }
-        if(getCachedViewCustomer().getMealsBalance()==0){
+        if(Double.parseDouble(getCachedViewCustomer().getMealsBalance())==0){
             buyMealsButton.setDisable(true);
         }
         }

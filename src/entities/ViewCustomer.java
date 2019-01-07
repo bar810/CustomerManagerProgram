@@ -1,6 +1,5 @@
 package entities;
 
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -15,16 +14,16 @@ public class ViewCustomer {
     private SimpleStringProperty lastName;
     private SimpleStringProperty lastPurchase;
     private SimpleStringProperty phone;
-    private SimpleDoubleProperty mealsBalance;
-    private SimpleDoubleProperty vipBalance;
+    private SimpleStringProperty mealsBalance;
+    private SimpleStringProperty vipBalance;
 
-    public ViewCustomer(int customerID, String firstName, String lastName, String lastPurchase, double mealsBalance, double vipBalance,String phone) {
+    public ViewCustomer(int customerID, String firstName, String lastName, String lastPurchase, String mealsBalance, String vipBalance,String phone) {
         this.customerID = new SimpleIntegerProperty(customerID);
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
         this.lastPurchase = new SimpleStringProperty(lastPurchase);
-        this.mealsBalance = new SimpleDoubleProperty(mealsBalance);
-        this.vipBalance = new SimpleDoubleProperty(vipBalance);
+        this.mealsBalance = new SimpleStringProperty(mealsBalance);
+        this.vipBalance = new SimpleStringProperty(vipBalance);
         this.phone=new SimpleStringProperty(phone);
     }
     public int getCustomerID() {
@@ -63,22 +62,22 @@ public class ViewCustomer {
     public void setLastPurchase(String lastPurchase) {
         this.lastPurchase.set(lastPurchase);
     }
-    public double getMealsBalance() {
+    public String getMealsBalance() {
         return mealsBalance.get();
     }
-    public SimpleDoubleProperty mealsBalanceProperty() {
+    public SimpleStringProperty mealsBalanceProperty() {
         return mealsBalance;
     }
-    public void setMealsBalance(double mealsBalance) {
+    public void setMealsBalance(String mealsBalance) {
         this.mealsBalance.set(mealsBalance);
     }
-    public double getVipBalance() {
+    public String getVipBalance() {
         return vipBalance.get();
     }
-    public SimpleDoubleProperty vipBalanceProperty() {
+    public SimpleStringProperty vipBalanceProperty() {
         return vipBalance;
     }
-    public void setVipBalance(double vipBalance) {
+    public void setVipBalance(String vipBalance) {
         this.vipBalance.set(vipBalance);
     }
     public String getPhone() {

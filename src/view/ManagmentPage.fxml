@@ -15,11 +15,15 @@
                </HBox.margin>
             </Button>
             <Button mnemonicParsing="false" onAction="#moveToBackup" text="ניהול נתונים" />
-            <Button mnemonicParsing="false" onAction="#moveToEditCustomer" text="עדכון פרטי לקוח">
+            <Button mnemonicParsing="false" onAction="#moveToCancelPurchase" text="ביטול רכישה">
                <HBox.margin>
                   <Insets left="5.0" />
                </HBox.margin>
             </Button>
+            <Button mnemonicParsing="false" onAction="#moveToEditCustomer" text="עדכון פרטי לקוח">
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin></Button>
             <Button mnemonicParsing="false" onAction="#moveToReports" text="דוחות">
                <HBox.margin>
                   <Insets left="5.0" />

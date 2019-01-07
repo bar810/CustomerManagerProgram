@@ -85,12 +85,12 @@ public class BuyMealsPageController extends AbstractView {
 
     private void tryToMakePurchase(ActionEvent event, double amount) {
         //check if there is enough balance
-        if (getCachedViewCustomer().getMealsBalance() < amount) {
+        if (Double.parseDouble(getCachedViewCustomer().getMealsBalance()) < amount) {
             alertToScreen(Alert.AlertType.INFORMATION,"שגיאה","ללקוח אין מספיק יתרה");
             goTo("HomePage.fxml");
         }
         if(alertToScreenWithResponse(Alert.AlertType.CONFIRMATION,"אישור פעולה","האם אתה בטוח שברצונך לאשר את הפעולה ?")==ButtonType.OK){
-            double newBalance=getCachedViewCustomer().getMealsBalance()-amount;
+            double newBalance=Double.parseDouble(getCachedViewCustomer().getMealsBalance())-amount;
             Subscription subscription= getSubscriptionByCustomerID(getCachedViewCustomer().getCustomerID(),MEALS_SUBSCRIPTION);
             if(subscription==null){
                 alertToScreen(Alert.AlertType.INFORMATION,"שגיאה","שגיאה במהלך הקנייה.לא נמצא מנוי. לא בוצעה רכישה");
@@ -106,7 +106,7 @@ public class BuyMealsPageController extends AbstractView {
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        double balance=getCachedViewCustomer().getMealsBalance();
+        double balance=Double.parseDouble(getCachedViewCustomer().getMealsBalance());
         customer_name_label.setText(getCachedViewCustomer().getFirstName()+" "+getCachedViewCustomer().getLastName());
         customer_balance_label.setText("יתרת הלקוח: "+String.valueOf(balance)+" ארוחות");
 

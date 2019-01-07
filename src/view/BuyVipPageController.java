@@ -42,12 +42,12 @@ public class BuyVipPageController extends AbstractView {
                 alertToScreen(Alert.AlertType.INFORMATION,"שגיאה","נא להכניס סכום גדול מ 0");
 
             }
-            else if(amountAsDouble>getCachedViewCustomer().getVipBalance()){
+            else if(amountAsDouble>Double.parseDouble(getCachedViewCustomer().getVipBalance())){
                 alertToScreen(Alert.AlertType.INFORMATION,"שגיאה","אין מספיק יתרה");
             }else{
                 if(alertToScreenWithResponse(Alert.AlertType.CONFIRMATION,"אישור פעולה","האם אתה בטוח שברצונך לאשר את הפעולה ?")==ButtonType.OK){
                     //
-                    double newBalance=getCachedViewCustomer().getVipBalance()-amountAsDouble;
+                    double newBalance=Double.parseDouble(getCachedViewCustomer().getVipBalance())-amountAsDouble;
                     Subscription subscription= getSubscriptionByCustomerID(getCachedViewCustomer().getCustomerID(),VIP_SUBSCRIPTION);
                     if(subscription==null){
                         alertToScreen(Alert.AlertType.INFORMATION,"שגיאה","שגיאה במהלך הקנייה. לא נמצא מנוי. לא בוצעה רכישה");
@@ -70,7 +70,7 @@ public class BuyVipPageController extends AbstractView {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        double balance=getCachedViewCustomer().getVipBalance();
+        double balance=Double.parseDouble(getCachedViewCustomer().getVipBalance());
         customer_name_label.setText(getCachedViewCustomer().getFirstName()+" "+getCachedViewCustomer().getLastName());
         customer_balance_label.setText("יתרת הלקוח: "+String.valueOf(balance)+" ארוחות");
         }
