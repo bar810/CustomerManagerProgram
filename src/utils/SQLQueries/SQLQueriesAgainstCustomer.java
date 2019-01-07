@@ -178,6 +178,32 @@ public class SQLQueriesAgainstCustomer {
             _logger.debug("Customer updated successfully. customer: "+customer.toString());
         }
     }
+    public static void updateCustomerPhone(int customerID,String newPhone){
+        _logger.debug("update customer phone number. Customer ID: "+customerID+". new name: "+newPhone);
+        Session customerSession= getCustomerSession();
+        customerSession.beginTransaction();
+        Customer customer=customerSession.get(Customer.class,customerID);
+        if(customer==null){
+            _logger.warning("Customer not found");
+        }else{
+            customer.setPhoneNumber(newPhone);
+            customerSession.getTransaction().commit();
+            _logger.debug("Customer updated successfully. customer: "+customer.toString());
+        }
+    }
+    public static void updateCustomerMail(int customerID,String newMail){
+        _logger.debug("update customer mail. Customer ID: "+customerID+". new name: "+newMail);
+        Session customerSession= getCustomerSession();
+        customerSession.beginTransaction();
+        Customer customer=customerSession.get(Customer.class,customerID);
+        if(customer==null){
+            _logger.warning("Customer not found");
+        }else{
+            customer.setMailAddress(newMail);
+            customerSession.getTransaction().commit();
+            _logger.debug("Customer updated successfully. customer: "+customer.toString());
+        }
+    }
     public static void removeOneCustomer(int customerID){
         _logger.debug("removing customer. ID: "+customerID);
         Session customerSession= getCustomerSession();

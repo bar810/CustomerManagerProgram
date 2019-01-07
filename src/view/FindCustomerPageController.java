@@ -128,7 +128,7 @@ public class FindCustomerPageController extends AbstractView {
                     lastPurchase=p.getDate();
                 }
             }
-            viewCustomers.add(new ViewCustomer(c.getCustomerID(),c.getFirstName(),c.getLastName(),lastPurchase,String.valueOf(mealsBalance),String.valueOf(vipBalance),c.getPhoneNumber()));
+            viewCustomers.add(new ViewCustomer(c.getCustomerID(),c.getFirstName(),c.getLastName(),lastPurchase,String.valueOf(mealsBalance),String.valueOf(vipBalance),c.getPhoneNumber(),c.getMailAddress()));
         }
 
         ObservableList<ViewCustomer> data=FXCollections.observableArrayList(viewCustomers);

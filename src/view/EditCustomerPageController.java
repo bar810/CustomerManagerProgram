@@ -28,6 +28,7 @@ import java.util.ResourceBundle;
 
 import static model.BasicMethods.deleteCustomerById;
 import static model.BasicMethods.getSubscriptionByCustomerId;
+import static model.BasicMethods.thisCustomerExistingInDB;
 import static model.GeneralViewFunctions.alertToScreen;
 import static model.GeneralViewFunctions.alertToScreenWithResponse;
 import static model.GlobalProperties.*;
@@ -81,6 +82,10 @@ public class EditCustomerPageController extends AbstractView {
     TableColumn<ViewCustomer, String> fn_col;
     @FXML
     TableColumn<ViewCustomer,String> ln_col;
+    @FXML
+    TableColumn<ViewCustomer,String> phone_col;
+    @FXML
+    TableColumn<ViewCustomer,String> mail_col;
     @FXML
     TableColumn<ViewCustomer, String> meals_col;
     @FXML
@@ -226,7 +231,12 @@ public class EditCustomerPageController extends AbstractView {
         ViewCustomer c= table.getSelectionModel().getSelectedItem();
         String newFirstName=editCell.getNewValue().toString();
         //check if it is valid
-        updateCustomerFirstName(c.getCustomerID(),newFirstName);
+        if(thisCustomerExistingInDB(newFirstName,c.getLastName(),c.getPhone())){
+            alertToScreen(Alert.AlertType.WARNING,"אימות נתונים","קיים לקוח אחר עם אותו שם פרטי, שם משפחה וטלפון");
+        }else{
+            updateCustomerFirstName(c.getCustomerID(),newFirstName);
+        }
+
         refreshTable();
     }
 
@@ -235,9 +245,44 @@ public class EditCustomerPageController extends AbstractView {
         ViewCustomer c= table.getSelectionModel().getSelectedItem();
         String newLastName=editCell.getNewValue().toString();
         //check if it is valid
-        updateCustomerLastName(c.getCustomerID(),newLastName);
+        if(thisCustomerExistingInDB(c.getFirstName(),newLastName,c.getPhone())){
+            alertToScreen(Alert.AlertType.WARNING,"אימות נתונים","קיים לקוח אחר עם אותו שם פרטי, שם משפחה וטלפון");
+        }else{
+            updateCustomerLastName(c.getCustomerID(),newLastName);
+        }
         refreshTable();
 
+    }
+
+    @FXML
+    private void changeCustomerMail(TableColumn.CellEditEvent editCell ){
+        ViewCustomer c= table.getSelectionModel().getSelectedItem();
+        String newMail=editCell.getNewValue().toString();
+        if(!isValidMail(newMail)){
+            alertToScreen(Alert.AlertType.WARNING,"אימות נתונים","מבנה המייל לא תקין. חובה להכיל @, וסיומת (com.)");
+        }
+        else{
+            updateCustomerMail(c.getCustomerID(),newMail);
+        }
+        refreshTable();
+    }
+
+    @FXML
+    private void changeCustomerphone(TableColumn.CellEditEvent editCell ){
+        ViewCustomer c= table.getSelectionModel().getSelectedItem();
+        String newPhone=editCell.getNewValue().toString();
+        if(!isValidPhone(newPhone)){
+            alertToScreen(Alert.AlertType.WARNING,"אימות נתונים","מספר הטלפון לא תקין- מספרים בלבד ובאורך תקין");
+        }
+        else{
+            if(thisCustomerExistingInDB(c.getFirstName(),c.getLastName(),newPhone)) {
+                alertToScreen(Alert.AlertType.WARNING, "אימות נתונים", "קיים לקוח אחר עם אותו שם פרטי, שם משפחה וטלפון");
+            }
+            else{
+                updateCustomerPhone(c.getCustomerID(),newPhone);
+            }
+        }
+        refreshTable();
     }
 
     @FXML
@@ -333,13 +378,15 @@ public class EditCustomerPageController extends AbstractView {
                     lastPurchase=p.getDate();
                 }
             }
-            viewCustomers.add(new ViewCustomer(c.getCustomerID(),c.getFirstName(),c.getLastName(),lastPurchase,String.valueOf(mealsBalance),String.valueOf(vipBalance),c.getPhoneNumber()));
+            viewCustomers.add(new ViewCustomer(c.getCustomerID(),c.getFirstName(),c.getLastName(),lastPurchase,String.valueOf(mealsBalance),String.valueOf(vipBalance),c.getPhoneNumber(),c.getMailAddress()));
         }
 
         ObservableList<ViewCustomer> data=FXCollections.observableArrayList(viewCustomers);
         id_col.setCellValueFactory(new PropertyValueFactory<>("customerID"));//the name like in the class
         fn_col.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         ln_col.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        phone_col.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        mail_col.setCellValueFactory(new PropertyValueFactory<>("mail"));
         lastPurchase_col.setCellValueFactory(new PropertyValueFactory<>("lastPurchase"));
         meals_col.setCellValueFactory(new PropertyValueFactory<>("mealsBalance"));
         vip_col.setCellValueFactory(new PropertyValueFactory<>("vipBalance"));
@@ -347,6 +394,8 @@ public class EditCustomerPageController extends AbstractView {
         table.setEditable(true);
         fn_col.setCellFactory(TextFieldTableCell.forTableColumn());
         ln_col.setCellFactory(TextFieldTableCell.forTableColumn());
+        phone_col.setCellFactory(TextFieldTableCell.forTableColumn());
+        mail_col.setCellFactory(TextFieldTableCell.forTableColumn());
         meals_col.setCellFactory(TextFieldTableCell.forTableColumn());
         vip_col.setCellFactory(TextFieldTableCell.forTableColumn());
         deleteCustomerButton.setDisable(true);

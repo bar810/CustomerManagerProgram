@@ -14,10 +14,11 @@ public class ViewCustomer {
     private SimpleStringProperty lastName;
     private SimpleStringProperty lastPurchase;
     private SimpleStringProperty phone;
+    private SimpleStringProperty mail;
     private SimpleStringProperty mealsBalance;
     private SimpleStringProperty vipBalance;
 
-    public ViewCustomer(int customerID, String firstName, String lastName, String lastPurchase, String mealsBalance, String vipBalance,String phone) {
+    public ViewCustomer(int customerID, String firstName, String lastName, String lastPurchase, String mealsBalance, String vipBalance,String phone,String mail) {
         this.customerID = new SimpleIntegerProperty(customerID);
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
@@ -25,6 +26,7 @@ public class ViewCustomer {
         this.mealsBalance = new SimpleStringProperty(mealsBalance);
         this.vipBalance = new SimpleStringProperty(vipBalance);
         this.phone=new SimpleStringProperty(phone);
+        this.mail=new SimpleStringProperty(mail);
     }
     public int getCustomerID() {
         return customerID.get();
@@ -88,5 +90,14 @@ public class ViewCustomer {
     }
     public void setPhone(String phone) {
         this.phone.set(phone);
+    }
+    public String getMail() {
+        return mail.get();
+    }
+    public SimpleStringProperty mailProperty() {
+        return mail;
+    }
+    public void setMail(String mail) {
+        this.mail.set(mail);
     }
 }

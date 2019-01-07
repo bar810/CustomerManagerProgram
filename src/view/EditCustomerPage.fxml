@@ -26,6 +26,8 @@
                         <TableColumn fx:id="lastPurchase_col" prefWidth="75.0" text="רכישה אחרונה" />
                         <TableColumn fx:id="vip_col" onEditCommit="#changeCustomerVipSubscriptionValue" prefWidth="75.0" text="VIP" />
                         <TableColumn fx:id="meals_col" onEditCommit="#changeCustomerMealsSubscriptionValue" prefWidth="75.0" text="ארוחות" />
+                        <TableColumn fx:id="mail_col" onEditCommit="#changeCustomerMail" prefWidth="75.0" text="מייל" />
+                        <TableColumn fx:id="phone_col" onEditCommit="#changeCustomerphone" prefWidth="75.0" text="טלפון" />
                         <TableColumn fx:id="ln_col" onEditCommit="#changeCustomerLastName" prefWidth="75.0" text="שם משפחה" />
                         <TableColumn fx:id="fn_col" onEditCommit="#changeCustomerFirstName" prefWidth="75.0" text="שם פרטי" />
                         <TableColumn fx:id="id_col" prefWidth="75.0" text="מספר לקוח" />

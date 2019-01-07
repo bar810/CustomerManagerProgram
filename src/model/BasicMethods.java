@@ -139,6 +139,11 @@ public class BasicMethods {
         assert customers != null;
         return customers.size()==1;
     }
+    public static boolean thisCustomerExistingInDB(String fn,String ln,String phone){
+        List<Customer> customers=getAllCustomersFromDBWithConditions("",fn,ln,"",phone);
+        assert customers != null;
+        return customers.size()==1;
+    }
     public static Subscription getSubscriptionByCustomerId(int customerId,String type){
         for(Subscription s: getCachedSubscriptions()){
             if(s.getCoustomerID()==customerId && s.getType().equals(type)){
