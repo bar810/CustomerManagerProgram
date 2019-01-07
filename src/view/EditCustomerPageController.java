@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
@@ -25,6 +26,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static model.BasicMethods.deleteCustomerById;
 import static model.BasicMethods.getSubscriptionByCustomerId;
 import static model.GeneralViewFunctions.alertToScreen;
 import static model.GeneralViewFunctions.alertToScreenWithResponse;
@@ -34,6 +36,8 @@ import static utils.Constants.VIP_SUBSCRIPTION;
 import static utils.SQLQueries.SQLQueriesAgainstCustomer.*;
 import static utils.SQLQueries.SQLQueriesAgainstPurchase.getAllPurchasesFromDB;
 import static utils.SQLQueries.SQLQueriesAgainstSubscription.*;
+import static utils.Utils.isValidMail;
+import static utils.Utils.isValidPhone;
 
 /**
  * @author bbrownsh
@@ -54,6 +58,21 @@ public class EditCustomerPageController extends AbstractView {
     private TextField phone;
     @FXML
     private TextField mail;
+
+    @FXML
+    private TextField addCustomer_firstName;
+    @FXML
+    private TextField addCustomer_lastName;
+    @FXML
+    private TextField addCustomer_phone;
+    @FXML
+    private TextField addCustomer_mail;
+    @FXML
+    private TextField addCustomer_mealsAmount;
+    @FXML
+    private TextField addCustomer_vipAmount;
+    @FXML
+    private Button deleteCustomerButton;
     @FXML
     private TableView<ViewCustomer> table;
     @FXML
@@ -69,6 +88,101 @@ public class EditCustomerPageController extends AbstractView {
     @FXML
     TableColumn<ViewCustomer,String> lastPurchase_col;
     private List<ViewCustomer> viewCustomers=new ArrayList<>();
+
+    @FXML
+    private void deleteCustomer(ActionEvent event){
+        if(alertToScreenWithResponse(Alert.AlertType.CONFIRMATION,"אישור פעולה","האם אתה בטוח שברצונך למחוק את הלקוח ואת כל המנויים שקיימים תחת השם שלו ?")==ButtonType.OK) {
+            ViewCustomer purchaseClicked=table.getSelectionModel().getSelectedItem();
+            deleteCustomerById(purchaseClicked.getCustomerID());
+            refreshTable();
+        }
+    }
+    @FXML
+    private void customerClicked(MouseEvent event){
+        deleteCustomerButton.setDisable(false);
+    }
+
+    @FXML
+    private void fastAddCustomer(ActionEvent event) {
+        boolean everythingIsGood = true;
+        String firstName = this.addCustomer_firstName.getText();
+        String lastName = this.addCustomer_lastName.getText();
+        String phoneNumber = addCustomer_phone.getText();
+        String mail = addCustomer_mail.getText();
+        String mealsValue = addCustomer_mealsAmount.getText();
+        String vipValue = addCustomer_vipAmount.getText();
+
+
+        // first - validate the input. first name, last name and phone are mandatory. than validate phone and mail (if inserted)
+        if (firstName.isEmpty() || lastName.isEmpty() || phoneNumber.isEmpty()) {
+            alertToScreen(Alert.AlertType.WARNING, "אימות נתונים", "חובה להכניס שם פרטי, שם משפחה וטלפון");
+            everythingIsGood = false;
+        }
+        if (everythingIsGood && (!isValidPhone(phoneNumber))) {
+            alertToScreen(Alert.AlertType.WARNING, "אימות נתונים", "מספר הטלפון לא תקין- מספרים בלבד ובאורך תקין");
+            everythingIsGood = false;
+        }
+        if (everythingIsGood && (!isValidMail(mail))) {
+            alertToScreen(Alert.AlertType.WARNING, "אימות נתונים", "מבנה המייל לא תקין. חובה להכיל @, וסיומת (com.)");
+            everythingIsGood = false;
+        }
+
+
+        double mealsAmount=0;
+        double vipAmount=0;
+        boolean insertMeals=false;
+        boolean insertVip=false;
+
+        try {
+            if(!mealsValue.isEmpty()){
+                mealsAmount = Double.parseDouble(mealsValue);
+                insertMeals=true;
+            }
+            if(!vipValue.isEmpty()){
+                vipAmount = Double.parseDouble(vipValue);
+                insertVip=true;
+            }
+        } catch (Exception ex) {
+            alertToScreen(Alert.AlertType.WARNING, "אימות נתונים", "ניתן להזין ערך מספרי חיובי בלבד בכמות הארוחות והויאיפי");
+            everythingIsGood = false;
+        }
+
+
+        if (everythingIsGood) {
+            //Here I have valid information. check if this customer is already exist in db.
+            List<Customer> customersInDB = getAllCustomersFromDB();
+            for (Customer c : customersInDB) {
+                if (c.getFirstName().equals(firstName) && c.getLastName().equals(lastName) && c.getPhoneNumber().equals(phoneNumber)) {
+                    alertToScreen(Alert.AlertType.WARNING, "אימות נתונים", "הלקוח כבר נמצא במערכת. לקוח חדש חייב להיות בעל שם פרטי, שם משפחה או טלפון שונה מלקוח שכבר נמצא במערכת");
+                    everythingIsGood = false;
+                    break;
+                }
+            }
+        }
+
+
+        if (everythingIsGood) {
+            //Here I have valid customer. insert the new customer to DB and if succeed -  print the number.
+            int id = insertCustomerToDB(new Customer(firstName, lastName, mail, phoneNumber));
+            if (id == -1) {
+                alertToScreen(Alert.AlertType.WARNING, "אימות נתונים", "שגיאה במהלך הכנסת הלקוח למערכת");
+                everythingIsGood = false;
+            } else {
+
+                //TODO insert subscriptions if the value is not empty
+                if(insertMeals){
+                    insertSubscriptionToDB(new Subscription(id,mealsAmount,MEALS_SUBSCRIPTION));
+                }
+                if(insertVip){
+                    insertSubscriptionToDB(new Subscription(id,vipAmount,VIP_SUBSCRIPTION));
+                }
+                alertToScreen(Alert.AlertType.INFORMATION, "אימות נתונים", "לקוח חדש הוכנס בהצלחה. מספר לקוח: " + id);
+            }
+            refreshTable();
+        }
+    }
+
+
 
     @FXML
     private void findCustomer(ActionEvent event){
@@ -235,5 +349,6 @@ public class EditCustomerPageController extends AbstractView {
         ln_col.setCellFactory(TextFieldTableCell.forTableColumn());
         meals_col.setCellFactory(TextFieldTableCell.forTableColumn());
         vip_col.setCellFactory(TextFieldTableCell.forTableColumn());
+        deleteCustomerButton.setDisable(true);
     }
 }

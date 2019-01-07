@@ -74,7 +74,7 @@ public class BasicMethods {
         //how much VIP bought
         //how many subscriptions bought from each one
     }
-    public static void deleteCustomer(int customerId){
+    public static void deleteCustomerById(int customerId){
         //delete his subscriptions before.
         for(Subscription s : getCachedSubscriptions()){
             if(s.getCoustomerID()==customerId){
