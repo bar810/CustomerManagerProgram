@@ -85,30 +85,50 @@ public class BasicMethods {
         //finally, remove the customer
         removeOneCustomer(customerId);
     }
-    public static void buySubscription(Customer customer, String type){
-        //check if there is customer.
-        if(thisCustomerExistingInDB(customer)){
-            //check if there is subscription from this type- if yes update. if not create new
-            List<Subscription> list= getAllSubscriptionFromDBWithConditions("",String.valueOf(customer.getCustomerID()),"","",type.toString());
-            if(list.size()>1){
-                //not valid case
-                _logger.error("Customer have more than 1 subscription from on type. not valid case. Customer: "+customer);
+    private static Subscription isThisCustomerHaveSubscriptionAlready(int customerID,String type){
+        for (Subscription s: getCachedSubscriptions()){
+            if(s.getCoustomerID()==customerID && s.getType().equals(type)){
+                return s;
             }
-            else{
-                boolean createNewSubscription=list.size()==0;
-                double amount=type.equals(MEALS_SUBSCRIPTION)?Double.parseDouble(getProperty(DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT)):Double.parseDouble(getProperty(DEFAULT_VIP_SUBSCRIPTION_AMOUNT));
-                if(createNewSubscription){
-                    insertSubscriptionToDB(new Subscription(customer.getCustomerID(),getCurrentTimeStamp(),amount,type));
-                }else{
-                    //need to update the current subscription
-                    updateSubscriptionBalance(list.get(0).getSubscriptionID(),list.get(0).getBalance()+amount);
-                    updateSubscriptionPurchaseDate(list.get(0).getSubscriptionID(),getCurrentTimeStamp());
+        }
+        return null;
+    }
 
+    public static boolean buySubscription(int customerId, String type) {
+        if (thisCustomerExistingInDB(getCustomerByID(customerId))) {
+            //check if there is subscription. - if yes just reload if no create new.
+            Subscription subscription = isThisCustomerHaveSubscriptionAlready(customerId, type);
+            double newBalnce=0;
+            if (subscription != null) {
+                //reload
+                if (type.equals(MEALS_SUBSCRIPTION)) {
+                    newBalnce=subscription.getBalance() + Double.parseDouble(getProperty(DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT));
+                } else if (type.equals(VIP_SUBSCRIPTION)) {
+                    newBalnce=subscription.getBalance() + Double.parseDouble(getProperty(DEFAULT_VIP_SUBSCRIPTION_AMOUNT));
+                }
+                updateSubscriptionBalance(subscription.getSubscriptionID(), newBalnce);
+            } else {
+                //create new
+                if (type.equals(MEALS_SUBSCRIPTION)) {
+                    newBalnce = Double.parseDouble(getProperty(DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT));
+                        insertSubscriptionToDB(new Subscription(customerId,newBalnce, MEALS_SUBSCRIPTION));
+                } else if (type.equals(VIP_SUBSCRIPTION)) {
+                    newBalnce = Double.parseDouble(getProperty(DEFAULT_VIP_SUBSCRIPTION_AMOUNT));
+                    insertSubscriptionToDB(new Subscription(customerId,newBalnce , VIP_SUBSCRIPTION));
                 }
             }
+            if (type.equals(MEALS_SUBSCRIPTION)) {
+                insertPurchaseToDB(new Purchase(customerId, Double.parseDouble(getProperty(DEFAULT_MEALS_SUBSCRIPTION_MEALS_AMOUNT)), newBalnce, MEALS_SUBSCRIPTION, PURCHASE_SUBSCRIPTION_COMMENT));
+            }else if (type.equals(VIP_SUBSCRIPTION)) {
+                insertPurchaseToDB(new Purchase(customerId, Double.parseDouble(getProperty(DEFAULT_VIP_SUBSCRIPTION_AMOUNT)), newBalnce, VIP_SUBSCRIPTION, PURCHASE_SUBSCRIPTION_COMMENT));
 
+            }
+            return true;
         }
+        return false;
     }
+
+
     public static void buyProduct(Customer customer,String type,double price){
         //check if there is customer.
         if(thisCustomerExistingInDB(customer)){

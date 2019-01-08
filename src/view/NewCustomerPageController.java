@@ -5,12 +5,18 @@ import entities.Customer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
 
+import static model.BasicMethods.buySubscription;
 import static model.GeneralViewFunctions.alertToScreen;
+import static utils.Constants.MEALS_SUBSCRIPTION;
+import static utils.Constants.VIP_SUBSCRIPTION;
 import static utils.SQLQueries.SQLQueriesAgainstCustomer.getAllCustomersFromDB;
 import static utils.SQLQueries.SQLQueriesAgainstCustomer.insertCustomerToDB;
 import static utils.Utils.isValidMail;
@@ -28,6 +34,10 @@ public class NewCustomerPageController extends AbstractView {
     private TextField phone;
     @FXML
     private TextField mail;
+    @FXML
+    private RadioButton createMealsSubscriptionButton;
+    @FXML
+    private RadioButton createVipSubscriptionButton;
 
     @FXML
     private void backButton(ActionEvent event){
@@ -69,6 +79,12 @@ public class NewCustomerPageController extends AbstractView {
         if(everythingIsGood){
             //Here I have valid customer. insert the new customer to DB and if succeed -  print the number.
             int id=insertCustomerToDB(new Customer(firstName,lastName,mail,phoneNumber));
+            if(createMealsSubscriptionButton.isSelected()){
+                buySubscription(id,MEALS_SUBSCRIPTION);
+            }
+            if(createVipSubscriptionButton.isSelected()){
+                buySubscription(id,VIP_SUBSCRIPTION);
+            }
             if(id==-1){
                 alertToScreen(Alert.AlertType.WARNING,"אימות נתונים","שגיאה במהלך הכנסת הלקוח למערכת");
                 everythingIsGood=false;
@@ -78,5 +94,14 @@ public class NewCustomerPageController extends AbstractView {
                 goTo("HomePage.fxml");
         }
     }
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        createMealsSubscriptionButton.setSelected(false);
+        createVipSubscriptionButton.setSelected(false);
+    }
+
+
 }
 
