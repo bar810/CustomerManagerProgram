@@ -14,28 +14,7 @@
     <root id="root">
       <element id="archive" name="CustomerManager.jar">
         <element id="module-output" name="CustomerManager" />
-        <element id="extracted-dir" path="$USER_HOME$/Desktop/New folder/antlr-2.7.7.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$USER_HOME$/Desktop/New folder/byte-buddy-1.9.5.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$USER_HOME$/Desktop/New folder/txw2-2.3.1.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$USER_HOME$/Desktop/New folder/mysql-connector-java-8.0.13.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$USER_HOME$/Desktop/New folder/dom4j-2.1.1.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$USER_HOME$/Desktop/New folder/jaxb-api-2.3.1.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$USER_HOME$/Desktop/New folder/hibernate-core-5.4.0.Final.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$USER_HOME$/Desktop/New folder/stax-ex-1.8.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$USER_HOME$/Desktop/New folder/hibernate-commons-annotations-5.1.0.Final.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$USER_HOME$/Desktop/New folder/javax.activation-api-1.2.0.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$USER_HOME$/Desktop/New folder/classmate-1.3.4.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$USER_HOME$/Desktop/New folder/javassist-3.24.0-GA.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$USER_HOME$/Desktop/New folder/jboss-logging-3.3.2.Final.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$USER_HOME$/Desktop/New folder/jandex-2.0.5.Final.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$USER_HOME$/Desktop/New folder/jboss-transaction-api_1.2_spec-1.1.1.Final.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$USER_HOME$/Desktop/New folder/istack-commons-runtime-3.0.7.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$USER_HOME$/Desktop/New folder/javax.mail.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$USER_HOME$/Desktop/New folder/hamcrest-core-1.3.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$USER_HOME$/Desktop/New folder/junit-4.12.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$USER_HOME$/Desktop/New folder/jaxb-runtime-2.3.1.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$USER_HOME$/Desktop/New folder/FastInfoset-1.2.15.jar" path-in-jar="/" />
-        <element id="extracted-dir" path="$USER_HOME$/Desktop/New folder/javax.persistence-api-2.2.jar" path-in-jar="/" />
+        <element id="library" level="project" name="antlr-2.7.7" />
       </element>
     </root>
   </artifact>

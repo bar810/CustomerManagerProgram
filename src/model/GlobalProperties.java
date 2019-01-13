@@ -53,7 +53,7 @@ public class GlobalProperties {
             InputStream is=new FileInputStream(CONFIGURE_FILE_PATH);
             _properties.load(is);
         } catch (Exception ex) {
-            _logger.error("error with properties");
+            _logger.error("error with properties - cannot find properties file");
             _logger.CleanAndSaveLogIfNeeded(true);
             exit();
         }
